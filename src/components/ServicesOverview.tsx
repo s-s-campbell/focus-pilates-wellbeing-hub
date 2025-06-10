@@ -2,23 +2,29 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { Users, Settings, Heart } from 'lucide-react';
+
 const ServicesOverview = () => {
-  const services = [{
-    icon: Users,
-    title: "Group Mat Classes",
-    description: "Build a strong foundation and improve flexibility in a supportive small group setting. Perfect for all levels.",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-  }, {
-    icon: Settings,
-    title: "Reformer Pilates",
-    description: "Utilise state-of-the-art reformer machines for a dynamic, full-body workout that builds strength and tones muscles.",
-    image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-  }, {
-    icon: Heart,
-    title: "Rehab & Private Sessions",
-    description: "Receive one-on-one attention to address specific injuries, manage chronic pain, or accelerate your personal progress.",
-    image: "https://images.unsplash.com/photo-1506629905186-b8142d7fbc4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-  }];
+  const services = [
+    {
+      icon: Users,
+      title: "Group Mat Classes",
+      description: "Build a strong foundation and improve flexibility in a supportive small group setting. Perfect for all levels.",
+      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+    },
+    {
+      icon: Settings,
+      title: "Reformer Pilates",
+      description: "Utilise state-of-the-art reformer machines for a dynamic, full-body workout that builds strength and tones muscles.",
+      image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+    },
+    {
+      icon: Heart,
+      title: "Rehab & Private Sessions",
+      description: "Receive one-on-one attention to address specific injuries, manage chronic pain, or accelerate your personal progress.",
+      image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+    }
+  ];
+
   return <section className="py-20 bg-muted/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
@@ -58,4 +64,5 @@ const ServicesOverview = () => {
       </div>
     </section>;
 };
+
 export default ServicesOverview;
