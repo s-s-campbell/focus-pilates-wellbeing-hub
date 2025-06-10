@@ -2,21 +2,28 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Heart, Users, Target } from 'lucide-react';
+
 const About = () => {
-  const principles = [{
-    icon: Heart,
-    title: "Movement as Medicine",
-    description: "We believe that mindful, correct movement is fundamental to healing, preventing injury, and enhancing your quality of life."
-  }, {
-    icon: Users,
-    title: "Strength in Community",
-    description: "We foster a warm, non-competitive environment where clients support and motivate one another. Friendships are built here just as often as strong cores."
-  }, {
-    icon: Target,
-    title: "Personalised Progress",
-    description: "Your journey is unique. We honour this by listening to your needs, adapting exercises for your body, and celebrating every milestone with you."
-  }];
-  return <div className="min-h-screen">
+  const principles = [
+    {
+      icon: Heart,
+      title: "Movement as Medicine",
+      description: "We believe that mindful, correct movement is fundamental to healing, preventing injury, and enhancing your quality of life."
+    },
+    {
+      icon: Users,
+      title: "Strength in Community",
+      description: "We foster a warm, non-competitive environment where clients support and motivate one another. Friendships are built here just as often as strong cores."
+    },
+    {
+      icon: Target,
+      title: "Personalised Progress",
+      description: "Your journey is unique. We honour this by listening to your needs, adapting exercises for your body, and celebrating every milestone with you."
+    }
+  ];
+
+  return (
+    <div className="min-h-screen">
       <Navigation />
       
       {/* Hero Section */}
@@ -57,8 +64,11 @@ const About = () => {
             </div>
             
             <div className="relative">
-              <img src="https://images.unsplash.com/photo-1594736797933-d0119de4fe8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Professional Pilates instructor" className="rounded-2xl shadow-xl w-full h-auto" />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-2xl"></div>
+              <img 
+                src="/lovable-uploads/7f150564-ed26-4b4d-898b-3d7f68b038cb.png" 
+                alt="Professional Pilates instructor in studio" 
+                className="rounded-2xl shadow-xl w-full h-auto" 
+              />
             </div>
           </div>
         </div>
@@ -95,6 +105,8 @@ const About = () => {
       </section>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default About;
