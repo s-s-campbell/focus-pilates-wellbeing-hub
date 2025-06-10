@@ -23,9 +23,9 @@ const Navigation = () => {
     <nav className="bg-card/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="flex items-center" style={{ color: 'oklch(68.1% 0.162 75.834)' }}>
+          <Link to="/" className="flex items-center">
             <img 
-              src="/lovable-uploads/53e5e091-4397-4c21-859f-32fd3421aecf.png" 
+              src="/lovable-uploads/6b747222-d3d9-4329-9f91-a20936eb2981.png" 
               alt="Pilates in Focus Logo" 
               className="h-10 w-auto"
             />

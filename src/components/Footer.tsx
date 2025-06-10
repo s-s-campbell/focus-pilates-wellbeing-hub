@@ -1,11 +1,17 @@
 import { Link } from 'react-router-dom';
+
 const Footer = () => {
-  return <footer className="text-background py-12 bg-[#c37fa8]">
+  return (
+    <footer className="text-background py-12 bg-[#c37fa8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <Link to="/" className="inline-block mb-4">
-              <img src="/lovable-uploads/53e5e091-4397-4c21-859f-32fd3421aecf.png" alt="Pilates in Focus Logo" className="h-12 w-auto brightness-0 invert" />
+              <img 
+                src="/lovable-uploads/6b747222-d3d9-4329-9f91-a20936eb2981.png" 
+                alt="Pilates in Focus Logo" 
+                className="h-12 w-auto brightness-0 invert" 
+              />
             </Link>
             <p className="text-background/80 mb-4 max-w-md">
               Your personalised path to a stronger, healthier you. Expert-led Pilates in a supportive, 
@@ -48,6 +54,8 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
+
 export default Footer;
