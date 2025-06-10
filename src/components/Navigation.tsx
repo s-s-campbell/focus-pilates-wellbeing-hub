@@ -27,7 +27,7 @@ const Navigation = () => {
             <img 
               src="/lovable-uploads/6b747222-d3d9-4329-9f91-a20936eb2981.png" 
               alt="Pilates in Focus Logo" 
-              className="h-10 w-auto"
+              className="h-16 w-auto"
             />
           </Link>
 
