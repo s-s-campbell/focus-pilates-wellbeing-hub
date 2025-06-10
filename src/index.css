@@ -9,83 +9,83 @@
 
 @layer base {
   :root {
-    --background: 255 255 255; /* #ffffff */
-    --foreground: 87 84 78; /* #57544e */
+    --background: oklch(98.5% 0.001 106.423); /* #ffffff */
+    --foreground: oklch(44.4% 0.011 73.639); /* Body text */
 
-    --card: 255 255 255; /* #ffffff */
-    --card-foreground: 87 84 78; /* #57544e */
+    --card: oklch(98.5% 0.001 106.423); /* #ffffff */
+    --card-foreground: oklch(44.4% 0.011 73.639); /* Body text */
 
-    --popover: 255 255 255; /* #ffffff */
-    --popover-foreground: 87 84 78; /* #57544e */
+    --popover: oklch(98.5% 0.001 106.423); /* #ffffff */
+    --popover-foreground: oklch(44.4% 0.011 73.639); /* Body text */
 
-    --primary: 195 127 168; /* #c37fa8 */
-    --primary-foreground: 255 255 255; /* #ffffff */
+    --primary: oklch(71.4% 0.203 305.504); /* Primary/Buttons/Text headings */
+    --primary-foreground: oklch(98.5% 0.001 106.423); /* Text in Button */
 
-    --secondary: 166 140 89; /* #a68c59 */
-    --secondary-foreground: 255 255 255; /* #ffffff */
+    --secondary: oklch(68.1% 0.162 75.834); /* Secondary */
+    --secondary-foreground: oklch(98.5% 0.001 106.423); /* Text in Button */
 
-    --muted: 255 255 255; /* #ffffff */
-    --muted-foreground: 87 84 78; /* #57544e */
+    --muted: oklch(98.5% 0.001 106.423); /* #ffffff */
+    --muted-foreground: oklch(44.4% 0.011 73.639); /* Body text */
 
-    --accent: 250 197 230; /* #fac5e6 - primary hover */
-    --accent-foreground: 87 84 78; /* #57544e */
+    --accent: oklch(89.2% 0.058 10.001); /* Primary hover */
+    --accent-foreground: oklch(44.4% 0.011 73.639); /* Body text */
 
     --destructive: 220 38 38;
     --destructive-foreground: 255 255 255;
 
     --border: 235 228 242;
     --input: 235 228 242;
-    --ring: 195 127 168; /* #c37fa8 */
+    --ring: oklch(71.4% 0.203 305.504); /* Primary */
 
     --radius: 0.75rem;
 
-    --sidebar-background: 255 255 255; /* #ffffff */
-    --sidebar-foreground: 87 84 78; /* #57544e */
-    --sidebar-primary: 195 127 168; /* #c37fa8 */
-    --sidebar-primary-foreground: 255 255 255; /* #ffffff */
-    --sidebar-accent: 255 255 255; /* #ffffff */
-    --sidebar-accent-foreground: 87 84 78; /* #57544e */
+    --sidebar-background: oklch(98.5% 0.001 106.423); /* #ffffff */
+    --sidebar-foreground: oklch(44.4% 0.011 73.639); /* Body text */
+    --sidebar-primary: oklch(71.4% 0.203 305.504); /* Primary */
+    --sidebar-primary-foreground: oklch(98.5% 0.001 106.423); /* Text in Button */
+    --sidebar-accent: oklch(98.5% 0.001 106.423); /* #ffffff */
+    --sidebar-accent-foreground: oklch(44.4% 0.011 73.639); /* Body text */
     --sidebar-border: 235 228 242;
-    --sidebar-ring: 195 127 168; /* #c37fa8 */
+    --sidebar-ring: oklch(71.4% 0.203 305.504); /* Primary */
   }
 
   .dark {
-    --background: 87 84 78; /* #57544e */
-    --foreground: 255 255 255; /* #ffffff */
+    --background: oklch(44.4% 0.011 73.639); /* Body text */
+    --foreground: oklch(98.5% 0.001 106.423); /* #ffffff */
 
-    --card: 87 84 78; /* #57544e */
-    --card-foreground: 255 255 255; /* #ffffff */
+    --card: oklch(44.4% 0.011 73.639); /* Body text */
+    --card-foreground: oklch(98.5% 0.001 106.423); /* #ffffff */
 
-    --popover: 87 84 78; /* #57544e */
-    --popover-foreground: 255 255 255; /* #ffffff */
+    --popover: oklch(44.4% 0.011 73.639); /* Body text */
+    --popover-foreground: oklch(98.5% 0.001 106.423); /* #ffffff */
 
-    --primary: 195 127 168; /* #c37fa8 */
-    --primary-foreground: 255 255 255; /* #ffffff */
+    --primary: oklch(71.4% 0.203 305.504); /* Primary/Buttons/Text headings */
+    --primary-foreground: oklch(98.5% 0.001 106.423); /* Text in Button */
 
-    --secondary: 166 140 89; /* #a68c59 */
-    --secondary-foreground: 255 255 255; /* #ffffff */
+    --secondary: oklch(68.1% 0.162 75.834); /* Secondary */
+    --secondary-foreground: oklch(98.5% 0.001 106.423); /* Text in Button */
 
-    --muted: 87 84 78; /* #57544e */
-    --muted-foreground: 255 255 255; /* #ffffff */
+    --muted: oklch(44.4% 0.011 73.639); /* Body text */
+    --muted-foreground: oklch(98.5% 0.001 106.423); /* #ffffff */
 
-    --accent: 250 197 230; /* #fac5e6 - primary hover */
-    --accent-foreground: 87 84 78; /* #57544e */
+    --accent: oklch(89.2% 0.058 10.001); /* Primary hover */
+    --accent-foreground: oklch(44.4% 0.011 73.639); /* Body text */
 
     --destructive: 239 68 68;
-    --destructive-foreground: 255 255 255; /* #ffffff */
+    --destructive-foreground: oklch(98.5% 0.001 106.423); /* #ffffff */
 
-    --border: 87 84 78; /* #57544e */
-    --input: 87 84 78; /* #57544e */
-    --ring: 195 127 168; /* #c37fa8 */
+    --border: oklch(44.4% 0.011 73.639); /* Body text */
+    --input: oklch(44.4% 0.011 73.639); /* Body text */
+    --ring: oklch(71.4% 0.203 305.504); /* Primary */
 
-    --sidebar-background: 87 84 78; /* #57544e */
-    --sidebar-foreground: 255 255 255; /* #ffffff */
-    --sidebar-primary: 195 127 168; /* #c37fa8 */
-    --sidebar-primary-foreground: 255 255 255; /* #ffffff */
-    --sidebar-accent: 87 84 78; /* #57544e */
-    --sidebar-accent-foreground: 255 255 255; /* #ffffff */
-    --sidebar-border: 87 84 78; /* #57544e */
-    --sidebar-ring: 195 127 168; /* #c37fa8 */
+    --sidebar-background: oklch(44.4% 0.011 73.639); /* Body text */
+    --sidebar-foreground: oklch(98.5% 0.001 106.423); /* #ffffff */
+    --sidebar-primary: oklch(71.4% 0.203 305.504); /* Primary */
+    --sidebar-primary-foreground: oklch(98.5% 0.001 106.423); /* Text in Button */
+    --sidebar-accent: oklch(44.4% 0.011 73.639); /* Body text */
+    --sidebar-accent-foreground: oklch(98.5% 0.001 106.423); /* #ffffff */
+    --sidebar-border: oklch(44.4% 0.011 73.639); /* Body text */
+    --sidebar-ring: oklch(71.4% 0.203 305.504); /* Primary */
   }
 }
 
