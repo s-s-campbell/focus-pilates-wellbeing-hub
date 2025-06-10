@@ -17,7 +17,7 @@ const ServicesOverview = () => {
     icon: Heart,
     title: "Rehab & Private Sessions",
     description: "Receive one-on-one attention to address specific injuries, manage chronic pain, or accelerate your personal progress.",
-    image: "https://images.unsplash.com/photo-1506629905186-b8142d7fbc4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
   }];
   return <section className="py-20 bg-muted/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
