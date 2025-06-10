@@ -1,0 +1,210 @@
+
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Clock, Mail, Phone, MapPin } from 'lucide-react';
+
+const Contact = () => {
+  return (
+    <div className="min-h-screen">
+      <Navigation />
+      
+      {/* Hero Section */}
+      <section className="pt-20 pb-16 bg-muted/30">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+            We'd Love to <span className="text-primary">Hear From You</span>
+          </h1>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            Ready to take the first step? Get in touch to book your introductory session or ask any questions you may have. 
+            We are located in a private residential home studio in Midrand, Gauteng. The full address will be provided 
+            upon booking confirmation to ensure privacy for our clients and residents.
+          </p>
+        </div>
+      </section>
+
+      {/* Contact Information & Form Section */}
+      <section className="py-20 bg-background">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Contact Information */}
+            <div className="space-y-8">
+              <Card className="border-0 shadow-lg">
+                <CardHeader>
+                  <CardTitle className="font-heading text-2xl text-foreground flex items-center">
+                    <Phone className="w-6 h-6 text-primary mr-3" />
+                    Contact Information
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="flex items-start space-x-3">
+                    <Mail className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-foreground">Email</p>
+                      <p className="text-muted-foreground">info@pilatesinfocus.co.za</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-3">
+                    <Phone className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-foreground">Phone</p>
+                      <p className="text-muted-foreground">+27 (0) 123 456 789</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-3">
+                    <MapPin className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-foreground">Location</p>
+                      <p className="text-muted-foreground">Midrand, Gauteng<br />
+                      Exact address provided upon booking</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-0 shadow-lg">
+                <CardHeader>
+                  <CardTitle className="font-heading text-2xl text-foreground flex items-center">
+                    <Clock className="w-6 h-6 text-primary mr-3" />
+                    Studio Hours
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-foreground">Monday - Friday</span>
+                    <span className="text-muted-foreground">7:00 AM - 6:00 PM</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-foreground">Saturday</span>
+                    <span className="text-muted-foreground">8:00 AM - 12:00 PM</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-foreground">Sunday</span>
+                    <span className="text-muted-foreground">Closed</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Contact Form */}
+            <Card className="border-0 shadow-lg">
+              <CardHeader>
+                <CardTitle className="font-heading text-2xl text-foreground">
+                  Send Us a Message
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="firstName">First Name</Label>
+                      <Input id="firstName" placeholder="Your first name" className="mt-1" />
+                    </div>
+                    <div>
+                      <Label htmlFor="lastName">Last Name</Label>
+                      <Input id="lastName" placeholder="Your last name" className="mt-1" />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="email">Email</Label>
+                    <Input id="email" type="email" placeholder="your.email@example.com" className="mt-1" />
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input id="phone" type="tel" placeholder="+27 (0) 123 456 789" className="mt-1" />
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="inquiry">How can we help you?</Label>
+                    <Select>
+                      <SelectTrigger className="mt-1">
+                        <SelectValue placeholder="Select an option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="book-class">I want to book a class</SelectItem>
+                        <SelectItem value="injury-question">I have a question about an injury</SelectItem>
+                        <SelectItem value="pricing">I'd like to know more about pricing</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea 
+                      id="message" 
+                      placeholder="Tell us more about your goals, any concerns, or questions you have..."
+                      className="mt-1 min-h-[100px]"
+                    />
+                  </div>
+                  
+                  <Button type="submit" size="lg" className="w-full rounded-full">
+                    Send Inquiry
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Online Booking Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
+            Book Your Class <span className="text-primary">Online</span>
+          </h2>
+          <p className="text-lg text-muted-foreground mb-8">
+            Ready to start your journey? Use our online booking system to schedule your introductory session 
+            or join one of our regular classes.
+          </p>
+          <Card className="border-0 shadow-lg p-8">
+            <div className="h-64 bg-muted/50 rounded-lg flex items-center justify-center">
+              <div className="text-center">
+                <p className="text-muted-foreground mb-4">Online Booking System</p>
+                <p className="text-sm text-muted-foreground">
+                  This is where you would embed your preferred booking tool<br />
+                  (Acuity Scheduling, Calendly, or Mindbody widget)
+                </p>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="py-20 bg-background">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
+            Find Us in <span className="text-primary">Midrand</span>
+          </h2>
+          <Card className="border-0 shadow-lg p-8">
+            <div className="h-64 bg-muted/50 rounded-lg flex items-center justify-center">
+              <div className="text-center">
+                <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
+                <p className="text-muted-foreground mb-2">Interactive Map</p>
+                <p className="text-sm text-muted-foreground">
+                  We are conveniently located in Midrand, Gauteng.<br />
+                  For the privacy of our clients, the exact address is shared upon booking confirmation.
+                </p>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Contact;
