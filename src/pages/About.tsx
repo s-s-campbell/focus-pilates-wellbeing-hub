@@ -1,30 +1,22 @@
-
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Heart, Users, Target } from 'lucide-react';
-
 const About = () => {
-  const principles = [
-    {
-      icon: Heart,
-      title: "Movement as Medicine",
-      description: "We believe that mindful, correct movement is fundamental to healing, preventing injury, and enhancing your quality of life."
-    },
-    {
-      icon: Users,
-      title: "Strength in Community",
-      description: "We foster a warm, non-competitive environment where clients support and motivate one another. Friendships are built here just as often as strong cores."
-    },
-    {
-      icon: Target,
-      title: "Personalised Progress",
-      description: "Your journey is unique. We honour this by listening to your needs, adapting exercises for your body, and celebrating every milestone with you."
-    }
-  ];
-
-  return (
-    <div className="min-h-screen">
+  const principles = [{
+    icon: Heart,
+    title: "Movement as Medicine",
+    description: "We believe that mindful, correct movement is fundamental to healing, preventing injury, and enhancing your quality of life."
+  }, {
+    icon: Users,
+    title: "Strength in Community",
+    description: "We foster a warm, non-competitive environment where clients support and motivate one another. Friendships are built here just as often as strong cores."
+  }, {
+    icon: Target,
+    title: "Personalised Progress",
+    description: "Your journey is unique. We honour this by listening to your needs, adapting exercises for your body, and celebrating every milestone with you."
+  }];
+  return <div className="min-h-screen">
       <Navigation />
       
       {/* Hero Section */}
@@ -65,21 +57,17 @@ const About = () => {
             </div>
             
             <div className="relative">
-              <img 
-                src="/lovable-uploads/7f150564-ed26-4b4d-898b-3d7f68b038cb.png" 
-                alt="Julie, Professional Pilates instructor in studio" 
-                className="rounded-2xl shadow-xl w-full h-auto" 
-              />
+              <img src="/lovable-uploads/7f150564-ed26-4b4d-898b-3d7f68b038cb.png" alt="Julie, Professional Pilates instructor in studio" className="rounded-2xl shadow-xl w-full h-auto" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Philosophy Section */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-amber-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-[#c37fa8]">
               Our Guiding <span className="text-primary">Principles</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -88,28 +76,24 @@ const About = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {principles.map((principle, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300 border-0 bg-card">
+            {principles.map((principle, index) => <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300 border-0 bg-card">
                 <CardContent className="p-8">
-                  <div className="inline-flex p-4 bg-primary/10 rounded-full mb-6">
+                  <div className="inline-flex p-4 rounded-full mb-6 bg-[#c37fa8]">
                     <principle.icon className="w-8 h-8 text-primary" />
                   </div>
-                  <h3 className="font-heading text-xl font-semibold text-foreground mb-4">
+                  <h3 className="font-heading text-xl font-semibold mb-4 text-[#c37fa8]">
                     {principle.title}
                   </h3>
                   <p className="text-muted-foreground leading-relaxed">
                     {principle.description}
                   </p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default About;
