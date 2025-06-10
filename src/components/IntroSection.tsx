@@ -1,11 +1,9 @@
-
 const IntroSection = () => {
-  return (
-    <section className="py-20 bg-background">
+  return <section className="py-20 bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            More Than a Class, It's a <span className="text-primary">Community</span>
+            More Than a Class, It's a <span className="text-[#c37fa8]">Community</span>
           </h2>
         </div>
         
@@ -30,17 +28,11 @@ const IntroSection = () => {
           </div>
           
           <div className="relative">
-            <img 
-              src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-              alt="Peaceful Pilates studio interior"
-              className="rounded-2xl shadow-xl w-full h-auto"
-            />
+            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Peaceful Pilates studio interior" className="rounded-2xl shadow-xl w-full h-auto" />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-2xl"></div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default IntroSection;
