@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,83 +8,83 @@
 
 @layer base {
   :root {
-    --background: oklch(98.5% 0.001 106.423); /* #ffffff */
-    --foreground: oklch(44.4% 0.011 73.639); /* Body text */
+    --background: 0 0% 100%; /* #ffffff */
+    --foreground: 222.2 84% 4.9%; /* Body text */
 
-    --card: oklch(98.5% 0.001 106.423); /* #ffffff */
-    --card-foreground: oklch(44.4% 0.011 73.639); /* Body text */
+    --card: 0 0% 100%; /* #ffffff */
+    --card-foreground: 222.2 84% 4.9%; /* Body text */
 
-    --popover: oklch(98.5% 0.001 106.423); /* #ffffff */
-    --popover-foreground: oklch(44.4% 0.011 73.639); /* Body text */
+    --popover: 0 0% 100%; /* #ffffff */
+    --popover-foreground: 222.2 84% 4.9%; /* Body text */
 
-    --primary: oklch(71.4% 0.203 305.504); /* Primary/Buttons/Text headings */
-    --primary-foreground: oklch(98.5% 0.001 106.423); /* Text in Button */
+    --primary: 322 81% 58%; /* pink-400 */
+    --primary-foreground: 0 0% 100%; /* Text in Button */
 
-    --secondary: oklch(68.1% 0.162 75.834); /* Secondary */
-    --secondary-foreground: oklch(98.5% 0.001 106.423); /* Text in Button */
+    --secondary: 210 40% 90%; /* Secondary */
+    --secondary-foreground: 222.2 84% 4.9%; /* Text in Button */
 
-    --muted: oklch(98.5% 0.001 106.423); /* #ffffff */
-    --muted-foreground: oklch(44.4% 0.011 73.639); /* Body text */
+    --muted: 210 40% 98%; /* #ffffff */
+    --muted-foreground: 215.4 16.3% 46.9%; /* Body text */
 
-    --accent: oklch(89.2% 0.058 10.001); /* Primary hover */
-    --accent-foreground: oklch(44.4% 0.011 73.639); /* Body text */
+    --accent: 322 78% 86%; /* pink-300 for hover */
+    --accent-foreground: 222.2 84% 4.9%; /* Body text */
 
-    --destructive: 220 38 38;
-    --destructive-foreground: 255 255 255;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 235 228 242;
-    --input: 235 228 242;
-    --ring: oklch(71.4% 0.203 305.504); /* Primary */
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 322 81% 58%; /* pink-400 */
 
     --radius: 0.75rem;
 
-    --sidebar-background: oklch(98.5% 0.001 106.423); /* #ffffff */
-    --sidebar-foreground: oklch(44.4% 0.011 73.639); /* Body text */
-    --sidebar-primary: oklch(71.4% 0.203 305.504); /* Primary */
-    --sidebar-primary-foreground: oklch(98.5% 0.001 106.423); /* Text in Button */
-    --sidebar-accent: oklch(98.5% 0.001 106.423); /* #ffffff */
-    --sidebar-accent-foreground: oklch(44.4% 0.011 73.639); /* Body text */
-    --sidebar-border: 235 228 242;
-    --sidebar-ring: oklch(71.4% 0.203 305.504); /* Primary */
+    --sidebar-background: 0 0% 100%; /* #ffffff */
+    --sidebar-foreground: 222.2 84% 4.9%; /* Body text */
+    --sidebar-primary: 322 81% 58%; /* pink-400 */
+    --sidebar-primary-foreground: 0 0% 100%; /* Text in Button */
+    --sidebar-accent: 210 40% 98%; /* #ffffff */
+    --sidebar-accent-foreground: 222.2 84% 4.9%; /* Body text */
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 322 81% 58%; /* pink-400 */
   }
 
   .dark {
-    --background: oklch(44.4% 0.011 73.639); /* Body text */
-    --foreground: oklch(98.5% 0.001 106.423); /* #ffffff */
+    --background: 222.2 84% 4.9%; /* Body text */
+    --foreground: 0 0% 100%; /* #ffffff */
 
-    --card: oklch(44.4% 0.011 73.639); /* Body text */
-    --card-foreground: oklch(98.5% 0.001 106.423); /* #ffffff */
+    --card: 222.2 84% 4.9%; /* Body text */
+    --card-foreground: 0 0% 100%; /* #ffffff */
 
-    --popover: oklch(44.4% 0.011 73.639); /* Body text */
-    --popover-foreground: oklch(98.5% 0.001 106.423); /* #ffffff */
+    --popover: 222.2 84% 4.9%; /* Body text */
+    --popover-foreground: 0 0% 100%; /* #ffffff */
 
-    --primary: oklch(71.4% 0.203 305.504); /* Primary/Buttons/Text headings */
-    --primary-foreground: oklch(98.5% 0.001 106.423); /* Text in Button */
+    --primary: 322 81% 58%; /* pink-400 */
+    --primary-foreground: 0 0% 100%; /* Text in Button */
 
-    --secondary: oklch(68.1% 0.162 75.834); /* Secondary */
-    --secondary-foreground: oklch(98.5% 0.001 106.423); /* Text in Button */
+    --secondary: 217.2 32.6% 17.5%; /* Secondary */
+    --secondary-foreground: 0 0% 100%; /* Text in Button */
 
-    --muted: oklch(44.4% 0.011 73.639); /* Body text */
-    --muted-foreground: oklch(98.5% 0.001 106.423); /* #ffffff */
+    --muted: 217.2 32.6% 17.5%; /* Body text */
+    --muted-foreground: 215 20.2% 65.1%; /* #ffffff */
 
-    --accent: oklch(89.2% 0.058 10.001); /* Primary hover */
-    --accent-foreground: oklch(44.4% 0.011 73.639); /* Body text */
+    --accent: 322 78% 86%; /* pink-300 for hover */
+    --accent-foreground: 222.2 84% 4.9%; /* Body text */
 
-    --destructive: 239 68 68;
-    --destructive-foreground: oklch(98.5% 0.001 106.423); /* #ffffff */
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%; /* #ffffff */
 
-    --border: oklch(44.4% 0.011 73.639); /* Body text */
-    --input: oklch(44.4% 0.011 73.639); /* Body text */
-    --ring: oklch(71.4% 0.203 305.504); /* Primary */
+    --border: 217.2 32.6% 17.5%; /* Body text */
+    --input: 217.2 32.6% 17.5%; /* Body text */
+    --ring: 322 81% 58%; /* pink-400 */
 
-    --sidebar-background: oklch(44.4% 0.011 73.639); /* Body text */
-    --sidebar-foreground: oklch(98.5% 0.001 106.423); /* #ffffff */
-    --sidebar-primary: oklch(71.4% 0.203 305.504); /* Primary */
-    --sidebar-primary-foreground: oklch(98.5% 0.001 106.423); /* Text in Button */
-    --sidebar-accent: oklch(44.4% 0.011 73.639); /* Body text */
-    --sidebar-accent-foreground: oklch(98.5% 0.001 106.423); /* #ffffff */
-    --sidebar-border: oklch(44.4% 0.011 73.639); /* Body text */
-    --sidebar-ring: oklch(71.4% 0.203 305.504); /* Primary */
+    --sidebar-background: 222.2 84% 4.9%; /* Body text */
+    --sidebar-foreground: 0 0% 100%; /* #ffffff */
+    --sidebar-primary: 322 81% 58%; /* pink-400 */
+    --sidebar-primary-foreground: 0 0% 100%; /* Text in Button */
+    --sidebar-accent: 217.2 32.6% 17.5%; /* Body text */
+    --sidebar-accent-foreground: 0 0% 100%; /* #ffffff */
+    --sidebar-border: 217.2 32.6% 17.5%; /* Body text */
+    --sidebar-ring: 322 81% 58%; /* pink-400 */
   }
 }
 
