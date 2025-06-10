@@ -27,7 +27,7 @@ const HeroSection = () => {
         </p>
         
         <div className="animate-scale-in">
-          <Button asChild size="lg" className="text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+          <Button asChild size="lg" className="text-lg px-8 py-6 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300">
             <Link to="/contact">Book Your Introductory Class</Link>
           </Button>
         </div>
