@@ -81,7 +81,7 @@ const Classes = () => {
           price: "Enquire for details"
         }
       ],
-      image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+      image: "/lovable-uploads/2af4ad6f-6a09-47b9-8019-99e16d32695b.png"
     }
   ];
 
