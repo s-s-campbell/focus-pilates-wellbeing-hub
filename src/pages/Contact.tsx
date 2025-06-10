@@ -1,4 +1,3 @@
-
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,16 +7,14 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Clock, Mail, Phone, MapPin } from 'lucide-react';
-
 const Contact = () => {
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-muted/30">
+      <section className="pt-20 pb-16 bg-amber-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#c37fa8]">
             We'd Love to <span className="text-primary">Hear From You</span>
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -29,7 +26,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Information & Form Section */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-stone-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Information */}
@@ -140,11 +137,7 @@ const Contact = () => {
                   
                   <div>
                     <Label htmlFor="message">Message</Label>
-                    <Textarea 
-                      id="message" 
-                      placeholder="Tell us more about your goals, any concerns, or questions you have..."
-                      className="mt-1 min-h-[100px]"
-                    />
+                    <Textarea id="message" placeholder="Tell us more about your goals, any concerns, or questions you have..." className="mt-1 min-h-[100px]" />
                   </div>
                   
                   <Button type="submit" size="lg" className="w-full rounded-full">
@@ -203,8 +196,6 @@ const Contact = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
