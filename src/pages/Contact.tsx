@@ -1,4 +1,3 @@
-
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,14 +7,12 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Clock, Mail, Phone, MapPin } from 'lucide-react';
-
 const Contact = () => {
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-amber-50">
+      <section className="pt-20 pb-16 bg-stone-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#c37fa8]">
             We'd Love to <span className="text-primary">Hear From You</span>
@@ -29,7 +26,7 @@ const Contact = () => {
       </section>
 
       {/* 1. Studio Hours Section */}
-      <section className="py-20 bg-stone-50">
+      <section className="py-20 bg-amber-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
@@ -62,7 +59,7 @@ const Contact = () => {
       </section>
 
       {/* 2. Send Us a Message Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-amber-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
@@ -128,7 +125,7 @@ const Contact = () => {
       </section>
 
       {/* 3. Online Booking Section */}
-      <section className="py-20 bg-stone-50">
+      <section className="py-20 bg-amber-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
             Book Your Class <span className="text-primary">Online</span>
@@ -152,7 +149,7 @@ const Contact = () => {
       </section>
 
       {/* 4. Map Section */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-amber-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
             Find Us in <span className="text-primary">Midrand</span>
@@ -173,7 +170,7 @@ const Contact = () => {
       </section>
 
       {/* 5. Contact Information Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-amber-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
@@ -218,8 +215,6 @@ const Contact = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
