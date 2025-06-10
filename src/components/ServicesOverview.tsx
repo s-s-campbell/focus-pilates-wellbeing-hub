@@ -15,7 +15,7 @@ const ServicesOverview = () => {
       icon: Settings,
       title: "Reformer Pilates",
       description: "Utilise state-of-the-art reformer machines for a dynamic, full-body workout that builds strength and tones muscles.",
-      image: "https://images.unsplash.com/photo-1506629905607-c28a32ac5e67?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+      image: "/lovable-uploads/859ac7b7-aaf7-4ad9-99a6-794234e0e041.png"
     },
     {
       icon: Heart,
