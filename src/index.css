@@ -17,7 +17,7 @@
     --popover: 0 0% 100%; /* #ffffff */
     --popover-foreground: 222.2 84% 4.9%; /* Body text */
 
-    --primary: 322 81% 58%; /* pink-400 */
+    --primary: 324 36% 63%; /* Updated to requested color */
     --primary-foreground: 0 0% 100%; /* Text in Button */
 
     --secondary: 210 40% 90%; /* Secondary */
@@ -26,7 +26,7 @@
     --muted: 210 40% 98%; /* #ffffff */
     --muted-foreground: 215.4 16.3% 46.9%; /* Body text */
 
-    --accent: 322 78% 86%; /* pink-300 for hover */
+    --accent: 324 36% 73%; /* Lighter version for hover */
     --accent-foreground: 222.2 84% 4.9%; /* Body text */
 
     --destructive: 0 84% 60%;
@@ -34,18 +34,18 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 322 81% 58%; /* pink-400 */
+    --ring: 324 36% 63%; /* Updated to match primary */
 
     --radius: 0.75rem;
 
     --sidebar-background: 0 0% 100%; /* #ffffff */
     --sidebar-foreground: 222.2 84% 4.9%; /* Body text */
-    --sidebar-primary: 322 81% 58%; /* pink-400 */
+    --sidebar-primary: 324 36% 63%; /* Updated to match primary */
     --sidebar-primary-foreground: 0 0% 100%; /* Text in Button */
     --sidebar-accent: 210 40% 98%; /* #ffffff */
     --sidebar-accent-foreground: 222.2 84% 4.9%; /* Body text */
     --sidebar-border: 214.3 31.8% 91.4%;
-    --sidebar-ring: 322 81% 58%; /* pink-400 */
+    --sidebar-ring: 324 36% 63%; /* Updated to match primary */
   }
 
   .dark {
@@ -58,7 +58,7 @@
     --popover: 222.2 84% 4.9%; /* Body text */
     --popover-foreground: 0 0% 100%; /* #ffffff */
 
-    --primary: 322 81% 58%; /* pink-400 */
+    --primary: 324 36% 63%; /* Updated to requested color */
     --primary-foreground: 0 0% 100%; /* Text in Button */
 
     --secondary: 217.2 32.6% 17.5%; /* Secondary */
@@ -67,7 +67,7 @@
     --muted: 217.2 32.6% 17.5%; /* Body text */
     --muted-foreground: 215 20.2% 65.1%; /* #ffffff */
 
-    --accent: 322 78% 86%; /* pink-300 for hover */
+    --accent: 324 36% 73%; /* Lighter version for hover */
     --accent-foreground: 222.2 84% 4.9%; /* Body text */
 
     --destructive: 0 62.8% 30.6%;
@@ -75,16 +75,16 @@
 
     --border: 217.2 32.6% 17.5%; /* Body text */
     --input: 217.2 32.6% 17.5%; /* Body text */
-    --ring: 322 81% 58%; /* pink-400 */
+    --ring: 324 36% 63%; /* Updated to match primary */
 
     --sidebar-background: 222.2 84% 4.9%; /* Body text */
     --sidebar-foreground: 0 0% 100%; /* #ffffff */
-    --sidebar-primary: 322 81% 58%; /* pink-400 */
+    --sidebar-primary: 324 36% 63%; /* Updated to match primary */
     --sidebar-primary-foreground: 0 0% 100%; /* Text in Button */
     --sidebar-accent: 217.2 32.6% 17.5%; /* Body text */
     --sidebar-accent-foreground: 0 0% 100%; /* #ffffff */
     --sidebar-border: 217.2 32.6% 17.5%; /* Body text */
-    --sidebar-ring: 322 81% 58%; /* pink-400 */
+    --sidebar-ring: 324 36% 63%; /* Updated to match primary */
   }
 }
 
