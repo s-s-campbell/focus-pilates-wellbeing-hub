@@ -1,23 +1,17 @@
 import { Link } from 'react-router-dom';
-
 const Footer = () => {
-  return (
-    <footer className="text-background py-12 bg-[#c37fa8]">
+  return <footer className="text-background py-12 bg-[#c37fa8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <Link to="/" className="inline-block mb-4">
-              <img 
-                src="/lovable-uploads/6b747222-d3d9-4329-9f91-a20936eb2981.png" 
-                alt="Pilates in Focus Logo" 
-                className="h-12 w-auto brightness-0 invert" 
-              />
+              <img src="/lovable-uploads/6b747222-d3d9-4329-9f91-a20936eb2981.png" alt="Pilates in Focus Logo" className="h-12 w-auto brightness-0 invert" />
             </Link>
-            <p className="text-background/80 mb-4 max-w-md">
+            <p className="mb-4 max-w-md text-stone-50">
               Your personalised path to a stronger, healthier you. Expert-led Pilates in a supportive, 
               intimate home studio in Midrand.
             </p>
-            <p className="text-background/60 text-sm">
+            <p className="text-sm text-stone-50">
               Located in Midrand, Gauteng<br />
               Exact address provided upon booking
             </p>
@@ -54,8 +48,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;

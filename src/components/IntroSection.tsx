@@ -2,7 +2,7 @@ const IntroSection = () => {
   return <section className="py-20 bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-[#c37fa8]">
             More Than a Class, It's a <span className="text-[#c37fa8]">Community</span>
           </h2>
         </div>
