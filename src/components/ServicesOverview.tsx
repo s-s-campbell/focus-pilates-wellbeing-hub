@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
@@ -9,13 +10,13 @@ const ServicesOverview = () => {
       icon: Users,
       title: "Group Mat Classes",
       description: "Build a strong foundation and improve flexibility in a supportive small group setting. Perfect for all levels.",
-      image: "/lovable-uploads/859ac7b7-aaf7-4ad9-99a6-794234e0e041.png"
+      image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
     },
     {
       icon: Settings,
       title: "Reformer Pilates",
       description: "Utilise state-of-the-art reformer machines for a dynamic, full-body workout that builds strength and tones muscles.",
-      image: "https://images.unsplash.com/photo-1506629905607-c28a32ac5e67?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+      image: "/lovable-uploads/859ac7b7-aaf7-4ad9-99a6-794234e0e041.png"
     },
     {
       icon: Heart,
