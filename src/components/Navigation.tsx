@@ -23,8 +23,12 @@ const Navigation = () => {
     <nav className="bg-card/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="font-heading text-2xl font-semibold text-primary">
-            Pilates in Focus
+          <Link to="/" className="flex items-center">
+            <img 
+              src="/lovable-uploads/53e5e091-4397-4c21-859f-32fd3421aecf.png" 
+              alt="Pilates in Focus Logo" 
+              className="h-10 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}

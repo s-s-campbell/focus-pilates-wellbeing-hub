@@ -7,8 +7,12 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
-            <Link to="/" className="font-heading text-2xl font-semibold text-accent mb-4 block">
-              Pilates in Focus
+            <Link to="/" className="inline-block mb-4">
+              <img 
+                src="/lovable-uploads/53e5e091-4397-4c21-859f-32fd3421aecf.png" 
+                alt="Pilates in Focus Logo" 
+                className="h-12 w-auto brightness-0 invert"
+              />
             </Link>
             <p className="text-background/80 mb-4 max-w-md">
               Your personalised path to a stronger, healthier you. Expert-led Pilates in a supportive, 
