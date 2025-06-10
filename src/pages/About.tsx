@@ -1,3 +1,4 @@
+
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
@@ -31,7 +32,7 @@ const About = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#c37fa8]">
-              Meet Your Instructor & <span className="text-primary">Founder</span>
+              Meet Julie, Your Instructor & <span className="text-primary">Founder</span>
             </h1>
           </div>
           
@@ -66,7 +67,7 @@ const About = () => {
             <div className="relative">
               <img 
                 src="/lovable-uploads/7f150564-ed26-4b4d-898b-3d7f68b038cb.png" 
-                alt="Professional Pilates instructor in studio" 
+                alt="Julie, Professional Pilates instructor in studio" 
                 className="rounded-2xl shadow-xl w-full h-auto" 
               />
             </div>
@@ -87,7 +88,8 @@ const About = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {principles.map((principle, index) => <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300 border-0 bg-card">
+            {principles.map((principle, index) => (
+              <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300 border-0 bg-card">
                 <CardContent className="p-8">
                   <div className="inline-flex p-4 bg-primary/10 rounded-full mb-6">
                     <principle.icon className="w-8 h-8 text-primary" />
@@ -99,7 +101,8 @@ const About = () => {
                     {principle.description}
                   </p>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </div>
       </section>
