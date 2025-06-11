@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 const Footer = () => {
   return <footer className="text-background py-12 bg-[#c37fa8]">
@@ -17,18 +18,19 @@ const Footer = () => {
             </p>
           </div>
           
-          <div>
+          <div className="mt-8">
             <h3 className="font-semibold mb-4 text-stone-50 text-lg">Quick Links</h3>
             <ul className="space-y-2">
               <li><Link to="/about" className="text-background/80 hover:text-accent transition-colors">About Us</Link></li>
               <li><Link to="/classes" className="text-background/80 hover:text-accent transition-colors">Our Classes</Link></li>
               <li><Link to="/testimonials" className="text-background/80 hover:text-accent transition-colors">Testimonials</Link></li>
               <li><Link to="/blog" className="text-background/80 hover:text-accent transition-colors">Blog</Link></li>
+              <li><Link to="/contact" className="text-background/80 hover:text-accent transition-colors">Contact</Link></li>
             </ul>
           </div>
           
-          <div>
-            <h3 className="font-semibold mb-4 text-stone-50 text-lg">Contact Info</h3>
+          <div className="mt-8">
+            <h3 className="font-semibold mb-4 text-stone-50 text-lg">Opening Hours</h3>
             <ul className="space-y-2 text-background/80">
               <li>Mon-Fri: 7:00 AM - 6:00 PM</li>
               <li>Saturday: 8:00 AM - 12:00 PM</li>
