@@ -5,7 +5,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <Link to="/" className="inline-block mb-4">
-              <img src="/lovable-uploads/6b747222-d3d9-4329-9f91-a20936eb2981.png" alt="Pilates in Focus Logo" className="h-12 w-auto brightness-0 invert" />
+              <img src="/lovable-uploads/6b747222-d3d9-4329-9f91-a20936eb2981.png" alt="Pilates in Focus Logo" className="h-20 w-auto brightness-0 invert" />
             </Link>
             <p className="mb-4 max-w-md text-stone-50">
               Your personalised path to a stronger, healthier you. Expert-led Pilates in a supportive, 
