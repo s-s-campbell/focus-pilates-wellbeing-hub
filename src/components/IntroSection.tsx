@@ -15,16 +15,9 @@ const IntroSection = () => {
               where you can escape the noise and focus on your body's needs.
             </p>
             
-            <p className="text-lg text-foreground/80 leading-relaxed">
-              Led by an instructor with over 25 years in the fitness industry, our small group and private classes 
-              are designed to deliver results safely and effectively. We specialise in helping beginners build confidence, 
-              supporting individuals through rehabilitation, and empowering seniors to stay active and strong.
-            </p>
+            <p className="text-lg text-foreground/80 leading-relaxed">Led by an instructor with over 25 years of experience in the fitness industry, our small group and private classes are designed to deliver results safely and effectively. We specialise in helping beginners build confidence, supporting individuals through rehabilitation, and empowering seniors to stay active and strong.</p>
             
-            <p className="text-lg text-foreground/80 leading-relaxed">
-              Here, you're not just a number—you're part of a welcoming community dedicated to moving with intention 
-              and living with vitality.
-            </p>
+            <p className="text-lg text-foreground/80 leading-relaxed">Here, you're not just a number - you're part of a welcoming community dedicated to moving with intention and living with vitality.</p>
           </div>
           
           <div className="relative">
