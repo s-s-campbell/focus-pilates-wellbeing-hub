@@ -149,7 +149,7 @@ const Contact = () => {
       </section>
 
       {/* 4. Map Section */}
-      <section className="py-20 bg-amber-50">
+      <section className="py-20 bg-stone-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-6">
             Find Us in <span className="text-primary">Midrand</span>
