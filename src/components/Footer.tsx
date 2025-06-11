@@ -1,5 +1,3 @@
-
-
 import { Link } from 'react-router-dom';
 const Footer = () => {
   return <footer className="text-background py-12 bg-[#c37fa8]">
@@ -45,12 +43,9 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-background/20 mt-8 pt-8 text-center">
-          <p className="text-background/60 text-sm">
-            © 2024 Pilates in Focus. All rights reserved. | Built with care for your wellness journey.
-          </p>
+          <p className="text-background/60 text-sm">© 2024 Pilates in Focus. All rights reserved. Built with care for your wellness journey.</p>
         </div>
       </div>
     </footer>;
 };
 export default Footer;
-
