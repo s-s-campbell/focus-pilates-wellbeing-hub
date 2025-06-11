@@ -1,9 +1,12 @@
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { Quote } from 'lucide-react';
+
 const TestimonialSnippet = () => {
-  return <section className="py-20 text-primary-foreground bg-amber-50">
+  return (
+    <section className="py-20 text-primary-foreground bg-amber-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-12">
           Hear From Our <span className="text-accent">Community</span>
@@ -23,11 +26,13 @@ const TestimonialSnippet = () => {
         </Card>
         
         <div className="mt-12">
-          <Button asChild size="lg" variant="secondary" className="rounded-full">
+          <Button asChild size="lg" variant="default" className="rounded-full">
             <Link to="/testimonials">Read More Success Stories</Link>
           </Button>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default TestimonialSnippet;
