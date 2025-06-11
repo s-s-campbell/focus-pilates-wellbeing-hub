@@ -23,7 +23,7 @@ const Blog = () => {
     {
       title: "New to Pilates? 5 Things to Expect in Your First Class",
       summary: "Feeling a little nervous about your first Pilates class? Don't be! From the lingo to the focus on breath, we break down everything a beginner needs to know to walk into their first session with confidence.",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      image: "https://images.unsplash.com/photo-1506629905607-4104d7711296?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
       date: "March 1, 2024",
       readTime: "4 min read"
     }
