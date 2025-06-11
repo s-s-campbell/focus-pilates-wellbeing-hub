@@ -1,5 +1,3 @@
-
-
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
@@ -27,7 +25,8 @@ const ServicesOverview = () => {
     }
   ];
 
-  return <section className="py-20 bg-muted/50">
+  return (
+    <section className="py-20 bg-muted/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-[#c37fa8]">
@@ -39,7 +38,8 @@ const ServicesOverview = () => {
         </div>
         
         <div className="grid md:grid-cols-3 gap-8 mb-12">
-          {services.map((service, index) => <Card key={index} className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-card">
+          {services.map((service, index) => (
+            <Card key={index} className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-card">
               <div className="relative h-48 overflow-hidden">
                 <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
@@ -55,17 +55,18 @@ const ServicesOverview = () => {
                   {service.description}
                 </p>
               </CardContent>
-            </Card>)}
+            </Card>
+          ))}
         </div>
         
         <div className="text-center">
-          <Button asChild size="lg" variant="outline" className="rounded-full">
+          <Button asChild size="lg" variant="default" className="rounded-full">
             <Link to="/classes">Explore Our Classes</Link>
           </Button>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 
 export default ServicesOverview;
-
