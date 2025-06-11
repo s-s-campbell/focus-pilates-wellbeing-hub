@@ -35,12 +35,12 @@ const Footer = () => {
               <li>Mon-Fri: 7:00 AM - 6:00 PM</li>
               <li>Saturday: 8:00 AM - 12:00 PM</li>
               <li>Sunday: Closed</li>
-              <li className="pt-2">
-                <Link to="/contact" className="text-amber-50 hover:text-amber-100 transition-colors font-semibold">
-                  Book Your Class →
-                </Link>
-              </li>
             </ul>
+            <div className="mt-4">
+              <Link to="/contact" className="text-amber-50 hover:text-amber-100 transition-colors font-semibold">
+                Book Your Class →
+              </Link>
+            </div>
           </div>
         </div>
         
