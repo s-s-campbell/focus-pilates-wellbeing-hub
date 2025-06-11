@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -14,7 +13,7 @@ const Navigation = () => {
     { href: '/classes', label: 'Our Classes' },
     { href: '/testimonials', label: 'Testimonials' },
     { href: '/blog', label: 'Blog' },
-    { href: '/contact', label: 'Contact & Bookings' },
+    { href: '/contact', label: 'Contact' },
   ];
 
   const isActive = (href: string) => location.pathname === href;
