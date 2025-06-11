@@ -1,3 +1,4 @@
+
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,8 +8,10 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Clock, Mail, Phone, MapPin } from 'lucide-react';
+
 const Contact = () => {
-  return <div className="min-h-screen">
+  return (
+    <div className="min-h-screen">
       <Navigation />
       
       {/* Hero Section */}
@@ -25,44 +28,11 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* 1. Studio Hours Section */}
+      {/* 1. Send Us a Message Section */}
       <section className="py-20 bg-amber-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Studio <span className="text-primary">Hours</span>
-            </h2>
-          </div>
-          <Card className="border-0 shadow-lg max-w-2xl mx-auto">
-            <CardHeader>
-              <CardTitle className="font-heading text-2xl text-foreground flex items-center justify-center">
-                <Clock className="w-6 h-6 text-primary mr-3" />
-                Opening Hours
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex justify-between items-center text-lg">
-                <span className="text-foreground font-medium">Monday - Friday</span>
-                <span className="text-muted-foreground">7:00 AM - 6:00 PM</span>
-              </div>
-              <div className="flex justify-between items-center text-lg">
-                <span className="text-foreground font-medium">Saturday</span>
-                <span className="text-muted-foreground">8:00 AM - 12:00 PM</span>
-              </div>
-              <div className="flex justify-between items-center text-lg">
-                <span className="text-foreground font-medium">Sunday</span>
-                <span className="text-muted-foreground">Closed</span>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* 2. Send Us a Message Section */}
-      <section className="py-20 bg-amber-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-6">
               Send Us a <span className="text-primary">Message</span>
             </h2>
           </div>
@@ -124,10 +94,10 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* 3. Online Booking Section */}
+      {/* 2. Online Booking Section */}
       <section className="py-20 bg-amber-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-6">
             Book Your Class <span className="text-primary">Online</span>
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
@@ -148,10 +118,43 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* 3. Studio Hours Section */}
+      <section className="py-20 bg-amber-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-6">
+              Studio <span className="text-primary">Hours</span>
+            </h2>
+          </div>
+          <Card className="border-0 shadow-lg max-w-2xl mx-auto">
+            <CardHeader>
+              <CardTitle className="font-heading text-2xl text-foreground flex items-center justify-center">
+                <Clock className="w-6 h-6 text-primary mr-3" />
+                Opening Hours
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex justify-between items-center text-lg">
+                <span className="text-foreground font-medium">Monday - Friday</span>
+                <span className="text-muted-foreground">7:00 AM - 6:00 PM</span>
+              </div>
+              <div className="flex justify-between items-center text-lg">
+                <span className="text-foreground font-medium">Saturday</span>
+                <span className="text-muted-foreground">8:00 AM - 12:00 PM</span>
+              </div>
+              <div className="flex justify-between items-center text-lg">
+                <span className="text-foreground font-medium">Sunday</span>
+                <span className="text-muted-foreground">Closed</span>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       {/* 4. Map Section */}
       <section className="py-20 bg-amber-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-6">
             Find Us in <span className="text-primary">Midrand</span>
           </h2>
           <Card className="border-0 shadow-lg p-8">
@@ -173,8 +176,8 @@ const Contact = () => {
       <section className="py-20 bg-amber-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Contact <span className="text-primary">Information</span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-6">
+              Can't Find What You're <span className="text-primary">Looking For?</span>
             </h2>
           </div>
           <Card className="border-0 shadow-lg max-w-2xl mx-auto">
@@ -215,6 +218,8 @@ const Contact = () => {
       </section>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Contact;
