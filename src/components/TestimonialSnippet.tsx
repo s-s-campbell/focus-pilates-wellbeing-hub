@@ -9,7 +9,7 @@ const TestimonialSnippet = () => {
     <section className="py-20 text-primary-foreground bg-amber-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-12">
-          Hear From Our <span className="text-accent">Community</span>
+          Hear From Our <span className="text-primary">Community</span>
         </h2>
         
         <Card className="bg-card/95 backdrop-blur-sm border-0 shadow-xl">
