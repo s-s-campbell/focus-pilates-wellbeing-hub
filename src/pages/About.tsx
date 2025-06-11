@@ -2,6 +2,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Heart, Users, Target } from 'lucide-react';
+
 const About = () => {
   const principles = [{
     icon: Heart,
@@ -16,7 +17,9 @@ const About = () => {
     title: "Personalised Progress",
     description: "Your journey is unique. We honour this by listening to your needs, adapting exercises for your body, and celebrating every milestone with you."
   }];
-  return <div className="min-h-screen">
+  
+  return (
+    <div className="min-h-screen">
       <Navigation />
       
       {/* Hero Section */}
@@ -76,10 +79,11 @@ const About = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {principles.map((principle, index) => <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300 border-0 bg-card">
+            {principles.map((principle, index) => (
+              <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300 border-0 bg-card">
                 <CardContent className="p-8">
                   <div className="inline-flex p-4 rounded-full mb-6 bg-[#c37fa8]">
-                    <principle.icon className="w-8 h-8 text-primary" />
+                    <principle.icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="font-heading text-xl font-semibold mb-4 text-[#c37fa8]">
                     {principle.title}
@@ -88,12 +92,15 @@ const About = () => {
                     {principle.description}
                   </p>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default About;
