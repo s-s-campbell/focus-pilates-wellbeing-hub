@@ -92,7 +92,7 @@ const Classes = () => {
       <section className="pt-20 pb-16 bg-muted/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#c37fa8]">
-            Find the Perfect Class for Your <span className="text-primary">Body and Goals</span>
+            Find the Perfect Class for Your <span className="text-primary">Goals</span>
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed">We offer a range of mat and reformer Pilates classes in both group and private settings. All our group classes are kept small to ensure you receive personalised feedback and guidance. Unsure where to start? Book an introductory private session so we can assess your needs and recommend the perfect path for you.</p>
         </div>
