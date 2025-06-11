@@ -4,7 +4,6 @@ import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
 
 const Booking = () => {
   return (
@@ -21,12 +20,6 @@ const Booking = () => {
             Ready to start your journey? Schedule your introductory session or join one of our regular classes. 
             We're here to support you every step of the way.
           </p>
-          <Button asChild variant="outline" size="sm" className="mb-8">
-            <Link to="/" className="flex items-center">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Home
-            </Link>
-          </Button>
         </div>
       </section>
 
@@ -35,7 +28,7 @@ const Booking = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Card className="border-0 shadow-xl">
             <CardHeader className="text-center">
-              <CardTitle className="font-heading text-3xl text-foreground">
+              <CardTitle className="font-heading text-3xl text-primary">
                 Schedule Your Session
               </CardTitle>
             </CardHeader>
@@ -61,13 +54,13 @@ const Booking = () => {
       {/* Contact Info Section */}
       <section className="py-16 bg-white">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-2xl font-bold text-foreground mb-6">
+          <h2 className="font-heading text-2xl font-bold text-primary mb-6">
             Need Help Booking?
           </h2>
           <p className="text-muted-foreground mb-6">
             If you have any questions or need assistance with booking, feel free to reach out to us directly.
           </p>
-          <Button asChild variant="outline">
+          <Button asChild>
             <Link to="/contact">Contact Us</Link>
           </Button>
         </div>
