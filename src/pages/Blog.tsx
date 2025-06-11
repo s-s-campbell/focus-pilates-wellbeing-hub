@@ -9,14 +9,14 @@ const Blog = () => {
     {
       title: "5 Simple Pilates Exercises to Alleviate Desk-Related Back Pain",
       summary: "If you spend hours at a desk, your back is paying the price. Discover five gentle, effective Pilates movements you can do to strengthen your core, release tension, and improve your posture.",
-      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
       date: "March 15, 2024",
       readTime: "5 min read"
     },
     {
       title: "Why Balance is a Superpower: How Pilates Helps Seniors Stay Stable and Confident",
       summary: "As we age, maintaining balance becomes crucial for preventing falls and staying independent. Learn how the specific principles of Pilates directly improve stability, proprioception, and confidence on your feet.",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+      image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
       date: "March 8, 2024",
       readTime: "7 min read"
     },
