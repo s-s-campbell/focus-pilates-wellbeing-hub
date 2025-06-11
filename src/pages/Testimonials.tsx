@@ -1,4 +1,3 @@
-
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
@@ -10,7 +9,7 @@ const Testimonials = () => {
       quote: "After my physiotherapist recommended Pilates for my chronic back pain, I was nervous about starting. Finding this studio was a blessing. The instructor's deep knowledge of rehabilitation put me at ease immediately. She tailored every movement for my body, and for the first time in years, I feel strong and in control. It's been life-changing.",
       name: "Sarah T.",
       title: "Physiotherapy Referral Client",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b5ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
     },
     {
       quote: "Keeping active as you get older is so important, but the big gyms are just too much. Pilates in Focus is the perfect fit. The classes are challenging but gentle on my joints, and I've noticed a huge improvement in my balance. I love the camaraderie with the other members—it's as much a social hour as it is a workout!",
