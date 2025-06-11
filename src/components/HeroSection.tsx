@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -31,7 +32,7 @@ const HeroSection = () => {
         
         <div className="animate-scale-in">
           <Button asChild size="lg" className="text-lg px-8 py-6 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300">
-            <Link to="/contact#booking">Book Your Pilates Class</Link>
+            <Link to="/booking">Book Your Pilates Class</Link>
           </Button>
         </div>
       </div>
