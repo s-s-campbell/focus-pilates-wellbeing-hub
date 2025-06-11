@@ -33,8 +33,8 @@ const Testimonials = () => {
       {/* Hero Section */}
       <section className="pt-20 pb-16 bg-muted/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-            Real Stories, <span className="text-primary">Real Results</span>
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6">
+            Real Stories, <span>Real Results</span>
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed">
             We are proud to have supported so many incredible individuals on their wellness journeys. 
