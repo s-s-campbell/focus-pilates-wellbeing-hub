@@ -1,3 +1,4 @@
+
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Clock, Mail, Phone, MapPin } from 'lucide-react';
+
 const Contact = () => {
   return <div className="min-h-screen">
       <Navigation />
@@ -92,7 +94,7 @@ const Contact = () => {
       </section>
 
       {/* 2. Online Booking Section */}
-      <section className="py-20 bg-white">
+      <section id="booking" className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-6">
             Book Your Class <span className="text-primary">Online</span>
