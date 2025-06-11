@@ -1,3 +1,4 @@
+
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -35,7 +36,7 @@ const Blog = () => {
       {/* Hero Section */}
       <section className="pt-20 pb-16 bg-muted/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6">
             Your Resource for <span className="text-primary">Mindful Movement</span>
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed">
