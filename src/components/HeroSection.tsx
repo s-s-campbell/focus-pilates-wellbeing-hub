@@ -1,9 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+
 const HeroSection = () => {
   const heroImages = ['https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80', 'https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex(prevIndex => prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1);
@@ -11,6 +13,7 @@ const HeroSection = () => {
 
     return () => clearInterval(interval);
   }, [heroImages.length]);
+
   return <section className="relative min-h-screen flex items-center justify-center">
       {/* Background Image Gallery */}
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out" style={{
@@ -28,7 +31,7 @@ const HeroSection = () => {
         
         <div className="animate-scale-in">
           <Button asChild size="lg" className="text-lg px-8 py-6 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300">
-            <Link to="/contact">Book Your Introductory Class</Link>
+            <Link to="/contact">Book Your Pilates Class</Link>
           </Button>
         </div>
       </div>
@@ -46,4 +49,5 @@ const HeroSection = () => {
       </div>
     </section>;
 };
+
 export default HeroSection;
