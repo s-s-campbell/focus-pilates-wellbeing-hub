@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Blog = () => {
   const blogPosts = [
@@ -11,21 +12,24 @@ const Blog = () => {
       summary: "If you spend hours at a desk, your back is paying the price. Discover five gentle, effective Pilates movements you can do to strengthen your core, release tension, and improve your posture.",
       image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
       date: "March 15, 2024",
-      readTime: "5 min read"
+      readTime: "5 min read",
+      slug: "desk-back-pain-exercises"
     },
     {
       title: "Why Balance is a Superpower: How Pilates Helps Seniors Stay Stable and Confident",
       summary: "As we age, maintaining balance becomes crucial for preventing falls and staying independent. Learn how the specific principles of Pilates directly improve stability, proprioception, and confidence on your feet.",
       image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
       date: "March 8, 2024",
-      readTime: "7 min read"
+      readTime: "7 min read",
+      slug: "pilates-balance-seniors"
     },
     {
       title: "New to Pilates? 5 Things to Expect in Your First Class",
       summary: "Feeling a little nervous about your first Pilates class? Don't be! From the lingo to the focus on breath, we break down everything a beginner needs to know to walk into their first session with confidence.",
       image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
       date: "March 1, 2024",
-      readTime: "4 min read"
+      readTime: "4 min read",
+      slug: "first-pilates-class-guide"
     }
   ];
 
@@ -76,8 +80,8 @@ const Blog = () => {
                   <p className="text-muted-foreground leading-relaxed mb-4">
                     {post.summary}
                   </p>
-                  <Button variant="outline" size="sm" className="rounded-full">
-                    Read More
+                  <Button asChild variant="outline" size="sm" className="rounded-full">
+                    <Link to={`/blog/${post.slug}`}>Read More</Link>
                   </Button>
                 </CardContent>
               </Card>
