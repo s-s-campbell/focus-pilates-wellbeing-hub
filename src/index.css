@@ -165,9 +165,9 @@
     @apply flex items-center justify-center;
   }
 
-  /* Responsive button optimization */
+  /* Responsive button optimization - Fixed desktop sizing */
   .responsive-button {
-    @apply h-12 px-6 text-base font-medium rounded-full touch-target lg:h-14 lg:px-8 lg:text-lg;
+    @apply h-12 px-6 text-base font-medium rounded-full touch-target;
   }
 
   /* Responsive card hover effects */
