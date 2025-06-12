@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 const Footer = () => {
   return <footer className="text-background py-12 bg-[#c37fa8]">
@@ -37,7 +36,7 @@ const Footer = () => {
               <li>Sunday: Closed</li>
             </ul>
             <div className="mt-4">
-              <Link to="/contact" className="text-amber-50 hover:text-amber-100 transition-colors font-semibold">
+              <Link to="/booking" className="text-amber-50 hover:text-amber-100 transition-colors font-semibold">
                 Book Your Class →
               </Link>
             </div>
