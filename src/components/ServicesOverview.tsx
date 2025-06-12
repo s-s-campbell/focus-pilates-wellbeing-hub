@@ -40,27 +40,29 @@ const ServicesOverview = () => {
         
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-8 sm:mb-12">
           {services.map((service, index) => (
-            <Card key={index} className="group mobile-card hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-card">
-              <div className="relative h-40 sm:h-48 overflow-hidden">
-                <img 
-                  src={service.image} 
-                  alt={service.title} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
-                <div className="absolute top-3 sm:top-4 left-3 sm:left-4 p-2 sm:p-3 bg-card/90 rounded-full">
-                  <service.icon className="w-4 h-4 sm:w-6 sm:h-6 text-primary" />
+            <Link key={index} to="/classes" className="block">
+              <Card className="group mobile-card hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-card cursor-pointer">
+                <div className="relative h-40 sm:h-48 overflow-hidden">
+                  <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+                  <div className="absolute top-3 sm:top-4 left-3 sm:left-4 p-2 sm:p-3 bg-card/90 rounded-full">
+                    <service.icon className="w-4 h-4 sm:w-6 sm:h-6 text-primary" />
+                  </div>
                 </div>
-              </div>
-              <CardContent className="mobile-card-spacing">
-                <h3 className="font-heading text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-primary">
-                  {service.title}
-                </h3>
-                <p className="mobile-text-optimize text-muted-foreground leading-relaxed">
-                  {service.description}
-                </p>
-              </CardContent>
-            </Card>
+                <CardContent className="mobile-card-spacing">
+                  <h3 className="font-heading text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-primary">
+                    {service.title}
+                  </h3>
+                  <p className="mobile-text-optimize text-muted-foreground leading-relaxed">
+                    {service.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
         
