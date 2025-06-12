@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -126,13 +125,6 @@ const Booking = () => {
           <p className="mobile-text-optimize text-muted-foreground leading-relaxed mb-4 sm:mb-6 md:mb-8 max-w-3xl mx-auto">
             Begin your transformative pilates journey with just a few simple steps. Our intuitive online booking system guides you through selecting your ideal class, discovering available session times, and securing your place.
           </p>
-          {isMobile && (
-            <div className="bg-muted/50 p-3 rounded-lg mb-4">
-              <p className="text-xs text-muted-foreground">
-                💡 Tap the button below to open our mobile-optimized booking platform
-              </p>
-            </div>
-          )}
         </div>
       </section>
 
