@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
@@ -26,32 +27,36 @@ const ServicesOverview = () => {
   ];
 
   return (
-    <section className="py-20 bg-muted/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-[#c37fa8]">
+    <section className="mobile-section-spacing bg-muted/50">
+      <div className="max-w-7xl mx-auto mobile-container">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="font-heading mobile-heading-optimize mb-4 text-primary">
             Classes Tailored to <span className="text-primary">Your Goals</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="mobile-text-optimize text-muted-foreground max-w-2xl mx-auto">
             Choose from our range of expertly designed classes, each crafted to meet you exactly where you are in your fitness journey.
           </p>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-8 sm:mb-12">
           {services.map((service, index) => (
-            <Card key={index} className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-card">
-              <div className="relative h-48 overflow-hidden">
-                <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <Card key={index} className="group mobile-card hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-card">
+              <div className="relative h-40 sm:h-48 overflow-hidden">
+                <img 
+                  src={service.image} 
+                  alt={service.title} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
-                <div className="absolute top-4 left-4 p-3 bg-card/90 rounded-full">
-                  <service.icon className="w-6 h-6 text-primary" />
+                <div className="absolute top-3 sm:top-4 left-3 sm:left-4 p-2 sm:p-3 bg-card/90 rounded-full">
+                  <service.icon className="w-4 h-4 sm:w-6 sm:h-6 text-primary" />
                 </div>
               </div>
-              <CardContent className="p-6">
-                <h3 className="font-heading text-xl font-semibold mb-3 text-[#c37fa8]">
+              <CardContent className="mobile-card-spacing">
+                <h3 className="font-heading text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-primary">
                   {service.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="mobile-text-optimize text-muted-foreground leading-relaxed">
                   {service.description}
                 </p>
               </CardContent>
@@ -60,7 +65,7 @@ const ServicesOverview = () => {
         </div>
         
         <div className="text-center">
-          <Button asChild size="lg" variant="default" className="rounded-full">
+          <Button asChild size="lg" variant="default" className="mobile-button">
             <Link to="/classes">Explore Our Classes</Link>
           </Button>
         </div>
