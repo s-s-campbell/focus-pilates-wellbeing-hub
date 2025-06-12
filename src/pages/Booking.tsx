@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { ExternalLink } from 'lucide-react';
 
 const Booking = () => {
   const isMobile = useIsMobile();
@@ -13,74 +14,68 @@ const Booking = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    // Load SimplyBook widget script
-    const script1 = document.createElement('script');
-    script1.src = '//widget.simplybook.net/v2/widget/widget.js';
-    script1.type = 'text/javascript';
-    document.head.appendChild(script1);
-    script1.onload = () => {
-      // Wait a bit for the script to be ready, then initialize the widget
-      setTimeout(() => {
-        if (window.SimplybookWidget) {
-          const widget = new window.SimplybookWidget({
-            "widget_type": "iframe",
-            "url": "https://pilatesinfocus.simplybook.net",
-            "theme": "dainty",
-            "theme_settings": {
-              "timeline_show_end_time": "1",
-              "timeline_hide_unavailable": "1",
-              "hide_past_days": "0",
-              "sb_base_color": "#861657",
-              "secondary_color": "#f4eaf0",
-              "sb_text_color": "#38182b",
-              "display_item_mode": "block",
-              "body_bg_color": "#ffffff",
-              "sb_background_image": "12",
-              "sb_review_image": "13",
-              "sb_review_image_preview": "/uploads/pilatesinfocus/image_files/preview/fa3d6be4d5673b39b2cc57c2edc7dad1.jpg",
-              "dark_font_color": "#38182b",
-              "light_font_color": "#ffffff",
-              "btn_color_1": "#ecb4bf",
-              "sb_company_label_color": "#38182b",
-              "sb_cancellation_color": "#ff6b8e",
-              "hide_img_mode": "1"
-            },
-            "timeline": "modern",
-            "datepicker": "top_calendar",
-            "is_rtl": false,
-            "app_config": {
-              "clear_session": 0,
-              "allow_switch_to_ada": 0,
-              "predefined": []
-            },
-            "container_id": "simplybook-widget"
-          });
-        }
-      }, 100);
-    };
+    // Only load SimplyBook widget script for desktop users
+    if (!isMobile) {
+      // Load SimplyBook widget script
+      const script1 = document.createElement('script');
+      script1.src = '//widget.simplybook.net/v2/widget/widget.js';
+      script1.type = 'text/javascript';
+      document.head.appendChild(script1);
+      script1.onload = () => {
+        // Wait a bit for the script to be ready, then initialize the widget
+        setTimeout(() => {
+          if (window.SimplybookWidget) {
+            const widget = new window.SimplybookWidget({
+              "widget_type": "iframe",
+              "url": "https://pilatesinfocus.simplybook.net",
+              "theme": "dainty",
+              "theme_settings": {
+                "timeline_show_end_time": "1",
+                "timeline_hide_unavailable": "1",
+                "hide_past_days": "0",
+                "sb_base_color": "#861657",
+                "secondary_color": "#f4eaf0",
+                "sb_text_color": "#38182b",
+                "display_item_mode": "block",
+                "body_bg_color": "#ffffff",
+                "sb_background_image": "12",
+                "sb_review_image": "13",
+                "sb_review_image_preview": "/uploads/pilatesinfocus/image_files/preview/fa3d6be4d5673b39b2cc57c2edc7dad1.jpg",
+                "dark_font_color": "#38182b",
+                "light_font_color": "#ffffff",
+                "btn_color_1": "#ecb4bf",
+                "sb_company_label_color": "#38182b",
+                "sb_cancellation_color": "#ff6b8e",
+                "hide_img_mode": "1"
+              },
+              "timeline": "modern",
+              "datepicker": "top_calendar",
+              "is_rtl": false,
+              "app_config": {
+                "clear_session": 0,
+                "allow_switch_to_ada": 0,
+                "predefined": []
+              },
+              "container_id": "simplybook-widget"
+            });
+          }
+        }, 100);
+      };
 
-    // Add custom CSS to hide timezone display and optimize layout for mobile
-    const style = document.createElement('style');
-    style.textContent = `
-      /* Hide timezone/time display in SimplyBook widget */
-      #simplybook-widget .widget-header-time,
-      #simplybook-widget .sb-timezone,
-      #simplybook-widget .sb-time-zone,
-      #simplybook-widget [class*="timezone"],
-      #simplybook-widget [class*="time-zone"],
-      #simplybook-widget .widget-timezone {
-        display: none !important;
-      }
-      
-      /* Hide elements containing "Our time:" text */
-      #simplybook-widget div:has-text("Our time:"),
-      #simplybook-widget span:has-text("Our time:"),
-      #simplybook-widget p:has-text("Our time:") {
-        display: none !important;
-      }
-      
-      /* Desktop optimizations */
-      @media (min-width: 768px) {
+      // Add custom CSS for desktop optimization only
+      const style = document.createElement('style');
+      style.textContent = `
+        /* Hide timezone/time display in SimplyBook widget */
+        #simplybook-widget .widget-header-time,
+        #simplybook-widget .sb-timezone,
+        #simplybook-widget .sb-time-zone,
+        #simplybook-widget [class*="timezone"],
+        #simplybook-widget [class*="time-zone"],
+        #simplybook-widget .widget-timezone {
+          display: none !important;
+        }
+        
+        /* Desktop optimizations */
         #simplybook-widget .widget-content,
         #simplybook-widget .sb-main-content,
         #simplybook-widget iframe {
@@ -92,102 +87,37 @@ const Booking = () => {
           padding-top: 10px !important;
           margin-bottom: 0 !important;
         }
-      }
-      
-      /* Mobile optimizations */
-      @media (max-width: 767px) {
+        
+        /* Ensure the widget fills available space efficiently */
         #simplybook-widget {
-          width: 100% !important;
-          min-height: 500px !important;
-          max-height: 80vh !important;
-          overflow-y: auto !important;
-          -webkit-overflow-scrolling: touch !important;
+          padding-top: 0 !important;
+          box-sizing: border-box !important;
         }
-        
-        #simplybook-widget iframe {
-          width: 100% !important;
-          min-height: 500px !important;
-          max-height: 80vh !important;
-          border: none !important;
-        }
-        
-        #simplybook-widget .widget-content,
-        #simplybook-widget .sb-main-content {
-          padding: 8px !important;
-          margin: 0 !important;
-        }
-        
-        #simplybook-widget .widget-header {
-          padding: 8px !important;
-          margin: 0 !important;
-          font-size: 14px !important;
-        }
-        
-        /* Optimize buttons for touch */
-        #simplybook-widget button,
-        #simplybook-widget .btn,
-        #simplybook-widget input[type="button"] {
-          min-height: 44px !important;
-          min-width: 44px !important;
-          padding: 8px 12px !important;
-          font-size: 14px !important;
-          touch-action: manipulation !important;
-        }
-        
-        /* Improve text readability on mobile */
-        #simplybook-widget,
-        #simplybook-widget * {
-          font-size: 14px !important;
-          line-height: 1.4 !important;
-        }
-        
-        /* Optimize calendar view for mobile */
-        #simplybook-widget .calendar,
-        #simplybook-widget .datepicker {
-          width: 100% !important;
-          font-size: 12px !important;
-        }
-        
-        /* Ensure proper spacing on mobile */
-        #simplybook-widget .form-group,
-        #simplybook-widget .field-group {
-          margin-bottom: 12px !important;
-        }
-        
-        /* Hide unnecessary elements on mobile to save space */
-        #simplybook-widget .widget-logo,
-        #simplybook-widget .footer-info {
-          display: none !important;
-        }
-      }
-      
-      /* Ensure the widget fills available space efficiently */
-      #simplybook-widget {
-        padding-top: 0 !important;
-        box-sizing: border-box !important;
-      }
-    `;
-    document.head.appendChild(style);
+      `;
+      document.head.appendChild(style);
 
-    // Cleanup function to remove scripts and styles when component unmounts
-    return () => {
-      const scripts = document.querySelectorAll('script[src*="simplybook"]');
-      scripts.forEach(script => script.remove());
-      // Remove custom styles
-      document.head.removeChild(style);
-      // Clear the widget container
-      const container = document.getElementById('simplybook-widget');
-      if (container) {
-        container.innerHTML = '';
-      }
-    };
-  }, []);
+      // Cleanup function to remove scripts and styles when component unmounts
+      return () => {
+        const scripts = document.querySelectorAll('script[src*="simplybook"]');
+        scripts.forEach(script => script.remove());
+        // Remove custom styles
+        if (document.head.contains(style)) {
+          document.head.removeChild(style);
+        }
+        // Clear the widget container
+        const container = document.getElementById('simplybook-widget');
+        if (container) {
+          container.innerHTML = '';
+        }
+      };
+    }
+  }, [isMobile]);
 
   return (
     <div className="min-h-screen mobile-scroll">
       <Navigation />
       
-      {/* Hero Section - Mobile Optimized */}
+      {/* Hero Section */}
       <section className="mobile-section-spacing bg-white">
         <div className="max-w-4xl mx-auto mobile-container text-center">
           <h1 className="font-heading mobile-heading-optimize font-bold mb-3 sm:mb-4 md:mb-6 text-primary">
@@ -199,14 +129,14 @@ const Booking = () => {
           {isMobile && (
             <div className="bg-muted/50 p-3 rounded-lg mb-4">
               <p className="text-xs text-muted-foreground">
-                💡 Tip: Scroll within the booking widget below to view all available options
+                💡 Tap the button below to open our mobile-optimized booking platform
               </p>
             </div>
           )}
         </div>
       </section>
 
-      {/* Booking Widget Section - Mobile Optimized */}
+      {/* Booking Section - Conditional Rendering */}
       <section className="mobile-section-spacing bg-stone-50">
         <div className="max-w-4xl mx-auto mobile-container">
           <Card className="border-0 shadow-xl mobile-card">
@@ -215,35 +145,51 @@ const Booking = () => {
                 Schedule Your Session
               </CardTitle>
             </CardHeader>
-            <CardContent className={`${isMobile ? 'p-2' : 'mobile-card-spacing'}`}>
-              <div 
-                id="simplybook-widget" 
-                className={`
-                  w-full overflow-auto rounded-lg border bg-white mobile-scroll
-                  ${isMobile 
-                    ? 'min-h-[500px] max-h-[80vh]' 
-                    : 'min-h-[600px]'
-                  }
-                `}
-              >
-                {/* SimplyBook widget will be rendered here */}
-                <div className="flex items-center justify-center h-full text-muted-foreground mobile-card-spacing">
-                  <div className="text-center">
-                    <div className="animate-pulse mb-2 text-sm sm:text-base">Loading booking system...</div>
-                    {isMobile && (
-                      <div className="text-xs text-muted-foreground">
-                        Please wait while we load the mobile-optimized booking interface
-                      </div>
-                    )}
+            <CardContent className="mobile-card-spacing">
+              {isMobile ? (
+                // Mobile: External Link Button
+                <div className="text-center space-y-4">
+                  <p className="text-muted-foreground mb-6">
+                    For the best mobile booking experience, we'll take you to our dedicated booking platform.
+                  </p>
+                  <Button 
+                    asChild 
+                    size="lg" 
+                    className="w-full h-14 text-lg mobile-button"
+                  >
+                    <a 
+                      href="https://pilatesinfocus.simplybook.net" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2"
+                    >
+                      <span>Open Booking Platform</span>
+                      <ExternalLink className="w-5 h-5" />
+                    </a>
+                  </Button>
+                  <p className="text-xs text-muted-foreground">
+                    Opens in a new tab for optimal mobile experience
+                  </p>
+                </div>
+              ) : (
+                // Desktop: Embedded Widget
+                <div 
+                  id="simplybook-widget" 
+                  className="w-full min-h-[600px] overflow-auto rounded-lg border bg-white"
+                >
+                  <div className="flex items-center justify-center h-full text-muted-foreground mobile-card-spacing">
+                    <div className="text-center">
+                      <div className="animate-pulse mb-2 text-base">Loading booking system...</div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </CardContent>
           </Card>
         </div>
       </section>
 
-      {/* Contact Info Section - Mobile Optimized */}
+      {/* Contact Info Section */}
       <section className="mobile-section-spacing bg-white">
         <div className="max-w-2xl mx-auto mobile-container text-center">
           <h2 className="font-heading text-xl sm:text-2xl font-bold text-primary mb-3 sm:mb-4 md:mb-6">
