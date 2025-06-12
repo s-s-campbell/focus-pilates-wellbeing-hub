@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -98,7 +99,7 @@ const Classes = () => {
       <section className="mobile-section-spacing bg-muted/30">
         <div className="max-w-4xl mx-auto mobile-container text-center">
           <h1 className="font-heading mobile-heading-optimize mb-4 sm:mb-6 text-primary">
-            Find the Perfect Class for Your <span className="text-foreground">Goals</span>
+            Find the Perfect Class for Your <span className="text-primary">Goals</span>
           </h1>
           <p className="mobile-text-optimize text-muted-foreground leading-relaxed max-w-3xl mx-auto">
             We offer a range of mat and reformer Pilates classes in both group and private settings. All our group classes are kept small to ensure you receive personalised feedback and guidance. Unsure where to start? Book an introductory private session so we can assess your needs and recommend the perfect path for you.
