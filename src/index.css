@@ -165,9 +165,22 @@
     @apply flex items-center justify-center;
   }
 
-  /* Responsive button optimization - Fixed desktop sizing */
+  /* Responsive button optimization - Fixed desktop sizing with !important to override component defaults */
   .responsive-button {
-    @apply h-12 px-6 text-base font-medium rounded-full touch-target lg:h-10 lg:px-4 lg:text-sm;
+    @apply h-12 px-6 text-base font-medium rounded-full touch-target;
+    height: 3rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    font-size: 1rem !important;
+  }
+
+  @media (min-width: 1024px) {
+    .responsive-button {
+      height: 2.5rem !important;
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+      font-size: 0.875rem !important;
+    }
   }
 
   /* Responsive card hover effects */

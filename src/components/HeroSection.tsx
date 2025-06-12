@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -34,7 +33,7 @@ const HeroSection = () => {
         </p>
         
         <div className="animate-scale-in">
-          <Button asChild className="responsive-button bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300">
+          <Button asChild className="responsive-button shadow-lg hover:shadow-xl transition-all duration-300">
             <Link to="/booking">Book Your Pilates Class</Link>
           </Button>
         </div>
