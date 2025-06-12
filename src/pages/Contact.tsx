@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -76,9 +77,9 @@ const Contact = () => {
                       <SelectValue placeholder="Select an option" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="book-class">I want to book a class</SelectItem>
                       <SelectItem value="injury-question">I have a question about an injury</SelectItem>
                       <SelectItem value="pricing">I'd like to know more about pricing</SelectItem>
+                      <SelectItem value="book-class">I need help booking a class</SelectItem>
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
