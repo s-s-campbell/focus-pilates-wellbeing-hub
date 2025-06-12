@@ -154,7 +154,7 @@ const Classes = () => {
           
           <div className="text-center mt-16">
             <Button asChild size="lg" className="rounded-full">
-              <Link to="/contact">View Schedule & Book Now</Link>
+              <Link to="/booking">View Schedule & Book Now</Link>
             </Button>
           </div>
         </div>
