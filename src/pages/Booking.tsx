@@ -6,10 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ExternalLink } from 'lucide-react';
-
 const Booking = () => {
   const isMobile = useIsMobile();
-
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -111,9 +109,7 @@ const Booking = () => {
       };
     }
   }, [isMobile]);
-
-  return (
-    <div className="min-h-screen mobile-scroll">
+  return <div className="min-h-screen mobile-scroll">
       <Navigation />
       
       {/* Hero Section */}
@@ -138,23 +134,14 @@ const Booking = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="mobile-card-spacing">
-              {isMobile ? (
-                // Mobile: External Link Button
-                <div className="text-center space-y-4">
+              {isMobile ?
+            // Mobile: External Link Button
+            <div className="text-center space-y-4">
                   <p className="text-muted-foreground mb-6">
                     For the best mobile booking experience, we'll take you to our dedicated booking platform.
                   </p>
-                  <Button 
-                    asChild 
-                    size="lg" 
-                    className="w-full h-14 text-lg mobile-button"
-                  >
-                    <a 
-                      href="https://pilatesinfocus.simplybook.net" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2"
-                    >
+                  <Button asChild size="lg" className="w-full h-14 text-lg mobile-button">
+                    <a href="https://pilatesinfocus.simplybook.net" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                       <span>Open Booking Platform</span>
                       <ExternalLink className="w-5 h-5" />
                     </a>
@@ -162,20 +149,15 @@ const Booking = () => {
                   <p className="text-xs text-muted-foreground">
                     Opens in a new tab for optimal mobile experience
                   </p>
-                </div>
-              ) : (
-                // Desktop: Embedded Widget
-                <div 
-                  id="simplybook-widget" 
-                  className="w-full min-h-[600px] overflow-auto rounded-lg border bg-white"
-                >
+                </div> :
+            // Desktop: Embedded Widget
+            <div id="simplybook-widget" className="w-full min-h-[600px] overflow-auto rounded-lg border bg-white">
                   <div className="flex items-center justify-center h-full text-muted-foreground mobile-card-spacing">
                     <div className="text-center">
                       <div className="animate-pulse mb-2 text-base">Loading booking system...</div>
                     </div>
                   </div>
-                </div>
-              )}
+                </div>}
             </CardContent>
           </Card>
         </div>
@@ -187,9 +169,7 @@ const Booking = () => {
           <h2 className="font-heading text-xl sm:text-2xl font-bold text-primary mb-3 sm:mb-4 md:mb-6">
             Need Help Booking?
           </h2>
-          <p className="mobile-text-optimize text-muted-foreground mb-4 sm:mb-6">
-            If you have any questions or need assistance with booking, feel free to reach out to us directly.
-          </p>
+          <p className="mobile-text-optimize text-muted-foreground mb-4 sm:mb-6">If you have any questions or need assistance with booking, feel free to contact us directly.</p>
           <Button asChild className={`mobile-button ${isMobile ? 'w-full' : ''}`}>
             <Link to="/contact">Contact Us</Link>
           </Button>
@@ -197,8 +177,6 @@ const Booking = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Booking;
