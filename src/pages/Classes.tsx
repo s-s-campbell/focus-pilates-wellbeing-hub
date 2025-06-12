@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -177,7 +176,7 @@ const Classes = () => {
           </div>
           
           <div className="text-center mt-8 sm:mt-16">
-            <Button asChild size="lg" className="responsive-button">
+            <Button asChild className="responsive-button">
               <Link to="/booking">View Schedule & Book Now</Link>
             </Button>
           </div>

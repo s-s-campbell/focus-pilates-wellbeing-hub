@@ -34,7 +34,7 @@ const HeroSection = () => {
         </p>
         
         <div className="animate-scale-in">
-          <Button asChild size="lg" className="responsive-button bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300">
+          <Button asChild className="responsive-button bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300">
             <Link to="/booking">Book Your Pilates Class</Link>
           </Button>
         </div>
