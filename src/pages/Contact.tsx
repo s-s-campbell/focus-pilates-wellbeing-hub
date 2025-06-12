@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -10,12 +9,10 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Clock, Mail, Phone, MapPin } from 'lucide-react';
-
 const Contact = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
   return <div className="min-h-screen">
       <Navigation />
       
@@ -25,11 +22,7 @@ const Contact = () => {
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#c37fa8]">
             We'd Love to <span className="text-primary">Hear From You</span>
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Ready to take the first step? Get in touch to book your introductory session or ask any questions you may have. 
-            We are located in a private residential home studio in Midrand, Gauteng. The full address will be provided 
-            upon booking confirmation to ensure privacy for our clients and residents.
-          </p>
+          <p className="text-lg text-muted-foreground leading-relaxed">Get in touch to ask any questions you may have or if you need assistance with booking a class. We are located in a private residential home studio in Midrand, Gauteng. The full address will be provided upon booking confirmation to ensure privacy for our clients and residents.</p>
         </div>
       </section>
 
@@ -160,16 +153,9 @@ const Contact = () => {
           <Card className="border-0 shadow-lg">
             <CardContent className="p-8">
               <div className="h-80 rounded-lg overflow-hidden border shadow-sm">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115681.91285225869!2d28.062225899999997!3d-26.00614015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e956fb6cdba33b3%3A0x9e1643e9b3bb0e8!2sMidrand%2C%20South%20Africa!5e0!3m2!1sen!2s!4v1702654321000!5m2!1sen!2s"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Pilates in Focus Studio Location - Midrand, Gauteng"
-                />
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115681.91285225869!2d28.062225899999997!3d-26.00614015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e956fb6cdba33b3%3A0x9e1643e9b3bb0e8!2sMidrand%2C%20South%20Africa!5e0!3m2!1sen!2s!4v1702654321000!5m2!1sen!2s" width="100%" height="100%" style={{
+                border: 0
+              }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Pilates in Focus Studio Location - Midrand, Gauteng" />
               </div>
               <div className="mt-6 text-center">
                 <div className="flex items-center justify-center mb-4">
