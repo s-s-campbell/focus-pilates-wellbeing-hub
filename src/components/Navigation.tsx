@@ -1,13 +1,24 @@
 
+// This component creates the navigation bar at the top of every page
+// It includes the logo, menu items, and a mobile hamburger menu
+
+// Import React hook for managing component state
 import { useState } from 'react';
+// Import routing components for navigation and getting current page
 import { Link, useLocation } from 'react-router-dom';
+// Import our custom Button component
 import { Button } from '@/components/ui/button';
+// Import icons for the mobile menu (hamburger and X for close)
 import { Menu, X } from 'lucide-react';
 
+// Main Navigation functional component
 const Navigation = () => {
+  // State to track if mobile menu is open or closed (starts closed)
   const [isOpen, setIsOpen] = useState(false);
+  // Hook to get current page location/URL
   const location = useLocation();
 
+  // Array of navigation menu items with their URLs and display text
   const navItems = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About Us' },
@@ -17,6 +28,7 @@ const Navigation = () => {
     { href: '/contact', label: 'Contact' },
   ];
 
+  // Function to check if a menu item is currently active (user is on that page)
   const isActive = (href: string) => location.pathname === href;
 
   return (
