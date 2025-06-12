@@ -21,13 +21,13 @@ const DifferentiatorSection = () => {
   ];
 
   return (
-    <section className="mobile-section-spacing bg-background">
-      <div className="max-w-6xl mx-auto mobile-container">
+    <section className="responsive-section-spacing bg-background">
+      <div className="max-w-6xl mx-auto responsive-container">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="font-heading mobile-heading-optimize mb-4 text-primary">
+          <h2 className="font-heading responsive-heading-optimize mb-4 text-primary">
             The Pilates in Focus <span className="text-primary">Difference</span>
           </h2>
-          <p className="mobile-text-optimize text-muted-foreground max-w-2xl mx-auto">
+          <p className="responsive-text-optimize text-muted-foreground max-w-2xl mx-auto">
             Discover what sets us apart and why our clients choose us for their wellness journey.
           </p>
         </div>
@@ -41,7 +41,7 @@ const DifferentiatorSection = () => {
               <h3 className="font-heading text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-primary">
                 {item.title}
               </h3>
-              <p className="mobile-text-optimize text-muted-foreground leading-relaxed">
+              <p className="responsive-text-optimize text-muted-foreground leading-relaxed">
                 {item.description}
               </p>
             </div>

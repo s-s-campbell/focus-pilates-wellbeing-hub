@@ -27,13 +27,13 @@ const ServicesOverview = () => {
   ];
 
   return (
-    <section className="mobile-section-spacing bg-muted/50">
-      <div className="max-w-7xl mx-auto mobile-container">
+    <section className="responsive-section-spacing bg-muted/50">
+      <div className="max-w-7xl mx-auto responsive-container">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="font-heading mobile-heading-optimize mb-4 text-primary">
+          <h2 className="font-heading responsive-heading-optimize mb-4 text-primary">
             Classes Tailored to <span className="text-primary">Your Goals</span>
           </h2>
-          <p className="mobile-text-optimize text-muted-foreground max-w-2xl mx-auto">
+          <p className="responsive-text-optimize text-muted-foreground max-w-2xl mx-auto">
             Choose from our range of expertly designed classes, each crafted to meet you exactly where you are in your fitness journey.
           </p>
         </div>
@@ -41,7 +41,7 @@ const ServicesOverview = () => {
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-8 sm:mb-12">
           {services.map((service, index) => (
             <Link key={index} to="/classes" className="block">
-              <Card className="group mobile-card hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-card cursor-pointer">
+              <Card className="group responsive-card hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-card cursor-pointer">
                 <div className="relative h-40 sm:h-48 overflow-hidden">
                   <img 
                     src={service.image} 
@@ -53,11 +53,11 @@ const ServicesOverview = () => {
                     <service.icon className="w-4 h-4 sm:w-6 sm:h-6 text-primary" />
                   </div>
                 </div>
-                <CardContent className="mobile-card-spacing">
+                <CardContent className="responsive-card-spacing">
                   <h3 className="font-heading text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-primary">
                     {service.title}
                   </h3>
-                  <p className="mobile-text-optimize text-muted-foreground leading-relaxed">
+                  <p className="responsive-text-optimize text-muted-foreground leading-relaxed">
                     {service.description}
                   </p>
                 </CardContent>
@@ -67,7 +67,7 @@ const ServicesOverview = () => {
         </div>
         
         <div className="text-center">
-          <Button asChild size="lg" variant="default" className="mobile-button">
+          <Button asChild size="lg" variant="default" className="responsive-button">
             <Link to="/classes">Explore Our Classes</Link>
           </Button>
         </div>

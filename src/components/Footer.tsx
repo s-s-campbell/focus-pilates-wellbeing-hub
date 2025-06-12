@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground py-8 sm:py-12">
-      <div className="max-w-7xl mx-auto mobile-container">
+      <div className="max-w-7xl mx-auto responsive-container">
         <div className="grid md:grid-cols-4 gap-6 sm:gap-8">
           <div className="md:col-span-2">
             <Link to="/" className="inline-block mb-4">
@@ -14,7 +14,7 @@ const Footer = () => {
                 className="h-16 sm:h-20 w-auto brightness-0 invert" 
               />
             </Link>
-            <p className="mb-4 max-w-md text-primary-foreground/90 mobile-text-optimize hidden sm:block">
+            <p className="mb-4 max-w-md text-primary-foreground/90 responsive-text-optimize hidden sm:block">
               Your personalised path to a stronger, healthier you. Expert-led Pilates in a supportive, 
               intimate home studio in Midrand.
             </p>
@@ -27,23 +27,23 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4 text-primary-foreground text-base sm:text-lg">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link to="/about" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors mobile-text-optimize">About Us</Link></li>
-              <li><Link to="/classes" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors mobile-text-optimize">Our Classes</Link></li>
-              <li><Link to="/testimonials" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors mobile-text-optimize">Testimonials</Link></li>
-              <li><Link to="/blog" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors mobile-text-optimize">Blog</Link></li>
-              <li><Link to="/contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors mobile-text-optimize">Contact</Link></li>
+              <li><Link to="/about" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors responsive-text-optimize">About Us</Link></li>
+              <li><Link to="/classes" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors responsive-text-optimize">Our Classes</Link></li>
+              <li><Link to="/testimonials" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors responsive-text-optimize">Testimonials</Link></li>
+              <li><Link to="/blog" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors responsive-text-optimize">Blog</Link></li>
+              <li><Link to="/contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors responsive-text-optimize">Contact</Link></li>
             </ul>
           </div>
           
           <div>
             <h3 className="font-semibold mb-4 text-primary-foreground text-base sm:text-lg">Opening Hours</h3>
-            <ul className="space-y-2 text-primary-foreground/80 mobile-text-optimize">
+            <ul className="space-y-2 text-primary-foreground/80 responsive-text-optimize">
               <li>Mon-Fri: 7:00 AM - 6:00 PM</li>
               <li>Saturday: 8:00 AM - 12:00 PM</li>
               <li>Sunday: Closed</li>
             </ul>
             <div className="mt-4">
-              <Link to="/booking" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors font-semibold mobile-text-optimize">
+              <Link to="/booking" className="text-primary-foreground hover:text-primary-foreground/80 transition-colors font-semibold responsive-text-optimize">
                 Book Your Class →
               </Link>
             </div>
