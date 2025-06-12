@@ -1,4 +1,5 @@
 
+import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,6 +7,10 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 const Booking = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Navigation />
