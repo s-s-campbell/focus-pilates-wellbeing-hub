@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -24,7 +23,7 @@ const Contact = () => {
       <section className="mobile-section-spacing bg-background">
         <div className="max-w-4xl mx-auto mobile-container text-center">
           <h1 className="font-heading mobile-heading-optimize mb-4 sm:mb-6 text-primary">
-            We'd Love to <span className="text-foreground">Hear From You</span>
+            We'd Love to <span className="text-primary">Hear From You</span>
           </h1>
           <p className="mobile-text-optimize text-muted-foreground leading-relaxed max-w-3xl mx-auto">
             Get in touch to ask any questions you may have, or if you need assistance with booking a class. We are located in a private residential home studio in Midrand, Gauteng. The full address will be provided upon booking confirmation to ensure privacy for our clients and residents.
@@ -37,7 +36,7 @@ const Contact = () => {
         <div className="max-w-4xl mx-auto mobile-container">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6">
-              Send Us a <span className="text-foreground">Message</span>
+              Send Us a <span className="text-primary">Message</span>
             </h2>
           </div>
           <Card className="border-0 shadow-lg mobile-card">
@@ -102,7 +101,7 @@ const Contact = () => {
       <section id="booking" className="mobile-section-spacing bg-muted/30">
         <div className="max-w-4xl mx-auto mobile-container text-center">
           <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6">
-            Book Your Class <span className="text-foreground">Online</span>
+            Book Your Class <span className="text-primary">Online</span>
           </h2>
           <p className="mobile-text-optimize text-muted-foreground mb-6 sm:mb-8 max-w-3xl mx-auto">
             Ready to start your journey? Click below to access our dedicated booking system and schedule your introductory session or join one of our regular classes.
@@ -122,7 +121,7 @@ const Contact = () => {
         <div className="max-w-4xl mx-auto mobile-container">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6">
-              Studio <span className="text-foreground">Hours</span>
+              Studio <span className="text-primary">Hours</span>
             </h2>
           </div>
           <Card className="border-0 shadow-lg max-w-2xl mx-auto mobile-card">
@@ -154,7 +153,7 @@ const Contact = () => {
       <section className="mobile-section-spacing bg-muted/30">
         <div className="max-w-4xl mx-auto mobile-container text-center">
           <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6">
-            Find Us in <span className="text-foreground">Midrand</span>
+            Find Us in <span className="text-primary">Midrand</span>
           </h2>
           <Card className="border-0 shadow-lg mobile-card">
             <CardContent className="mobile-card-spacing">
@@ -192,7 +191,7 @@ const Contact = () => {
         <div className="max-w-4xl mx-auto mobile-container">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6">
-              Can't Find What You're <span className="text-foreground">Looking For?</span>
+              Can't Find What You're <span className="text-primary">Looking For?</span>
             </h2>
           </div>
           <Card className="border-0 shadow-lg max-w-2xl mx-auto mobile-card">
