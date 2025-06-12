@@ -1,15 +1,13 @@
 /* Enhanced SimplyBook Widget Styling */
-/* Add this to your CSS file or create a separate stylesheet */
 
 /* Base widget container styling */
 #simplybook-widget {
-  border-radius: 12px !important;
+  border-radius: 16px !important;
   overflow: hidden !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
   background: #ffffff !important;
 }
 
-/* Hide unnecessary elements including logout buttons */
+/* CRITICAL: Hide ALL logout/exit buttons and related elements */
 #simplybook-widget .widget-header-time,
 #simplybook-widget .sb-timezone,
 #simplybook-widget .sb-time-zone,
@@ -48,62 +46,43 @@
 #simplybook-widget .fa-sign-out-alt,
 #simplybook-widget i[class*="door"],
 #simplybook-widget i[class*="logout"],
-#simplybook-widget i[class*="exit"] {
+#simplybook-widget i[class*="exit"],
+/* Additional selectors for SimplyBook's specific logout elements */
+#simplybook-widget .sb-widget-header .sb-logout,
+#simplybook-widget .sb-widget-header [class*="logout"],
+#simplybook-widget .sb-widget-header [title*="exit"],
+#simplybook-widget .widget-header .logout,
+#simplybook-widget .widget-header [title*="logout"],
+#simplybook-widget .sb-header-logout,
+#simplybook-widget .header-logout,
+#simplybook-widget button[title*="logout" i],
+#simplybook-widget button[title*="exit" i],
+#simplybook-widget a[title*="logout" i],
+#simplybook-widget a[title*="exit" i] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
+  pointer-events: none !important;
 }
 
-/* Ensure proper table structure and header positioning */
-#simplybook-widget table {
-  width: 100% !important;
-  border-collapse: collapse !important;
-}
-
-#simplybook-widget table thead {
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 10 !important;
-  background: #ffffff !important;
-}
-
-#simplybook-widget table thead th {
-  background: #f8fafc !important;
-  font-weight: 600 !important;
-  text-align: center !important;
-  padding: 1rem 0.5rem !important;
-  border-bottom: 2px solid #e5e7eb !important;
-  font-family: 'Inter', sans-serif !important;
-  color: #374151 !important;
-}
-
-#simplybook-widget .sb-table-header,
-#simplybook-widget .table-header,
-#simplybook-widget th {
-  background: #f8fafc !important;
-  font-weight: 600 !important;
-  text-align: center !important;
-  padding: 1rem 0.5rem !important;
-  border-bottom: 2px solid #e5e7eb !important;
-}
-
-/* Iframe and content optimization */
+/* Iframe styling */
 #simplybook-widget iframe {
   border: none !important;
-  border-radius: 12px !important;
+  border-radius: 16px !important;
   width: 100% !important;
-  min-height: 600px !important;
+  min-height: 700px !important;
   background: #ffffff !important;
 }
 
-/* Header improvements */
+/* Header styling to match your brand */
 #simplybook-widget .widget-header,
-#simplybook-widget .sb-header {
-  background: linear-gradient(135deg, #c37fa8, #861657) !important;
+#simplybook-widget .sb-header,
+#simplybook-widget .sb-widget-header {
+  background: linear-gradient(135deg, #c37fa8, #9f4f7a) !important;
   color: white !important;
-  padding: 1rem !important;
-  border-radius: 12px 12px 0 0 !important;
+  padding: 1.5rem !important;
   margin: 0 !important;
+  border-radius: 16px 16px 0 0 !important;
 }
 
 #simplybook-widget .widget-header h1,
@@ -113,32 +92,52 @@
 #simplybook-widget .sb-header h2,
 #simplybook-widget .sb-header h3 {
   color: white !important;
-  font-family: 'Playfair Display', serif !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   margin: 0 !important;
 }
 
 /* Button styling to match your theme */
-#simplybook-widget button,
-#simplybook-widget .sb-button,
-#simplybook-widget [class*="btn"],
+#simplybook-widget button:not([class*="logout"]):not([class*="exit"]):not([title*="logout"]):not([title*="exit"]),
+#simplybook-widget .sb-button:not([class*="logout"]):not([class*="exit"]),
+#simplybook-widget [class*="btn"]:not([class*="logout"]):not([class*="exit"]),
 #simplybook-widget input[type="submit"] {
   background: #c37fa8 !important;
   border: none !important;
-  border-radius: 25px !important;
+  border-radius: 8px !important;
   color: white !important;
   font-weight: 500 !important;
   padding: 0.75rem 1.5rem !important;
   transition: all 0.2s ease !important;
-  font-family: 'Inter', sans-serif !important;
+  cursor: pointer !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
-#simplybook-widget button:hover,
-#simplybook-widget .sb-button:hover,
-#simplybook-widget [class*="btn"]:hover,
+#simplybook-widget button:not([class*="logout"]):not([class*="exit"]):hover,
+#simplybook-widget .sb-button:not([class*="logout"]):not([class*="exit"]):hover,
+#simplybook-widget [class*="btn"]:not([class*="logout"]):not([class*="exit"]):hover,
 #simplybook-widget input[type="submit"]:hover {
-  background: #861657 !important;
+  background: #9f4f7a !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px rgba(134, 22, 87, 0.3) !important;
+  box-shadow: 0 4px 12px rgba(159, 79, 122, 0.3) !important;
+}
+
+/* Form inputs styling */
+#simplybook-widget input:not([type="submit"]),
+#simplybook-widget select,
+#simplybook-widget textarea {
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 0.75rem !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  transition: border-color 0.2s ease !important;
+}
+
+#simplybook-widget input:not([type="submit"]):focus,
+#simplybook-widget select:focus,
+#simplybook-widget textarea:focus {
+  border-color: #c37fa8 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(195, 127, 168, 0.1) !important;
 }
 
 /* Calendar styling */
@@ -146,7 +145,7 @@
 #simplybook-widget [class*="calendar"],
 #simplybook-widget .sb-calendar {
   border-radius: 8px !important;
-  border: 1px solid #e5e7eb !important;
+  border: 1px solid #e2e8f0 !important;
   overflow: hidden !important;
 }
 
@@ -171,31 +170,12 @@
   color: white !important;
 }
 
-/* Form inputs styling */
-#simplybook-widget input,
-#simplybook-widget select,
-#simplybook-widget textarea {
-  border: 2px solid #e5e7eb !important;
-  border-radius: 8px !important;
-  padding: 0.75rem !important;
-  font-family: 'Inter', sans-serif !important;
-  transition: border-color 0.2s ease !important;
-}
-
-#simplybook-widget input:focus,
-#simplybook-widget select:focus,
-#simplybook-widget textarea:focus {
-  border-color: #c37fa8 !important;
-  outline: none !important;
-  box-shadow: 0 0 0 3px rgba(195, 127, 168, 0.1) !important;
-}
-
 /* Time slots styling */
 #simplybook-widget .time-slot,
 #simplybook-widget [class*="time"],
 #simplybook-widget .sb-time-slot {
   background: #f8fafc !important;
-  border: 2px solid #e5e7eb !important;
+  border: 2px solid #e2e8f0 !important;
   border-radius: 8px !important;
   padding: 0.75rem !important;
   margin: 0.25rem !important;
@@ -215,25 +195,11 @@
 #simplybook-widget [class*="time"].selected,
 #simplybook-widget .sb-time-slot.selected {
   background: #c37fa8 !important;
-  border-color: #861657 !important;
+  border-color: #9f4f7a !important;
   color: white !important;
 }
 
-/* Loading states */
-#simplybook-widget .loading,
-#simplybook-widget [class*="loading"],
-#simplybook-widget .sb-loading {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%) !important;
-  background-size: 200% 100% !important;
-  animation: loading-shimmer 1.5s infinite !important;
-}
-
-@keyframes loading-shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-/* Desktop-specific optimizations */
+/* Desktop optimizations */
 @media (min-width: 1024px) {
   #simplybook-widget {
     min-height: 700px !important;
@@ -242,33 +208,18 @@
   #simplybook-widget iframe {
     min-height: 700px !important;
   }
-  
-  /* Multi-column layout for time slots on desktop */
-  #simplybook-widget .time-slots-container,
-  #simplybook-widget [class*="time-slots"] {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
-    gap: 0.5rem !important;
-  }
-  
-  /* Better spacing for desktop */
-  #simplybook-widget .widget-content,
-  #simplybook-widget .sb-main-content {
-    padding: 1.5rem !important;
-  }
 }
 
-/* Mobile-specific optimizations */
+/* Mobile optimizations */
 @media (max-width: 768px) {
   #simplybook-widget {
-    margin: 0 -1rem !important;
-    border-radius: 0 !important;
+    border-radius: 12px !important;
     min-height: 500px !important;
   }
   
   #simplybook-widget iframe {
     min-height: 500px !important;
-    border-radius: 0 !important;
+    border-radius: 12px !important;
   }
   
   /* Larger touch targets for mobile */
@@ -282,70 +233,39 @@
     padding: 1rem !important;
     font-size: 16px !important;
   }
-  
-  /* Prevent zoom on iOS */
-  #simplybook-widget input,
-  #simplybook-widget select,
-  #simplybook-widget textarea {
-    font-size: 16px !important;
-  }
-  
-  /* Stack layout for mobile */
-  #simplybook-widget .time-slots-container,
-  #simplybook-widget [class*="time-slots"] {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.5rem !important;
-  }
-  
-  /* Mobile header adjustments */
-  #simplybook-widget .widget-header,
-  #simplybook-widget .sb-header {
-    padding: 1rem 0.5rem !important;
-    text-align: center !important;
-  }
-}
-
-/* Tablet optimizations */
-@media (min-width: 769px) and (max-width: 1024px) {
-  #simplybook-widget {
-    min-height: 600px !important;
-  }
-  
-  #simplybook-widget iframe {
-    min-height: 600px !important;
-  }
-  
-  /* Two-column layout for time slots on tablet */
-  #simplybook-widget .time-slots-container,
-  #simplybook-widget [class*="time-slots"] {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.5rem !important;
-  }
 }
 
 /* Accessibility improvements */
-#simplybook-widget *:focus {
+#simplybook-widget *:focus-visible {
   outline: 2px solid #c37fa8 !important;
   outline-offset: 2px !important;
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  #simplybook-widget button,
-  #simplybook-widget .sb-button,
-  #simplybook-widget [class*="btn"] {
-    border: 2px solid #000000 !important;
-  }
+/* Force hide any remaining logout elements that might appear dynamically */
+#simplybook-widget * {
+  /* Scan for any element containing logout-related text */
 }
 
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  #simplybook-widget *,
-  #simplybook-widget *::before,
-  #simplybook-widget *::after {
-    animation: none !important;
-    transition: none !important;
-  }
+#simplybook-widget *[class*="logout"],
+#simplybook-widget *[id*="logout"],
+#simplybook-widget *[title*="logout"],
+#simplybook-widget *[aria-label*="logout"],
+#simplybook-widget *[class*="exit"],
+#simplybook-widget *[id*="exit"],
+#simplybook-widget *[title*="exit"],
+#simplybook-widget *[aria-label*="exit"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Hide elements by text content (for elements that might not have classes) */
+#simplybook-widget *:contains("logout"),
+#simplybook-widget *:contains("log out"),
+#simplybook-widget *:contains("exit"),
+#simplybook-widget *:contains("Logout"),
+#simplybook-widget *:contains("Log Out"),
+#simplybook-widget *:contains("Exit") {
+  display: none !important;
 }
