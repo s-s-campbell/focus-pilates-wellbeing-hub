@@ -1,10 +1,104 @@
-/* Enhanced SimplyBook Widget Styling */
+/* Enhanced SimplyBook Widget Styling with Logout Button Overlay */
 
-/* Base widget container styling */
+/* Base widget container styling with overlay positioning */
 #simplybook-widget {
   border-radius: 16px !important;
   overflow: hidden !important;
   background: #ffffff !important;
+  position: relative !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+/* OVERLAY METHOD: Hide logout button by covering it */
+#simplybook-widget::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px; /* Adjust based on logout button size */
+  height: 80px; /* Adjust based on logout button size */
+  background: #ffffff; /* Match widget background */
+  z-index: 1000;
+  pointer-events: none;
+  border-radius: 16px 0 8px 0; /* Rounded to match widget corners */
+}
+
+/* Alternative overlay for different positioning if needed */
+#simplybook-widget::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #c37fa8, #9f4f7a);
+  z-index: 1001;
+  pointer-events: none;
+  border-radius: 8px;
+  /* Add your logo or icon here if desired */
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>');
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Iframe styling for better integration */
+#simplybook-widget iframe {
+  border: none !important;
+  border-radius: 16px !important;
+  width: 100% !important;
+  min-height: 700px !important;
+  background: #ffffff !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Widget integration improvements */
+#simplybook-widget {
+  margin: 0 auto !important;
+  max-width: 100% !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+}
+
+/* Better visual hierarchy - move service selection to top */
+#simplybook-widget .service-selection,
+#simplybook-widget .sb-service-selection,
+#simplybook-widget [class*="service-select"] {
+  order: -1 !important;
+  margin-bottom: 1.5rem !important;
+  background: #f8fafc !important;
+  border-radius: 12px !important;
+  padding: 1rem !important;
+}
+
+/* Improved card layout */
+#simplybook-widget .service-card,
+#simplybook-widget .sb-service,
+#simplybook-widget [class*="service-item"] {
+  background: #ffffff !important;
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  padding: 1.5rem !important;
+  margin-bottom: 1rem !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+#simplybook-widget .service-card:hover,
+#simplybook-widget .sb-service:hover,
+#simplybook-widget [class*="service-item"]:hover {
+  border-color: #c37fa8 !important;
+  box-shadow: 0 8px 25px rgba(195, 127, 168, 0.15) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Selected service state */
+#simplybook-widget .service-card.selected,
+#simplybook-widget .sb-service.selected,
+#simplybook-widget [class*="service-item"].selected {
+  border-color: #c37fa8 !important;
+  background: linear-gradient(135deg, #f4eaf0, #ffffff) !important;
+  box-shadow: 0 8px 25px rgba(195, 127, 168, 0.2) !important;
 }
 
 /* CRITICAL: Hide ALL logout/exit buttons and related elements */
@@ -47,7 +141,6 @@
 #simplybook-widget i[class*="door"],
 #simplybook-widget i[class*="logout"],
 #simplybook-widget i[class*="exit"],
-/* Additional selectors for SimplyBook's specific logout elements */
 #simplybook-widget .sb-widget-header .sb-logout,
 #simplybook-widget .sb-widget-header [class*="logout"],
 #simplybook-widget .sb-widget-header [title*="exit"],
@@ -65,32 +158,16 @@
   pointer-events: none !important;
 }
 
-/* Hide logout button in SimplyBook widget */
-#simplybook-widget .logout-button,
-#simplybook-widget [class*="logout"],
-#simplybook-widget [class*="clear-session"],
-#simplybook-widget .sb-logout {
-    display: none !important;
-}
-
-/* Iframe styling */
-#simplybook-widget iframe {
-  border: none !important;
-  border-radius: 16px !important;
-  width: 100% !important;
-  min-height: 700px !important;
-  background: #ffffff !important;
-}
-
 /* Header styling to match your brand */
 #simplybook-widget .widget-header,
 #simplybook-widget .sb-header,
 #simplybook-widget .sb-widget-header {
   background: linear-gradient(135deg, #c37fa8, #9f4f7a) !important;
   color: white !important;
-  padding: 1.5rem !important;
+  padding: 2rem 1.5rem !important;
   margin: 0 !important;
   border-radius: 16px 16px 0 0 !important;
+  position: relative !important;
 }
 
 #simplybook-widget .widget-header h1,
@@ -102,31 +179,35 @@
   color: white !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   margin: 0 !important;
+  font-weight: 600 !important;
 }
 
-/* Button styling to match your theme */
+/* Enhanced button styling */
 #simplybook-widget button:not([class*="logout"]):not([class*="exit"]):not([title*="logout"]):not([title*="exit"]),
 #simplybook-widget .sb-button:not([class*="logout"]):not([class*="exit"]),
 #simplybook-widget [class*="btn"]:not([class*="logout"]):not([class*="exit"]),
 #simplybook-widget input[type="submit"] {
-  background: #c37fa8 !important;
+  background: linear-gradient(135deg, #c37fa8, #9f4f7a) !important;
   border: none !important;
-  border-radius: 8px !important;
+  border-radius: 10px !important;
   color: white !important;
-  font-weight: 500 !important;
-  padding: 0.75rem 1.5rem !important;
-  transition: all 0.2s ease !important;
+  font-weight: 600 !important;
+  padding: 1rem 2rem !important;
+  transition: all 0.3s ease !important;
   cursor: pointer !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  box-shadow: 0 4px 15px rgba(195, 127, 168, 0.3) !important;
+  font-size: 1rem !important;
+  letter-spacing: 0.5px !important;
 }
 
 #simplybook-widget button:not([class*="logout"]):not([class*="exit"]):hover,
 #simplybook-widget .sb-button:not([class*="logout"]):not([class*="exit"]):hover,
 #simplybook-widget [class*="btn"]:not([class*="logout"]):not([class*="exit"]):hover,
 #simplybook-widget input[type="submit"]:hover {
-  background: #9f4f7a !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px rgba(159, 79, 122, 0.3) !important;
+  background: linear-gradient(135deg, #9f4f7a, #7d3d5f) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(195, 127, 168, 0.4) !important;
 }
 
 /* Form inputs styling */
@@ -134,10 +215,12 @@
 #simplybook-widget select,
 #simplybook-widget textarea {
   border: 2px solid #e2e8f0 !important;
-  border-radius: 8px !important;
-  padding: 0.75rem !important;
+  border-radius: 10px !important;
+  padding: 1rem !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  transition: border-color 0.2s ease !important;
+  transition: all 0.3s ease !important;
+  background: #ffffff !important;
+  font-size: 1rem !important;
 }
 
 #simplybook-widget input:not([type="submit"]):focus,
@@ -145,23 +228,26 @@
 #simplybook-widget textarea:focus {
   border-color: #c37fa8 !important;
   outline: none !important;
-  box-shadow: 0 0 0 3px rgba(195, 127, 168, 0.1) !important;
+  box-shadow: 0 0 0 4px rgba(195, 127, 168, 0.1) !important;
+  background: #ffffff !important;
 }
 
 /* Calendar styling */
 #simplybook-widget .calendar,
 #simplybook-widget [class*="calendar"],
 #simplybook-widget .sb-calendar {
-  border-radius: 8px !important;
+  border-radius: 12px !important;
   border: 1px solid #e2e8f0 !important;
   overflow: hidden !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
 }
 
 #simplybook-widget .calendar-day,
 #simplybook-widget [class*="day"],
 #simplybook-widget .sb-day {
-  border-radius: 6px !important;
-  transition: all 0.2s ease !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+  font-weight: 500 !important;
 }
 
 #simplybook-widget .calendar-day:hover,
@@ -169,26 +255,30 @@
 #simplybook-widget .sb-day:hover {
   background: #f4eaf0 !important;
   transform: scale(1.05) !important;
+  box-shadow: 0 2px 8px rgba(195, 127, 168, 0.2) !important;
 }
 
 #simplybook-widget .calendar-day.selected,
 #simplybook-widget [class*="day"].selected,
 #simplybook-widget .sb-day.selected {
-  background: #c37fa8 !important;
+  background: linear-gradient(135deg, #c37fa8, #9f4f7a) !important;
   color: white !important;
+  box-shadow: 0 4px 15px rgba(195, 127, 168, 0.3) !important;
 }
 
 /* Time slots styling */
 #simplybook-widget .time-slot,
 #simplybook-widget [class*="time"],
 #simplybook-widget .sb-time-slot {
-  background: #f8fafc !important;
+  background: #ffffff !important;
   border: 2px solid #e2e8f0 !important;
-  border-radius: 8px !important;
-  padding: 0.75rem !important;
-  margin: 0.25rem !important;
-  transition: all 0.2s ease !important;
+  border-radius: 10px !important;
+  padding: 1rem !important;
+  margin: 0.5rem !important;
+  transition: all 0.3s ease !important;
   cursor: pointer !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
 }
 
 #simplybook-widget .time-slot:hover,
@@ -197,17 +287,19 @@
   border-color: #c37fa8 !important;
   background: #f4eaf0 !important;
   transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(195, 127, 168, 0.15) !important;
 }
 
 #simplybook-widget .time-slot.selected,
 #simplybook-widget [class*="time"].selected,
 #simplybook-widget .sb-time-slot.selected {
-  background: #c37fa8 !important;
+  background: linear-gradient(135deg, #c37fa8, #9f4f7a) !important;
   border-color: #9f4f7a !important;
   color: white !important;
+  box-shadow: 0 6px 20px rgba(195, 127, 168, 0.3) !important;
 }
 
-/* Desktop optimizations */
+/* Responsive design improvements */
 @media (min-width: 1024px) {
   #simplybook-widget {
     min-height: 700px !important;
@@ -216,9 +308,21 @@
   #simplybook-widget iframe {
     min-height: 700px !important;
   }
+  
+  /* Larger overlay for desktop */
+  #simplybook-widget::before {
+    width: 90px;
+    height: 90px;
+  }
+  
+  #simplybook-widget::after {
+    width: 64px;
+    height: 64px;
+    top: 13px;
+    left: 13px;
+  }
 }
 
-/* Mobile optimizations */
 @media (max-width: 768px) {
   #simplybook-widget {
     border-radius: 12px !important;
@@ -230,6 +334,19 @@
     border-radius: 12px !important;
   }
   
+  /* Smaller overlay for mobile */
+  #simplybook-widget::before {
+    width: 70px;
+    height: 70px;
+  }
+  
+  #simplybook-widget::after {
+    width: 48px;
+    height: 48px;
+    top: 11px;
+    left: 11px;
+  }
+  
   /* Larger touch targets for mobile */
   #simplybook-widget button,
   #simplybook-widget .sb-button,
@@ -237,23 +354,25 @@
   #simplybook-widget .time-slot,
   #simplybook-widget [class*="time"],
   #simplybook-widget .sb-time-slot {
-    min-height: 44px !important;
+    min-height: 48px !important;
     padding: 1rem !important;
-    font-size: 16px !important;
+    font-size: 1rem !important;
+  }
+  
+  #simplybook-widget .service-card,
+  #simplybook-widget .sb-service,
+  #simplybook-widget [class*="service-item"] {
+    padding: 1rem !important;
   }
 }
 
 /* Accessibility improvements */
 #simplybook-widget *:focus-visible {
-  outline: 2px solid #c37fa8 !important;
+  outline: 3px solid #c37fa8 !important;
   outline-offset: 2px !important;
 }
 
-/* Force hide any remaining logout elements that might appear dynamically */
-#simplybook-widget * {
-  /* Scan for any element containing logout-related text */
-}
-
+/* Additional overlay methods for stubborn logout buttons */
 #simplybook-widget *[class*="logout"],
 #simplybook-widget *[id*="logout"],
 #simplybook-widget *[title*="logout"],
@@ -266,14 +385,25 @@
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
 }
 
-/* Hide elements by text content (for elements that might not have classes) */
-#simplybook-widget *:contains("logout"),
-#simplybook-widget *:contains("log out"),
-#simplybook-widget *:contains("exit"),
-#simplybook-widget *:contains("Logout"),
-#simplybook-widget *:contains("Log Out"),
-#simplybook-widget *:contains("Exit") {
-  display: none !important;
+/* Smooth animations for better UX */
+#simplybook-widget * {
+  transition: all 0.3s ease !important;
+}
+
+/* Loading state improvements */
+#simplybook-widget .loading,
+#simplybook-widget [class*="loading"] {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%) !important;
+  background-size: 200% 100% !important;
+  animation: loading 1.5s infinite !important;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
