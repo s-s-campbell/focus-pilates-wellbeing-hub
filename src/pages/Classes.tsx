@@ -1,8 +1,8 @@
 
-
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import FloatingBookButton from '@/components/FloatingBookButton';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -185,9 +185,9 @@ const Classes = () => {
       </section>
 
       <Footer />
+      <FloatingBookButton />
     </div>
   );
 };
 
 export default Classes;
-
