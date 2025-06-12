@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -56,10 +57,53 @@ const Booking = () => {
       }, 100);
     };
 
-    // Cleanup function to remove scripts when component unmounts
+    // Add custom CSS to hide timezone display and optimize layout
+    const style = document.createElement('style');
+    style.textContent = `
+      /* Hide timezone/time display in SimplyBook widget */
+      #simplybook-widget .widget-header-time,
+      #simplybook-widget .sb-timezone,
+      #simplybook-widget .sb-time-zone,
+      #simplybook-widget [class*="timezone"],
+      #simplybook-widget [class*="time-zone"],
+      #simplybook-widget .widget-timezone {
+        display: none !important;
+      }
+      
+      /* Hide elements containing "Our time:" text */
+      #simplybook-widget div:has-text("Our time:"),
+      #simplybook-widget span:has-text("Our time:"),
+      #simplybook-widget p:has-text("Our time:") {
+        display: none !important;
+      }
+      
+      /* Move widget content up to fill the space */
+      #simplybook-widget .widget-content,
+      #simplybook-widget .sb-main-content,
+      #simplybook-widget iframe {
+        margin-top: -20px !important;
+        padding-top: 0 !important;
+      }
+      
+      /* Optimize widget layout spacing */
+      #simplybook-widget .widget-header {
+        padding-top: 10px !important;
+        margin-bottom: 0 !important;
+      }
+      
+      /* Ensure the widget fills available space efficiently */
+      #simplybook-widget {
+        padding-top: 0 !important;
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Cleanup function to remove scripts and styles when component unmounts
     return () => {
       const scripts = document.querySelectorAll('script[src*="simplybook"]');
       scripts.forEach(script => script.remove());
+      // Remove custom styles
+      document.head.removeChild(style);
       // Clear the widget container
       const container = document.getElementById('simplybook-widget');
       if (container) {
