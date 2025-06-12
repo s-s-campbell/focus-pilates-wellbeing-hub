@@ -26,9 +26,12 @@ const FloatingBookButton = () => {
 
   return (
     <div 
-      className={`fixed bottom-4 right-4 z-50 transition-all duration-300 ${
+      className={`fixed bottom-8 sm:bottom-6 right-4 z-50 transition-all duration-300 ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-80'
       }`}
+      style={{
+        bottom: 'max(2rem, env(safe-area-inset-bottom, 0px) + 1rem)'
+      }}
     >
       <Button 
         asChild 
