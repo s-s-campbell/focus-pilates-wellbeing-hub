@@ -26,7 +26,7 @@ const FloatingBookButton = () => {
 
   return (
     <div 
-      className={`fixed top-[calc(85vh-3rem)] sm:top-[calc(90vh-3rem)] lg:top-[calc(95vh-4rem)] right-4 z-50 transition-all duration-300 ${
+      className={`fixed top-[calc(88vh-3rem)] sm:top-[calc(92vh-3rem)] lg:top-[calc(96vh-4rem)] right-4 z-50 transition-all duration-300 ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-80'
       }`}
     >
