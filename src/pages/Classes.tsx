@@ -58,7 +58,7 @@ const Classes = () => {
     },
     {
       icon: Heart,
-      title: "Private Mat & Reformer Classes",
+      title: "Private Classes (Mat/Reformer/Custom)",
       subtitle: "One-on-One Attention",
       forWho: "Individuals with injuries, chronic pain, specific rehabilitation goals, pre/post-natal clients, or anyone preferring undivided attention.",
       description: "A session completely tailored to you. We'll conduct a full postural assessment and design a programme to address your specific goals, whether it's recovering from surgery, managing scoliosis, or simply mastering your technique.",
