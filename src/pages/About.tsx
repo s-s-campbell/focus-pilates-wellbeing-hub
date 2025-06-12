@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -92,7 +93,7 @@ const About = () => {
             {principles.map((principle, index) => (
               <Card key={index} className="text-center mobile-card hover:shadow-lg transition-shadow duration-300 border-0 bg-card">
                 <CardContent className="mobile-card-spacing">
-                  <div className="inline-flex p-3 sm:p-4 rounded-full mb-4 sm:mb-6 bg-[#c37fa8] touch-target">
+                  <div className="flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full mb-4 sm:mb-6 bg-primary mx-auto">
                     <principle.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                   </div>
                   <h3 className="font-heading text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-[#c37fa8]">
