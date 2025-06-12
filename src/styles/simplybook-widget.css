@@ -1,0 +1,286 @@
+/* Enhanced SimplyBook Widget Styling */
+/* Add this to your CSS file or create a separate stylesheet */
+
+/* Base widget container styling */
+#simplybook-widget {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+  background: #ffffff !important;
+}
+
+/* Hide unnecessary elements */
+#simplybook-widget .widget-header-time,
+#simplybook-widget .sb-timezone,
+#simplybook-widget .sb-time-zone,
+#simplybook-widget [class*="timezone"],
+#simplybook-widget [class*="time-zone"],
+#simplybook-widget .widget-timezone,
+#simplybook-widget .sb-powered-by,
+#simplybook-widget [class*="powered"],
+#simplybook-widget .sb-footer-links {
+  display: none !important;
+}
+
+/* Iframe and content optimization */
+#simplybook-widget iframe {
+  border: none !important;
+  border-radius: 12px !important;
+  width: 100% !important;
+  min-height: 600px !important;
+  background: #ffffff !important;
+}
+
+/* Header improvements */
+#simplybook-widget .widget-header,
+#simplybook-widget .sb-header {
+  background: linear-gradient(135deg, #c37fa8, #861657) !important;
+  color: white !important;
+  padding: 1rem !important;
+  border-radius: 12px 12px 0 0 !important;
+  margin: 0 !important;
+}
+
+#simplybook-widget .widget-header h1,
+#simplybook-widget .widget-header h2,
+#simplybook-widget .widget-header h3,
+#simplybook-widget .sb-header h1,
+#simplybook-widget .sb-header h2,
+#simplybook-widget .sb-header h3 {
+  color: white !important;
+  font-family: 'Playfair Display', serif !important;
+  margin: 0 !important;
+}
+
+/* Button styling to match your theme */
+#simplybook-widget button,
+#simplybook-widget .sb-button,
+#simplybook-widget [class*="btn"],
+#simplybook-widget input[type="submit"] {
+  background: #c37fa8 !important;
+  border: none !important;
+  border-radius: 25px !important;
+  color: white !important;
+  font-weight: 500 !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: all 0.2s ease !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+#simplybook-widget button:hover,
+#simplybook-widget .sb-button:hover,
+#simplybook-widget [class*="btn"]:hover,
+#simplybook-widget input[type="submit"]:hover {
+  background: #861657 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(134, 22, 87, 0.3) !important;
+}
+
+/* Calendar styling */
+#simplybook-widget .calendar,
+#simplybook-widget [class*="calendar"],
+#simplybook-widget .sb-calendar {
+  border-radius: 8px !important;
+  border: 1px solid #e5e7eb !important;
+  overflow: hidden !important;
+}
+
+#simplybook-widget .calendar-day,
+#simplybook-widget [class*="day"],
+#simplybook-widget .sb-day {
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+}
+
+#simplybook-widget .calendar-day:hover,
+#simplybook-widget [class*="day"]:hover,
+#simplybook-widget .sb-day:hover {
+  background: #f4eaf0 !important;
+  transform: scale(1.05) !important;
+}
+
+#simplybook-widget .calendar-day.selected,
+#simplybook-widget [class*="day"].selected,
+#simplybook-widget .sb-day.selected {
+  background: #c37fa8 !important;
+  color: white !important;
+}
+
+/* Form inputs styling */
+#simplybook-widget input,
+#simplybook-widget select,
+#simplybook-widget textarea {
+  border: 2px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  padding: 0.75rem !important;
+  font-family: 'Inter', sans-serif !important;
+  transition: border-color 0.2s ease !important;
+}
+
+#simplybook-widget input:focus,
+#simplybook-widget select:focus,
+#simplybook-widget textarea:focus {
+  border-color: #c37fa8 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(195, 127, 168, 0.1) !important;
+}
+
+/* Time slots styling */
+#simplybook-widget .time-slot,
+#simplybook-widget [class*="time"],
+#simplybook-widget .sb-time-slot {
+  background: #f8fafc !important;
+  border: 2px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  padding: 0.75rem !important;
+  margin: 0.25rem !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+}
+
+#simplybook-widget .time-slot:hover,
+#simplybook-widget [class*="time"]:hover,
+#simplybook-widget .sb-time-slot:hover {
+  border-color: #c37fa8 !important;
+  background: #f4eaf0 !important;
+  transform: translateY(-2px) !important;
+}
+
+#simplybook-widget .time-slot.selected,
+#simplybook-widget [class*="time"].selected,
+#simplybook-widget .sb-time-slot.selected {
+  background: #c37fa8 !important;
+  border-color: #861657 !important;
+  color: white !important;
+}
+
+/* Loading states */
+#simplybook-widget .loading,
+#simplybook-widget [class*="loading"],
+#simplybook-widget .sb-loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%) !important;
+  background-size: 200% 100% !important;
+  animation: loading-shimmer 1.5s infinite !important;
+}
+
+@keyframes loading-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Desktop-specific optimizations */
+@media (min-width: 1024px) {
+  #simplybook-widget {
+    min-height: 700px !important;
+  }
+  
+  #simplybook-widget iframe {
+    min-height: 700px !important;
+  }
+  
+  /* Multi-column layout for time slots on desktop */
+  #simplybook-widget .time-slots-container,
+  #simplybook-widget [class*="time-slots"] {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+    gap: 0.5rem !important;
+  }
+  
+  /* Better spacing for desktop */
+  #simplybook-widget .widget-content,
+  #simplybook-widget .sb-main-content {
+    padding: 1.5rem !important;
+  }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  #simplybook-widget {
+    margin: 0 -1rem !important;
+    border-radius: 0 !important;
+    min-height: 500px !important;
+  }
+  
+  #simplybook-widget iframe {
+    min-height: 500px !important;
+    border-radius: 0 !important;
+  }
+  
+  /* Larger touch targets for mobile */
+  #simplybook-widget button,
+  #simplybook-widget .sb-button,
+  #simplybook-widget [class*="btn"],
+  #simplybook-widget .time-slot,
+  #simplybook-widget [class*="time"],
+  #simplybook-widget .sb-time-slot {
+    min-height: 44px !important;
+    padding: 1rem !important;
+    font-size: 16px !important;
+  }
+  
+  /* Prevent zoom on iOS */
+  #simplybook-widget input,
+  #simplybook-widget select,
+  #simplybook-widget textarea {
+    font-size: 16px !important;
+  }
+  
+  /* Stack layout for mobile */
+  #simplybook-widget .time-slots-container,
+  #simplybook-widget [class*="time-slots"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  
+  /* Mobile header adjustments */
+  #simplybook-widget .widget-header,
+  #simplybook-widget .sb-header {
+    padding: 1rem 0.5rem !important;
+    text-align: center !important;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+  #simplybook-widget {
+    min-height: 600px !important;
+  }
+  
+  #simplybook-widget iframe {
+    min-height: 600px !important;
+  }
+  
+  /* Two-column layout for time slots on tablet */
+  #simplybook-widget .time-slots-container,
+  #simplybook-widget [class*="time-slots"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+}
+
+/* Accessibility improvements */
+#simplybook-widget *:focus {
+  outline: 2px solid #c37fa8 !important;
+  outline-offset: 2px !important;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  #simplybook-widget button,
+  #simplybook-widget .sb-button,
+  #simplybook-widget [class*="btn"] {
+    border: 2px solid #000000 !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  #simplybook-widget *,
+  #simplybook-widget *::before,
+  #simplybook-widget *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

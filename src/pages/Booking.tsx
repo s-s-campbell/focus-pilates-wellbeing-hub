@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ExternalLink } from 'lucide-react';
+// Import the SimplyBook widget CSS styles
+import '../styles/simplybook-widget.css';
 
 const Booking = () => {
   const isMobile = useIsMobile();
@@ -61,48 +63,12 @@ const Booking = () => {
         }, 100);
       };
 
-      // Add custom CSS for desktop optimization only
-      const style = document.createElement('style');
-      style.textContent = `
-        /* Hide timezone/time display in SimplyBook widget */
-        #simplybook-widget .widget-header-time,
-        #simplybook-widget .sb-timezone,
-        #simplybook-widget .sb-time-zone,
-        #simplybook-widget [class*="timezone"],
-        #simplybook-widget [class*="time-zone"],
-        #simplybook-widget .widget-timezone {
-          display: none !important;
-        }
-        
-        /* Desktop optimizations */
-        #simplybook-widget .widget-content,
-        #simplybook-widget .sb-main-content,
-        #simplybook-widget iframe {
-          margin-top: -20px !important;
-          padding-top: 0 !important;
-        }
-        
-        #simplybook-widget .widget-header {
-          padding-top: 10px !important;
-          margin-bottom: 0 !important;
-        }
-        
-        /* Ensure the widget fills available space efficiently */
-        #simplybook-widget {
-          padding-top: 0 !important;
-          box-sizing: border-box !important;
-        }
-      `;
-      document.head.appendChild(style);
+      // CSS styles are now imported from external file
 
-      // Cleanup function to remove scripts and styles when component unmounts
+      // Cleanup function to remove scripts when component unmounts
       return () => {
         const scripts = document.querySelectorAll('script[src*="simplybook"]');
         scripts.forEach(script => script.remove());
-        // Remove custom styles
-        if (document.head.contains(style)) {
-          document.head.removeChild(style);
-        }
         // Clear the widget container
         const container = document.getElementById('simplybook-widget');
         if (container) {
