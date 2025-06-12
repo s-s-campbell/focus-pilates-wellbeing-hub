@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 // import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ExternalLink } from 'lucide-react';
+import '../styles/simplybook-widget.css';
 
 const Booking = () => {
   const isMobile = useIsMobile();
