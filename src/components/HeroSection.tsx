@@ -71,7 +71,7 @@ const HeroSection = () => {
         <div className="animate-scale-in">
           {/* Button component with Link inside for navigation */}
           {/* "asChild" tells Button to use the Link as its element instead of creating a new button */}
-          <Button asChild className="responsive-button shadow-lg hover:shadow-xl transition-all duration-300">
+          <Button asChild className="responsive-button shadow-lg hover:shadow-xl transition-all duration-300 w-auto">
             <Link to="/booking">Book Your Pilates Class</Link>
           </Button>
         </div>
