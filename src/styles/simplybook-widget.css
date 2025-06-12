@@ -9,7 +9,7 @@
   background: #ffffff !important;
 }
 
-/* Hide unnecessary elements */
+/* Hide unnecessary elements including logout buttons */
 #simplybook-widget .widget-header-time,
 #simplybook-widget .sb-timezone,
 #simplybook-widget .sb-time-zone,
@@ -23,8 +23,68 @@
 #simplybook-widget [class*="logout"],
 #simplybook-widget [class*="exit"],
 #simplybook-widget .widget-logout,
-#simplybook-widget .widget-exit {
+#simplybook-widget .widget-exit,
+#simplybook-widget .logout-btn,
+#simplybook-widget .exit-btn,
+#simplybook-widget .sb-logout-button,
+#simplybook-widget .sb-exit-button,
+#simplybook-widget .logout-link,
+#simplybook-widget .exit-link,
+#simplybook-widget [title*="logout" i],
+#simplybook-widget [title*="exit" i],
+#simplybook-widget [title*="log out" i],
+#simplybook-widget [aria-label*="logout" i],
+#simplybook-widget [aria-label*="exit" i],
+#simplybook-widget [aria-label*="log out" i],
+#simplybook-widget .door-icon,
+#simplybook-widget .logout-icon,
+#simplybook-widget .exit-icon,
+#simplybook-widget svg[class*="door"],
+#simplybook-widget svg[class*="logout"],
+#simplybook-widget svg[class*="exit"],
+#simplybook-widget .fas.fa-door-open,
+#simplybook-widget .fa-door-open,
+#simplybook-widget .fa-sign-out,
+#simplybook-widget .fa-sign-out-alt,
+#simplybook-widget i[class*="door"],
+#simplybook-widget i[class*="logout"],
+#simplybook-widget i[class*="exit"] {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Ensure proper table structure and header positioning */
+#simplybook-widget table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+}
+
+#simplybook-widget table thead {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  background: #ffffff !important;
+}
+
+#simplybook-widget table thead th {
+  background: #f8fafc !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  padding: 1rem 0.5rem !important;
+  border-bottom: 2px solid #e5e7eb !important;
+  font-family: 'Inter', sans-serif !important;
+  color: #374151 !important;
+}
+
+#simplybook-widget .sb-table-header,
+#simplybook-widget .table-header,
+#simplybook-widget th {
+  background: #f8fafc !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  padding: 1rem 0.5rem !important;
+  border-bottom: 2px solid #e5e7eb !important;
 }
 
 /* Iframe and content optimization */
