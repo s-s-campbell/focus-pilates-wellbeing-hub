@@ -9,11 +9,7 @@ const IntroSection = () => {
         
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <p className="text-lg text-foreground/80 leading-relaxed">
-              Tired of crowded gyms and one-size-fits-all workouts? At Pilates in Focus, we believe in the power 
-              of personal connection and expert guidance. Our private, serene home studio in Midrand is a sanctuary 
-              where you can escape the noise and focus on your body's needs.
-            </p>
+            <p className="text-lg text-foreground/80 leading-relaxed">At Pilates in Focus, we believe in the power of personal connection and expert guidance. Our private, serene home studio in Midrand is a sanctuary where you can escape the noise and focus on your body's needs.</p>
             
             <p className="text-lg text-foreground/80 leading-relaxed">Led by an instructor with over 25 years of experience in the fitness industry, our small group and private classes are designed to deliver results safely and effectively. We specialise in helping beginners build confidence, supporting individuals through rehabilitation, and empowering seniors to stay active and strong.</p>
             
