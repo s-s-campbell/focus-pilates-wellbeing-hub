@@ -20,38 +20,38 @@ const Navigation = () => {
   const isActive = (href: string) => location.pathname === href;
 
   return (
-    <nav className="bg-card/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <nav className="bg-card/95 backdrop-blur-sm border-b border-border sticky top-0 z-50 mobile-nav">
+      <div className="max-w-7xl mx-auto mobile-container">
+        <div className="flex justify-between items-center h-14 sm:h-16">
           <Link to="/" className="flex items-center">
             <img 
               src="/lovable-uploads/6b747222-d3d9-4329-9f91-a20936eb2981.png" 
               alt="Pilates in Focus Logo" 
-              className="h-16 w-auto"
+              className="h-12 sm:h-16 w-auto"
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
+                className={`text-sm font-medium transition-colors hover:text-primary touch-target ${
                   isActive(item.href) ? 'text-primary' : 'text-foreground/80'
                 }`}
               >
                 {item.label}
               </Link>
             ))}
-            <Button asChild size="sm" className="ml-4">
+            <Button asChild size="sm" className="ml-4 mobile-button">
               <Link to="/booking">Book Now</Link>
             </Button>
           </div>
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden"
+            className="md:hidden touch-target p-2"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
@@ -61,22 +61,24 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <div className="md:hidden mobile-fade-in border-t border-border bg-card/98 backdrop-blur-sm">
+            <div className="mobile-container py-4 space-y-2">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`block px-3 py-2 text-base font-medium transition-colors hover:text-primary ${
-                    isActive(item.href) ? 'text-primary' : 'text-foreground/80'
+                  className={`block py-3 px-4 text-base font-medium transition-colors hover:text-primary rounded-lg touch-target ${
+                    isActive(item.href) 
+                      ? 'text-primary bg-primary/10' 
+                      : 'text-foreground/80 hover:bg-muted/50'
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}
                 </Link>
               ))}
-              <div className="px-3 py-2">
-                <Button asChild size="sm" className="w-full">
+              <div className="pt-2">
+                <Button asChild size="lg" className="w-full mobile-button">
                   <Link to="/booking" onClick={() => setIsOpen(false)}>Book Now</Link>
                 </Button>
               </div>

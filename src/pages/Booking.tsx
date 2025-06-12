@@ -184,16 +184,16 @@ const Booking = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen mobile-scroll">
       <Navigation />
       
       {/* Hero Section - Mobile Optimized */}
-      <section className="pt-20 pb-8 md:pb-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 md:mb-6 text-primary">
+      <section className="mobile-section-spacing bg-white">
+        <div className="max-w-4xl mx-auto mobile-container text-center">
+          <h1 className="font-heading mobile-heading-optimize font-bold mb-3 sm:mb-4 md:mb-6 text-primary">
             Book Your <span className="text-[#c37fa8]">Pilates Class</span>
           </h1>
-          <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed mb-6 md:mb-8">
+          <p className="mobile-text-optimize text-muted-foreground leading-relaxed mb-4 sm:mb-6 md:mb-8 max-w-3xl mx-auto">
             Begin your transformative pilates journey with just a few simple steps. Our intuitive online booking system guides you through selecting your ideal class, discovering available session times, and securing your place.
           </p>
           {isMobile && (
@@ -207,19 +207,19 @@ const Booking = () => {
       </section>
 
       {/* Booking Widget Section - Mobile Optimized */}
-      <section className="py-8 md:py-20 bg-stone-50">
-        <div className="max-w-4xl mx-auto px-2 sm:px-4 lg:px-8">
-          <Card className="border-0 shadow-xl">
-            <CardHeader className="text-center pb-4 md:pb-6">
-              <CardTitle className="font-heading text-xl md:text-2xl lg:text-3xl text-primary">
+      <section className="mobile-section-spacing bg-stone-50">
+        <div className="max-w-4xl mx-auto mobile-container">
+          <Card className="border-0 shadow-xl mobile-card">
+            <CardHeader className="text-center pb-3 sm:pb-4 md:pb-6 mobile-card-spacing">
+              <CardTitle className="font-heading text-xl sm:text-2xl lg:text-3xl text-primary">
                 Schedule Your Session
               </CardTitle>
             </CardHeader>
-            <CardContent className={`${isMobile ? 'p-2' : 'p-8'}`}>
+            <CardContent className={`${isMobile ? 'p-2' : 'mobile-card-spacing'}`}>
               <div 
                 id="simplybook-widget" 
                 className={`
-                  w-full overflow-auto rounded-lg border bg-white
+                  w-full overflow-auto rounded-lg border bg-white mobile-scroll
                   ${isMobile 
                     ? 'min-h-[500px] max-h-[80vh]' 
                     : 'min-h-[600px]'
@@ -227,9 +227,9 @@ const Booking = () => {
                 `}
               >
                 {/* SimplyBook widget will be rendered here */}
-                <div className="flex items-center justify-center h-full text-muted-foreground p-4">
+                <div className="flex items-center justify-center h-full text-muted-foreground mobile-card-spacing">
                   <div className="text-center">
-                    <div className="animate-pulse mb-2">Loading booking system...</div>
+                    <div className="animate-pulse mb-2 text-sm sm:text-base">Loading booking system...</div>
                     {isMobile && (
                       <div className="text-xs text-muted-foreground">
                         Please wait while we load the mobile-optimized booking interface
@@ -244,15 +244,15 @@ const Booking = () => {
       </section>
 
       {/* Contact Info Section - Mobile Optimized */}
-      <section className="py-8 md:py-16 bg-white">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-xl md:text-2xl font-bold text-primary mb-4 md:mb-6">
+      <section className="mobile-section-spacing bg-white">
+        <div className="max-w-2xl mx-auto mobile-container text-center">
+          <h2 className="font-heading text-xl sm:text-2xl font-bold text-primary mb-3 sm:mb-4 md:mb-6">
             Need Help Booking?
           </h2>
-          <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">
+          <p className="mobile-text-optimize text-muted-foreground mb-4 sm:mb-6">
             If you have any questions or need assistance with booking, feel free to reach out to us directly.
           </p>
-          <Button asChild className={`${isMobile ? 'w-full py-3' : ''}`}>
+          <Button asChild className={`mobile-button ${isMobile ? 'w-full' : ''}`}>
             <Link to="/contact">Contact Us</Link>
           </Button>
         </div>

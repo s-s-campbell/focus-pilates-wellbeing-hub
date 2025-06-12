@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -38,16 +39,16 @@ const Blog = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen mobile-scroll">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-muted/30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6">
+      <section className="mobile-section-spacing bg-muted/30">
+        <div className="max-w-4xl mx-auto mobile-container text-center">
+          <h1 className="font-heading mobile-heading-optimize text-primary mb-4 sm:mb-6">
             Your Resource for <span className="text-primary">Mindful Movement</span>
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="mobile-text-optimize text-muted-foreground max-w-3xl mx-auto">
             Explore our articles for tips, insights, and inspiration to support your wellness journey 
             both inside and outside the studio.
           </p>
@@ -55,12 +56,12 @@ const Blog = () => {
       </section>
 
       {/* Blog Posts Section */}
-      <section className="py-20 bg-background">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="mobile-section-spacing bg-background">
+        <div className="max-w-6xl mx-auto mobile-container">
+          <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
             {blogPosts.map((post, index) => (
-              <Card key={index} className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-card">
-                <div className="relative h-48 overflow-hidden">
+              <Card key={index} className="group mobile-card hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-card">
+                <div className="relative h-40 sm:h-48 overflow-hidden">
                   <img 
                     src={post.image}
                     alt={post.title}
@@ -69,22 +70,22 @@ const Blog = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
                 </div>
                 
-                <CardHeader className="pb-4">
-                  <div className="flex items-center text-sm text-muted-foreground mb-2">
+                <CardHeader className="pb-3 sm:pb-4 mobile-card-spacing">
+                  <div className="flex items-center text-xs sm:text-sm text-muted-foreground mb-2">
                     <span>{post.date}</span>
                     <span className="mx-2">•</span>
                     <span>{post.readTime}</span>
                   </div>
-                  <CardTitle className="font-heading text-xl font-semibold text-foreground leading-tight group-hover:text-primary transition-colors">
+                  <CardTitle className="font-heading text-lg sm:text-xl font-semibold text-foreground leading-tight group-hover:text-primary transition-colors">
                     {post.title}
                   </CardTitle>
                 </CardHeader>
                 
-                <CardContent className="pt-0">
-                  <p className="text-muted-foreground leading-relaxed mb-4">
+                <CardContent className="pt-0 mobile-card-spacing">
+                  <p className="mobile-text-optimize text-muted-foreground mb-4">
                     {post.summary}
                   </p>
-                  <Button asChild variant="outline" size="sm" className="rounded-full">
+                  <Button asChild variant="outline" size="sm" className="rounded-full touch-target w-full sm:w-auto">
                     <Link to={`/blog/${post.slug}`}>Read More</Link>
                   </Button>
                 </CardContent>

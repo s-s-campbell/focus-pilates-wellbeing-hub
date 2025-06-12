@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -31,16 +32,16 @@ const Testimonials = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen mobile-scroll">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-muted/30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6">
+      <section className="mobile-section-spacing bg-muted/30">
+        <div className="max-w-4xl mx-auto mobile-container text-center">
+          <h1 className="font-heading mobile-heading-optimize text-primary mb-4 sm:mb-6">
             Real Stories, <span>Real Results</span>
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="mobile-text-optimize text-muted-foreground max-w-3xl mx-auto">
             We are proud to have supported so many incredible individuals on their wellness journeys. 
             Here is what some of our clients have to say.
           </p>
@@ -48,20 +49,20 @@ const Testimonials = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-background">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-12">
+      <section className="mobile-section-spacing bg-background">
+        <div className="max-w-6xl mx-auto mobile-container">
+          <div className="space-y-8 sm:space-y-12">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardContent className="p-8 md:p-12">
-                  <div className="grid lg:grid-cols-4 gap-8 items-center">
+              <Card key={index} className="border-0 shadow-lg mobile-card hover:shadow-xl transition-shadow duration-300">
+                <CardContent className="mobile-card-spacing md:p-12">
+                  <div className="grid lg:grid-cols-4 gap-6 sm:gap-8 items-center">
                     <div className="lg:col-span-1 text-center lg:text-left">
                       <img 
                         src={testimonial.image}
                         alt={testimonial.name}
-                        className="w-24 h-24 rounded-full mx-auto lg:mx-0 mb-4 object-cover shadow-md"
+                        className="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto lg:mx-0 mb-3 sm:mb-4 object-cover shadow-md"
                       />
-                      <h3 className="font-semibold text-foreground text-lg">
+                      <h3 className="font-semibold text-foreground text-base sm:text-lg">
                         {testimonial.name}
                       </h3>
                       <p className="text-primary text-sm font-medium">
@@ -70,8 +71,8 @@ const Testimonials = () => {
                     </div>
                     
                     <div className="lg:col-span-3">
-                      <Quote className="w-8 h-8 text-primary mb-4 opacity-50" />
-                      <blockquote className="text-lg text-foreground/80 leading-relaxed italic">
+                      <Quote className="w-6 h-6 sm:w-8 sm:h-8 text-primary mb-3 sm:mb-4 opacity-50 mx-auto lg:mx-0" />
+                      <blockquote className="mobile-text-optimize sm:text-lg text-foreground/80 leading-relaxed italic text-center lg:text-left">
                         "{testimonial.quote}"
                       </blockquote>
                     </div>
