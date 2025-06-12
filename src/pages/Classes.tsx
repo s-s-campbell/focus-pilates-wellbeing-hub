@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -145,7 +146,15 @@ const Classes = () => {
                           {classItem.pricing.map((price, priceIndex) => (
                             <div key={priceIndex} className="flex justify-between items-center">
                               <span className="text-muted-foreground">{price.type}:</span>
-                              <span className="font-semibold text-foreground">{price.price}</span>
+                              <span className="font-semibold text-foreground">
+                                {price.price === "Enquire for details" ? (
+                                  <Link to="/contact" className="text-primary hover:text-primary/80 underline">
+                                    {price.price}
+                                  </Link>
+                                ) : (
+                                  price.price
+                                )}
+                              </span>
                             </div>
                           ))}
                         </div>
