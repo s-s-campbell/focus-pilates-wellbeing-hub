@@ -167,7 +167,7 @@
 
   /* Responsive button optimization - Fixed desktop sizing */
   .responsive-button {
-    @apply h-12 px-6 text-base font-medium rounded-full touch-target;
+    @apply h-12 px-6 text-base font-medium rounded-full touch-target lg:h-10 lg:px-4 lg:text-sm;
   }
 
   /* Responsive card hover effects */
