@@ -260,17 +260,33 @@ const Contact = () => {
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-6">
             Find Us in <span className="text-primary">Midrand</span>
           </h2>
-          <Card className="border-0 shadow-lg p-8">
-            <div className="h-64 bg-muted/50 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
-                <p className="text-muted-foreground mb-2">Interactive Map</p>
-                <p className="text-sm text-muted-foreground">
+          <Card className="border-0 shadow-lg">
+            <CardContent className="p-8">
+              <div className="h-80 rounded-lg overflow-hidden border shadow-sm">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115681.91285225869!2d28.062225899999997!3d-26.00614015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e956fb6cdba33b3%3A0x9e1643e9b3bb0e8!2sMidrand%2C%20South%20Africa!5e0!3m2!1sen!2s!4v1702654321000!5m2!1sen!2s"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Pilates in Focus Studio Location - Midrand, Gauteng"
+                />
+              </div>
+              <div className="mt-6 text-center">
+                <div className="flex items-center justify-center mb-4">
+                  <MapPin className="w-6 h-6 text-primary mr-2" />
+                  <h3 className="font-heading text-xl font-semibold text-foreground">
+                    Studio Location
+                  </h3>
+                </div>
+                <p className="text-muted-foreground">
                   We are conveniently located in Midrand, Gauteng.<br />
-                  For the privacy of our clients, the exact address is shared upon booking confirmation.
+                  For the privacy of our clients and residents, the exact address is shared upon booking confirmation.
                 </p>
               </div>
-            </div>
+            </CardContent>
           </Card>
         </div>
       </section>
