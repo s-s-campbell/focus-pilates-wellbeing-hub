@@ -9,6 +9,59 @@ import { Link } from 'react-router-dom';
 const Booking = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // Load SimplyBook widget script
+    const script1 = document.createElement('script');
+    script1.src = '//widget.simplybook.net/v2/widget/widget.js';
+    script1.type = 'text/javascript';
+    document.head.appendChild(script1);
+
+    script1.onload = () => {
+      // Initialize the widget after the script loads
+      const script2 = document.createElement('script');
+      script2.type = 'text/javascript';
+      script2.innerHTML = `
+        var widget = new SimplybookWidget({
+          "widget_type":"iframe",
+          "url":"https://pilatesinfocus.simplybook.net",
+          "theme":"dainty",
+          "theme_settings":{
+            "timeline_show_end_time":"1",
+            "timeline_hide_unavailable":"1",
+            "hide_past_days":"0",
+            "sb_base_color":"#861657",
+            "secondary_color":"#f4eaf0",
+            "sb_text_color":"#38182b",
+            "display_item_mode":"block",
+            "body_bg_color":"#ffffff",
+            "sb_background_image":"12",
+            "sb_review_image":"13",
+            "sb_review_image_preview":"/uploads/pilatesinfocus/image_files/preview/fa3d6be4d5673b39b2cc57c2edc7dad1.jpg",
+            "dark_font_color":"#38182b",
+            "light_font_color":"#ffffff",
+            "btn_color_1":"#ecb4bf",
+            "sb_company_label_color":"#38182b",
+            "sb_cancellation_color":"#ff6b8e",
+            "hide_img_mode":"1"
+          },
+          "timeline":"modern",
+          "datepicker":"top_calendar",
+          "is_rtl":false,
+          "app_config":{
+            "clear_session":0,
+            "allow_switch_to_ada":0,
+            "predefined":[]
+          }
+        });
+      `;
+      document.head.appendChild(script2);
+    };
+
+    // Cleanup function to remove scripts when component unmounts
+    return () => {
+      const scripts = document.querySelectorAll('script[src*="simplybook"]');
+      scripts.forEach(script => script.remove());
+    };
   }, []);
 
   return (
@@ -38,18 +91,8 @@ const Booking = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="p-8">
-              <div className="h-96 bg-muted/50 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <p className="text-xl font-semibold text-foreground mb-4">Online Booking System</p>
-                  <p className="text-muted-foreground mb-6">
-                    This is where you would embed your preferred booking tool<br />
-                    (Acuity Scheduling, Calendly, or Mindbody widget)
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    The booking widget will integrate seamlessly here for a<br />
-                    streamlined booking experience.
-                  </p>
-                </div>
+              <div id="simplybook-widget" className="min-h-[600px] w-full">
+                {/* SimplyBook widget will be rendered here */}
               </div>
             </CardContent>
           </Card>
