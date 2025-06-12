@@ -1,10 +1,10 @@
-
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import FloatingBookButton from '@/components/FloatingBookButton';
 
 const Blog = () => {
   useEffect(() => {
@@ -96,6 +96,7 @@ const Blog = () => {
       </section>
 
       <Footer />
+      <FloatingBookButton />
     </div>
   );
 };

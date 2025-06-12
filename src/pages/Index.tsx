@@ -6,6 +6,7 @@ import ServicesOverview from '@/components/ServicesOverview';
 import DifferentiatorSection from '@/components/DifferentiatorSection';
 import TestimonialSnippet from '@/components/TestimonialSnippet';
 import Footer from '@/components/Footer';
+import FloatingBookButton from '@/components/FloatingBookButton';
 
 const Index = () => {
   return (
@@ -17,6 +18,7 @@ const Index = () => {
       <DifferentiatorSection />
       <TestimonialSnippet />
       <Footer />
+      <FloatingBookButton />
     </div>
   );
 };

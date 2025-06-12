@@ -1,9 +1,9 @@
-
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Quote } from 'lucide-react';
+import FloatingBookButton from '@/components/FloatingBookButton';
 
 const Testimonials = () => {
   useEffect(() => {
@@ -85,6 +85,7 @@ const Testimonials = () => {
       </section>
 
       <Footer />
+      <FloatingBookButton />
     </div>
   );
 };
