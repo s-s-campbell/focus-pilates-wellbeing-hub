@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ExternalLink } from 'lucide-react';
+
 const Booking = () => {
   const isMobile = useIsMobile();
   useEffect(() => {
@@ -109,6 +110,7 @@ const Booking = () => {
       };
     }
   }, [isMobile]);
+  
   return <div className="min-h-screen mobile-scroll">
       <Navigation />
       
@@ -169,10 +171,13 @@ const Booking = () => {
           <h2 className="font-heading text-xl sm:text-2xl font-bold text-primary mb-3 sm:mb-4 md:mb-6">
             Need Help Booking?
           </h2>
-          <p className="mobile-text-optimize text-muted-foreground mb-4 sm:mb-6">If you have any questions or need assistance with booking, feel free to contact us directly.</p>
-          <Button asChild className={`mobile-button ${isMobile ? 'w-full' : ''}`}>
-            <Link to="/contact">Contact Us</Link>
-          </Button>
+          <p className="mobile-text-optimize text-muted-foreground mb-4 sm:mb-6">
+            If you have any questions or need assistance with booking, feel free to{' '}
+            <Link to="/contact" className="text-primary hover:underline font-medium">
+              contact us directly
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
