@@ -65,6 +65,14 @@
   pointer-events: none !important;
 }
 
+/* Hide logout button in SimplyBook widget */
+#simplybook-widget .logout-button,
+#simplybook-widget [class*="logout"],
+#simplybook-widget [class*="clear-session"],
+#simplybook-widget .sb-logout {
+    display: none !important;
+}
+
 /* Iframe styling */
 #simplybook-widget iframe {
   border: none !important;
