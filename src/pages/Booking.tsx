@@ -2,7 +2,6 @@
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -94,41 +93,42 @@ const Booking = () => {
       </section>
 
       {/* Booking Section - Conditional Rendering */}
-      <section className="responsive-section-spacing bg-stone-50">
-        <div className="max-w-4xl mx-auto responsive-container">
-          <Card className="border-0 shadow-xl responsive-card">
-            <CardHeader className="text-center pb-3 sm:pb-4 md:pb-6 responsive-card-spacing">
-              <CardTitle className="font-heading text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-primary">
-                Schedule Your Session
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="responsive-card-spacing">
-              {isMobile ?
+      <section className="py-8 sm:py-12 md:py-16 bg-white">
+        <div className="max-w-6xl mx-auto responsive-container">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-primary mb-4">
+              Schedule Your Session
+            </h2>
+          </div>
+          
+          {isMobile ? (
             // Mobile: External Link Button
-            <div className="text-center space-y-4">
-                  <p className="text-muted-foreground mb-6 responsive-text-optimize">
-                    For the best mobile booking experience, we'll take you to our dedicated booking platform.
-                  </p>
-                  <Button asChild size="lg" className="w-full h-14 text-lg responsive-button">
-                    <a href="https://pilatesinfocus.simplybook.net" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                      <span>Open Booking Platform</span>
-                      <ExternalLink className="w-5 h-5" />
-                    </a>
-                  </Button>
-                  <p className="text-xs lg:text-sm text-muted-foreground">
-                    Opens in a new tab for optimal mobile experience
-                  </p>
-                </div> :
+            <div className="text-center space-y-6 px-4">
+              <p className="text-muted-foreground responsive-text-optimize">
+                For the best mobile booking experience, we'll take you to our dedicated booking platform.
+              </p>
+              <Button asChild size="lg" className="w-full h-14 text-lg responsive-button">
+                <a href="https://pilatesinfocus.simplybook.net" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                  <span>Open Booking Platform</span>
+                  <ExternalLink className="w-5 h-5" />
+                </a>
+              </Button>
+              <p className="text-xs lg:text-sm text-muted-foreground">
+                Opens in a new tab for optimal mobile experience
+              </p>
+            </div>
+          ) : (
             // Desktop: Embedded Widget
-            <div id="simplybook-widget" className="w-full min-h-[600px] lg:min-h-[700px] xl:min-h-[800px] overflow-auto rounded-lg border bg-white">
-                  <div className="flex items-center justify-center h-full text-muted-foreground responsive-card-spacing">
-                    <div className="text-center">
-                      <div className="animate-pulse mb-2 responsive-text-optimize">Loading booking system...</div>
-                    </div>
+            <div className="w-full">
+              <div id="simplybook-widget" className="w-full min-h-[600px] lg:min-h-[700px] xl:min-h-[800px]">
+                <div className="flex items-center justify-center h-full text-muted-foreground py-12">
+                  <div className="text-center">
+                    <div className="animate-pulse mb-2 responsive-text-optimize">Loading booking system...</div>
                   </div>
-                </div>}
-            </CardContent>
-          </Card>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 

@@ -18,7 +18,12 @@
 #simplybook-widget .widget-timezone,
 #simplybook-widget .sb-powered-by,
 #simplybook-widget [class*="powered"],
-#simplybook-widget .sb-footer-links {
+#simplybook-widget .sb-footer-links,
+#simplybook-widget .sb-logout,
+#simplybook-widget [class*="logout"],
+#simplybook-widget [class*="exit"],
+#simplybook-widget .widget-logout,
+#simplybook-widget .widget-exit {
   display: none !important;
 }
 
