@@ -1,10 +1,15 @@
+
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
+
 const Booking = () => {
+  const isMobile = useIsMobile();
+
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -54,7 +59,7 @@ const Booking = () => {
       }, 100);
     };
 
-    // Add custom CSS to hide timezone display and optimize layout
+    // Add custom CSS to hide timezone display and optimize layout for mobile
     const style = document.createElement('style');
     style.textContent = `
       /* Hide timezone/time display in SimplyBook widget */
@@ -74,23 +79,92 @@ const Booking = () => {
         display: none !important;
       }
       
-      /* Move widget content up to fill the space */
-      #simplybook-widget .widget-content,
-      #simplybook-widget .sb-main-content,
-      #simplybook-widget iframe {
-        margin-top: -20px !important;
-        padding-top: 0 !important;
+      /* Desktop optimizations */
+      @media (min-width: 768px) {
+        #simplybook-widget .widget-content,
+        #simplybook-widget .sb-main-content,
+        #simplybook-widget iframe {
+          margin-top: -20px !important;
+          padding-top: 0 !important;
+        }
+        
+        #simplybook-widget .widget-header {
+          padding-top: 10px !important;
+          margin-bottom: 0 !important;
+        }
       }
       
-      /* Optimize widget layout spacing */
-      #simplybook-widget .widget-header {
-        padding-top: 10px !important;
-        margin-bottom: 0 !important;
+      /* Mobile optimizations */
+      @media (max-width: 767px) {
+        #simplybook-widget {
+          width: 100% !important;
+          min-height: 500px !important;
+          max-height: 80vh !important;
+          overflow-y: auto !important;
+          -webkit-overflow-scrolling: touch !important;
+        }
+        
+        #simplybook-widget iframe {
+          width: 100% !important;
+          min-height: 500px !important;
+          max-height: 80vh !important;
+          border: none !important;
+        }
+        
+        #simplybook-widget .widget-content,
+        #simplybook-widget .sb-main-content {
+          padding: 8px !important;
+          margin: 0 !important;
+        }
+        
+        #simplybook-widget .widget-header {
+          padding: 8px !important;
+          margin: 0 !important;
+          font-size: 14px !important;
+        }
+        
+        /* Optimize buttons for touch */
+        #simplybook-widget button,
+        #simplybook-widget .btn,
+        #simplybook-widget input[type="button"] {
+          min-height: 44px !important;
+          min-width: 44px !important;
+          padding: 8px 12px !important;
+          font-size: 14px !important;
+          touch-action: manipulation !important;
+        }
+        
+        /* Improve text readability on mobile */
+        #simplybook-widget,
+        #simplybook-widget * {
+          font-size: 14px !important;
+          line-height: 1.4 !important;
+        }
+        
+        /* Optimize calendar view for mobile */
+        #simplybook-widget .calendar,
+        #simplybook-widget .datepicker {
+          width: 100% !important;
+          font-size: 12px !important;
+        }
+        
+        /* Ensure proper spacing on mobile */
+        #simplybook-widget .form-group,
+        #simplybook-widget .field-group {
+          margin-bottom: 12px !important;
+        }
+        
+        /* Hide unnecessary elements on mobile to save space */
+        #simplybook-widget .widget-logo,
+        #simplybook-widget .footer-info {
+          display: none !important;
+        }
       }
       
       /* Ensure the widget fills available space efficiently */
       #simplybook-widget {
         padding-top: 0 !important;
+        box-sizing: border-box !important;
       }
     `;
     document.head.appendChild(style);
@@ -108,33 +182,60 @@ const Booking = () => {
       }
     };
   }, []);
-  return <div className="min-h-screen">
+
+  return (
+    <div className="min-h-screen">
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-white">
+      {/* Hero Section - Mobile Optimized */}
+      <section className="pt-20 pb-8 md:pb-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-primary">
+          <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 md:mb-6 text-primary">
             Book Your <span className="text-[#c37fa8]">Pilates Class</span>
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-8">Begin your transformative pilates journey with just a few simple steps. Our intuitive online booking system guides you through selecting your ideal class, discovering available session times, and securing your place. Choose your preferred payment method and prepare to experience expert-led movement in our serene Midrand studio.</p>
+          <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed mb-6 md:mb-8">
+            Begin your transformative pilates journey with just a few simple steps. Our intuitive online booking system guides you through selecting your ideal class, discovering available session times, and securing your place.
+          </p>
+          {isMobile && (
+            <div className="bg-muted/50 p-3 rounded-lg mb-4">
+              <p className="text-xs text-muted-foreground">
+                💡 Tip: Scroll within the booking widget below to view all available options
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Booking Widget Section */}
-      <section className="py-20 bg-stone-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Booking Widget Section - Mobile Optimized */}
+      <section className="py-8 md:py-20 bg-stone-50">
+        <div className="max-w-4xl mx-auto px-2 sm:px-4 lg:px-8">
           <Card className="border-0 shadow-xl">
-            <CardHeader className="text-center">
-              <CardTitle className="font-heading text-3xl text-primary">
+            <CardHeader className="text-center pb-4 md:pb-6">
+              <CardTitle className="font-heading text-xl md:text-2xl lg:text-3xl text-primary">
                 Schedule Your Session
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-8">
-              <div id="simplybook-widget" className="min-h-[600px] w-full overflow-auto rounded-lg border">
+            <CardContent className={`${isMobile ? 'p-2' : 'p-8'}`}>
+              <div 
+                id="simplybook-widget" 
+                className={`
+                  w-full overflow-auto rounded-lg border bg-white
+                  ${isMobile 
+                    ? 'min-h-[500px] max-h-[80vh]' 
+                    : 'min-h-[600px]'
+                  }
+                `}
+              >
                 {/* SimplyBook widget will be rendered here */}
-                <div className="flex items-center justify-center h-full text-muted-foreground">
-                  Loading booking system...
+                <div className="flex items-center justify-center h-full text-muted-foreground p-4">
+                  <div className="text-center">
+                    <div className="animate-pulse mb-2">Loading booking system...</div>
+                    {isMobile && (
+                      <div className="text-xs text-muted-foreground">
+                        Please wait while we load the mobile-optimized booking interface
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -142,22 +243,24 @@ const Booking = () => {
         </div>
       </section>
 
-      {/* Contact Info Section */}
-      <section className="py-16 bg-white">
+      {/* Contact Info Section - Mobile Optimized */}
+      <section className="py-8 md:py-16 bg-white">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-2xl font-bold text-primary mb-6">
+          <h2 className="font-heading text-xl md:text-2xl font-bold text-primary mb-4 md:mb-6">
             Need Help Booking?
           </h2>
-          <p className="text-muted-foreground mb-6">
+          <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">
             If you have any questions or need assistance with booking, feel free to reach out to us directly.
           </p>
-          <Button asChild>
+          <Button asChild className={`${isMobile ? 'w-full py-3' : ''}`}>
             <Link to="/contact">Contact Us</Link>
           </Button>
         </div>
       </section>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Booking;
