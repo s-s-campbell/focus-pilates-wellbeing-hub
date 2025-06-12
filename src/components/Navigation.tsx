@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -44,7 +45,7 @@ const Navigation = () => {
               </Link>
             ))}
             <Button asChild size="sm" className="ml-4">
-              <Link to="/contact">Book Now</Link>
+              <Link to="/booking">Book Now</Link>
             </Button>
           </div>
 
@@ -76,7 +77,7 @@ const Navigation = () => {
               ))}
               <div className="px-3 py-2">
                 <Button asChild size="sm" className="w-full">
-                  <Link to="/contact" onClick={() => setIsOpen(false)}>Book Now</Link>
+                  <Link to="/booking" onClick={() => setIsOpen(false)}>Book Now</Link>
                 </Button>
               </div>
             </div>
