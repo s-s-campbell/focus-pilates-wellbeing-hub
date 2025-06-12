@@ -17,50 +17,55 @@ const Booking = () => {
     document.head.appendChild(script1);
 
     script1.onload = () => {
-      // Initialize the widget after the script loads
-      const script2 = document.createElement('script');
-      script2.type = 'text/javascript';
-      script2.innerHTML = `
-        var widget = new SimplybookWidget({
-          "widget_type":"iframe",
-          "url":"https://pilatesinfocus.simplybook.net",
-          "theme":"dainty",
-          "theme_settings":{
-            "timeline_show_end_time":"1",
-            "timeline_hide_unavailable":"1",
-            "hide_past_days":"0",
-            "sb_base_color":"#861657",
-            "secondary_color":"#f4eaf0",
-            "sb_text_color":"#38182b",
-            "display_item_mode":"block",
-            "body_bg_color":"#ffffff",
-            "sb_background_image":"12",
-            "sb_review_image":"13",
-            "sb_review_image_preview":"/uploads/pilatesinfocus/image_files/preview/fa3d6be4d5673b39b2cc57c2edc7dad1.jpg",
-            "dark_font_color":"#38182b",
-            "light_font_color":"#ffffff",
-            "btn_color_1":"#ecb4bf",
-            "sb_company_label_color":"#38182b",
-            "sb_cancellation_color":"#ff6b8e",
-            "hide_img_mode":"1"
-          },
-          "timeline":"modern",
-          "datepicker":"top_calendar",
-          "is_rtl":false,
-          "app_config":{
-            "clear_session":0,
-            "allow_switch_to_ada":0,
-            "predefined":[]
-          }
-        });
-      `;
-      document.head.appendChild(script2);
+      // Wait a bit for the script to be ready, then initialize the widget
+      setTimeout(() => {
+        if (window.SimplybookWidget) {
+          const widget = new window.SimplybookWidget({
+            "widget_type": "iframe",
+            "url": "https://pilatesinfocus.simplybook.net",
+            "theme": "dainty",
+            "theme_settings": {
+              "timeline_show_end_time": "1",
+              "timeline_hide_unavailable": "1",
+              "hide_past_days": "0",
+              "sb_base_color": "#861657",
+              "secondary_color": "#f4eaf0",
+              "sb_text_color": "#38182b",
+              "display_item_mode": "block",
+              "body_bg_color": "#ffffff",
+              "sb_background_image": "12",
+              "sb_review_image": "13",
+              "sb_review_image_preview": "/uploads/pilatesinfocus/image_files/preview/fa3d6be4d5673b39b2cc57c2edc7dad1.jpg",
+              "dark_font_color": "#38182b",
+              "light_font_color": "#ffffff",
+              "btn_color_1": "#ecb4bf",
+              "sb_company_label_color": "#38182b",
+              "sb_cancellation_color": "#ff6b8e",
+              "hide_img_mode": "1"
+            },
+            "timeline": "modern",
+            "datepicker": "top_calendar",
+            "is_rtl": false,
+            "app_config": {
+              "clear_session": 0,
+              "allow_switch_to_ada": 0,
+              "predefined": []
+            },
+            "container_id": "simplybook-widget"
+          });
+        }
+      }, 100);
     };
 
     // Cleanup function to remove scripts when component unmounts
     return () => {
       const scripts = document.querySelectorAll('script[src*="simplybook"]');
       scripts.forEach(script => script.remove());
+      // Clear the widget container
+      const container = document.getElementById('simplybook-widget');
+      if (container) {
+        container.innerHTML = '';
+      }
     };
   }, []);
 
@@ -91,8 +96,15 @@ const Booking = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="p-8">
-              <div id="simplybook-widget" className="min-h-[600px] w-full">
+              <div 
+                id="simplybook-widget" 
+                className="min-h-[600px] max-h-[800px] w-full overflow-hidden rounded-lg border"
+                style={{ height: '600px' }}
+              >
                 {/* SimplyBook widget will be rendered here */}
+                <div className="flex items-center justify-center h-full text-muted-foreground">
+                  Loading booking system...
+                </div>
               </div>
             </CardContent>
           </Card>
