@@ -1,5 +1,5 @@
-
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,106 +13,6 @@ import { Clock, Mail, Phone, MapPin } from 'lucide-react';
 const Contact = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    // Load SimplyBook widget script
-    const script1 = document.createElement('script');
-    script1.src = '//widget.simplybook.net/v2/widget/widget.js';
-    script1.type = 'text/javascript';
-    document.head.appendChild(script1);
-    script1.onload = () => {
-      // Wait a bit for the script to be ready, then initialize the widget
-      setTimeout(() => {
-        if (window.SimplybookWidget) {
-          const widget = new window.SimplybookWidget({
-            "widget_type": "iframe",
-            "url": "https://pilatesinfocus.simplybook.net",
-            "theme": "dainty",
-            "theme_settings": {
-              "timeline_show_end_time": "1",
-              "timeline_hide_unavailable": "1",
-              "hide_past_days": "0",
-              "sb_base_color": "#861657",
-              "secondary_color": "#f4eaf0",
-              "sb_text_color": "#38182b",
-              "display_item_mode": "block",
-              "body_bg_color": "#ffffff",
-              "sb_background_image": "12",
-              "sb_review_image": "13",
-              "sb_review_image_preview": "/uploads/pilatesinfocus/image_files/preview/fa3d6be4d5673b39b2cc57c2edc7dad1.jpg",
-              "dark_font_color": "#38182b",
-              "light_font_color": "#ffffff",
-              "btn_color_1": "#ecb4bf",
-              "sb_company_label_color": "#38182b",
-              "sb_cancellation_color": "#ff6b8e",
-              "hide_img_mode": "1"
-            },
-            "timeline": "modern",
-            "datepicker": "top_calendar",
-            "is_rtl": false,
-            "app_config": {
-              "clear_session": 0,
-              "allow_switch_to_ada": 0,
-              "predefined": []
-            },
-            "container_id": "simplybook-widget-contact"
-          });
-        }
-      }, 100);
-    };
-
-    // Add custom CSS to hide timezone display and optimize layout
-    const style = document.createElement('style');
-    style.textContent = `
-      /* Hide timezone/time display in SimplyBook widget */
-      #simplybook-widget-contact .widget-header-time,
-      #simplybook-widget-contact .sb-timezone,
-      #simplybook-widget-contact .sb-time-zone,
-      #simplybook-widget-contact [class*="timezone"],
-      #simplybook-widget-contact [class*="time-zone"],
-      #simplybook-widget-contact .widget-timezone {
-        display: none !important;
-      }
-      
-      /* Hide elements containing "Our time:" text */
-      #simplybook-widget-contact div:has-text("Our time:"),
-      #simplybook-widget-contact span:has-text("Our time:"),
-      #simplybook-widget-contact p:has-text("Our time:") {
-        display: none !important;
-      }
-      
-      /* Move widget content up to fill the space */
-      #simplybook-widget-contact .widget-content,
-      #simplybook-widget-contact .sb-main-content,
-      #simplybook-widget-contact iframe {
-        margin-top: -20px !important;
-        padding-top: 0 !important;
-      }
-      
-      /* Optimize widget layout spacing */
-      #simplybook-widget-contact .widget-header {
-        padding-top: 10px !important;
-        margin-bottom: 0 !important;
-      }
-      
-      /* Ensure the widget fills available space efficiently */
-      #simplybook-widget-contact {
-        padding-top: 0 !important;
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Cleanup function to remove scripts and styles when component unmounts
-    return () => {
-      const scripts = document.querySelectorAll('script[src*="simplybook"]');
-      scripts.forEach(script => script.remove());
-      // Remove custom styles
-      document.head.removeChild(style);
-      // Clear the widget container
-      const container = document.getElementById('simplybook-widget-contact');
-      if (container) {
-        container.innerHTML = '';
-      }
-    };
   }, []);
 
   return <div className="min-h-screen">
@@ -205,19 +105,15 @@ const Contact = () => {
             Book Your Class <span className="text-primary">Online</span>
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Ready to start your journey? Use our online booking system to schedule your introductory session 
-            or join one of our regular classes.
+            Ready to start your journey? Click below to access our dedicated booking system and schedule your introductory session or join one of our regular classes.
           </p>
-          <Card className="border-0 shadow-lg">
-            <CardContent className="p-8">
-              <div id="simplybook-widget-contact" className="min-h-[600px] w-full overflow-auto rounded-lg border">
-                {/* SimplyBook widget will be rendered here */}
-                <div className="flex items-center justify-center h-full text-muted-foreground">
-                  Loading booking system...
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="flex justify-center">
+            <Button asChild size="lg" className="px-12 py-4 text-lg">
+              <Link to="/booking">
+                Book Now
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
