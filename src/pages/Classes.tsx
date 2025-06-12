@@ -93,29 +93,29 @@ const Classes = () => {
   ];
 
   return (
-    <div className="min-h-screen mobile-scroll">
+    <div className="min-h-screen smooth-scroll">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="mobile-section-spacing bg-muted/30">
-        <div className="max-w-4xl mx-auto mobile-container text-center">
-          <h1 className="font-heading mobile-heading-optimize mb-4 sm:mb-6 text-primary">
+      <section className="responsive-section-spacing bg-muted/30">
+        <div className="max-w-4xl mx-auto responsive-container text-center">
+          <h1 className="font-heading responsive-heading-optimize mb-4 sm:mb-6 text-primary">
             Find the Perfect Class for Your <span className="text-primary">Goals</span>
           </h1>
-          <p className="mobile-text-optimize text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+          <p className="responsive-text-optimize text-muted-foreground leading-relaxed max-w-3xl mx-auto">
             We offer a range of mat and reformer Pilates classes in both group and private settings. All our group classes are kept small to ensure you receive personalised feedback and guidance. Unsure where to start? Book an introductory private session so we can assess your needs and recommend the perfect path for you.
           </p>
         </div>
       </section>
 
       {/* Classes Section */}
-      <section className="mobile-section-spacing bg-background">
-        <div className="max-w-7xl mx-auto mobile-container">
-          <div className="space-y-8 sm:space-y-12">
+      <section className="responsive-section-spacing bg-background">
+        <div className="max-w-7xl mx-auto responsive-container">
+          <div className="space-y-8 sm:space-y-12 lg:space-y-16">
             {classes.map((classItem, index) => (
-              <Card key={index} className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 mobile-card">
+              <Card key={index} className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 responsive-card">
                 <div className="grid lg:grid-cols-2 gap-0">
-                  <div className="relative h-48 sm:h-64 lg:h-auto">
+                  <div className="relative h-48 sm:h-64 lg:h-auto xl:h-96">
                     <img 
                       src={classItem.image} 
                       alt={classItem.title} 
@@ -123,40 +123,40 @@ const Classes = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-primary/60 to-transparent"></div>
                     <div className="absolute top-4 sm:top-6 left-4 sm:left-6">
-                      <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-card/90 rounded-full">
-                        <classItem.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                      <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-card/90 rounded-full">
+                        <classItem.icon className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-primary" />
                       </div>
                     </div>
                   </div>
                   
-                  <div className="mobile-card-spacing lg:p-8 xl:p-12">
+                  <div className="responsive-card-spacing lg:p-8 xl:p-12">
                     <CardHeader className="p-0 mb-4 sm:mb-6">
-                      <CardTitle className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-2">
+                      <CardTitle className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-2">
                         {classItem.title}
                       </CardTitle>
-                      <p className="mobile-text-optimize text-primary font-semibold">
+                      <p className="responsive-text-optimize text-primary font-semibold">
                         {classItem.subtitle}
                       </p>
                     </CardHeader>
                     
                     <CardContent className="p-0 space-y-4 sm:space-y-6">
                       <div>
-                        <h4 className="font-semibold text-foreground mb-2 mobile-text-optimize">Who it's for:</h4>
-                        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{classItem.forWho}</p>
+                        <h4 className="font-semibold text-foreground mb-2 responsive-text-optimize">Who it's for:</h4>
+                        <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">{classItem.forWho}</p>
                       </div>
                       
                       <div>
-                        <h4 className="font-semibold text-foreground mb-2 mobile-text-optimize">What to expect:</h4>
-                        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{classItem.description}</p>
+                        <h4 className="font-semibold text-foreground mb-2 responsive-text-optimize">What to expect:</h4>
+                        <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">{classItem.description}</p>
                       </div>
                       
                       <div>
-                        <h4 className="font-semibold text-foreground mb-3 mobile-text-optimize">Pricing:</h4>
+                        <h4 className="font-semibold text-foreground mb-3 responsive-text-optimize">Pricing:</h4>
                         <div className="space-y-2">
                           {classItem.pricing.map((price, priceIndex) => (
                             <div key={priceIndex} className="flex justify-between items-center">
-                              <span className="text-sm sm:text-base text-muted-foreground">{price.type}:</span>
-                              <span className="font-semibold text-sm sm:text-base text-foreground">
+                              <span className="text-sm sm:text-base lg:text-lg text-muted-foreground">{price.type}:</span>
+                              <span className="font-semibold text-sm sm:text-base lg:text-lg text-foreground">
                                 {price.price === "Enquire for details" ? (
                                   <Link to="/contact" className="text-primary hover:text-primary/80 underline">
                                     {price.price}
@@ -177,7 +177,7 @@ const Classes = () => {
           </div>
           
           <div className="text-center mt-8 sm:mt-16">
-            <Button asChild size="lg" className="mobile-button">
+            <Button asChild size="lg" className="responsive-button">
               <Link to="/booking">View Schedule & Book Now</Link>
             </Button>
           </div>

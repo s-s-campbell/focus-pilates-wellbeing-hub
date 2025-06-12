@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -32,16 +33,16 @@ const Testimonials = () => {
   ];
 
   return (
-    <div className="min-h-screen mobile-scroll">
+    <div className="min-h-screen smooth-scroll">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="mobile-section-spacing bg-muted/30">
-        <div className="max-w-4xl mx-auto mobile-container text-center">
-          <h1 className="font-heading mobile-heading-optimize text-primary mb-4 sm:mb-6">
+      <section className="responsive-section-spacing bg-muted/30">
+        <div className="max-w-4xl mx-auto responsive-container text-center">
+          <h1 className="font-heading responsive-heading-optimize text-primary mb-4 sm:mb-6">
             Real Stories, <span>Real Results</span>
           </h1>
-          <p className="mobile-text-optimize text-muted-foreground max-w-3xl mx-auto">
+          <p className="responsive-text-optimize text-muted-foreground max-w-3xl mx-auto">
             We are proud to have supported so many incredible individuals on their wellness journeys. 
             Here is what some of our clients have to say.
           </p>
@@ -49,30 +50,30 @@ const Testimonials = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="mobile-section-spacing bg-background">
-        <div className="max-w-6xl mx-auto mobile-container">
-          <div className="space-y-8 sm:space-y-12">
+      <section className="responsive-section-spacing bg-background">
+        <div className="max-w-6xl mx-auto responsive-container">
+          <div className="space-y-8 sm:space-y-12 lg:space-y-16">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="border-0 shadow-lg mobile-card hover:shadow-xl transition-shadow duration-300">
-                <CardContent className="mobile-card-spacing md:p-12">
-                  <div className="grid lg:grid-cols-4 gap-6 sm:gap-8 items-center">
+              <Card key={index} className="border-0 shadow-lg responsive-card hover:shadow-xl transition-shadow duration-300">
+                <CardContent className="responsive-card-spacing md:p-12 lg:p-16">
+                  <div className="grid lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 items-center">
                     <div className="lg:col-span-1 text-center lg:text-left">
                       <img 
                         src={testimonial.image}
                         alt={testimonial.name}
-                        className="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto lg:mx-0 mb-3 sm:mb-4 object-cover shadow-md"
+                        className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 rounded-full mx-auto lg:mx-0 mb-3 sm:mb-4 object-cover shadow-md"
                       />
-                      <h3 className="font-semibold text-foreground text-base sm:text-lg">
+                      <h3 className="font-semibold text-foreground text-base sm:text-lg lg:text-xl">
                         {testimonial.name}
                       </h3>
-                      <p className="text-primary text-sm font-medium">
+                      <p className="text-primary text-sm lg:text-base font-medium">
                         {testimonial.title}
                       </p>
                     </div>
                     
                     <div className="lg:col-span-3">
-                      <Quote className="w-6 h-6 sm:w-8 sm:h-8 text-primary mb-3 sm:mb-4 opacity-50 mx-auto lg:mx-0" />
-                      <blockquote className="mobile-text-optimize sm:text-lg text-foreground/80 leading-relaxed italic text-center lg:text-left">
+                      <Quote className="w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12 text-primary mb-3 sm:mb-4 opacity-50 mx-auto lg:mx-0" />
+                      <blockquote className="responsive-text-optimize sm:text-lg lg:text-xl text-foreground/80 leading-relaxed italic text-center lg:text-left">
                         "{testimonial.quote}"
                       </blockquote>
                     </div>

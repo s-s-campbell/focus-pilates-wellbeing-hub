@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -111,52 +112,52 @@ const Booking = () => {
     }
   }, [isMobile]);
   
-  return <div className="min-h-screen mobile-scroll">
+  return <div className="min-h-screen smooth-scroll">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="mobile-section-spacing bg-white">
-        <div className="max-w-4xl mx-auto mobile-container text-center">
-          <h1 className="font-heading mobile-heading-optimize font-bold mb-3 sm:mb-4 md:mb-6 text-primary">
+      <section className="responsive-section-spacing bg-white">
+        <div className="max-w-4xl mx-auto responsive-container text-center">
+          <h1 className="font-heading responsive-heading-optimize font-bold mb-3 sm:mb-4 md:mb-6 text-primary">
             Book Your <span className="text-[#c37fa8]">Pilates Class</span>
           </h1>
-          <p className="mobile-text-optimize text-muted-foreground leading-relaxed mb-4 sm:mb-6 md:mb-8 max-w-3xl mx-auto">
+          <p className="responsive-text-optimize text-muted-foreground leading-relaxed mb-4 sm:mb-6 md:mb-8 max-w-3xl mx-auto">
             Begin your transformative pilates journey with just a few simple steps. Our intuitive online booking system guides you through selecting your ideal class, discovering available session times, and securing your place.
           </p>
         </div>
       </section>
 
       {/* Booking Section - Conditional Rendering */}
-      <section className="mobile-section-spacing bg-stone-50">
-        <div className="max-w-4xl mx-auto mobile-container">
-          <Card className="border-0 shadow-xl mobile-card">
-            <CardHeader className="text-center pb-3 sm:pb-4 md:pb-6 mobile-card-spacing">
-              <CardTitle className="font-heading text-xl sm:text-2xl lg:text-3xl text-primary">
+      <section className="responsive-section-spacing bg-stone-50">
+        <div className="max-w-4xl mx-auto responsive-container">
+          <Card className="border-0 shadow-xl responsive-card">
+            <CardHeader className="text-center pb-3 sm:pb-4 md:pb-6 responsive-card-spacing">
+              <CardTitle className="font-heading text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-primary">
                 Schedule Your Session
               </CardTitle>
             </CardHeader>
-            <CardContent className="mobile-card-spacing">
+            <CardContent className="responsive-card-spacing">
               {isMobile ?
             // Mobile: External Link Button
             <div className="text-center space-y-4">
-                  <p className="text-muted-foreground mb-6">
+                  <p className="text-muted-foreground mb-6 responsive-text-optimize">
                     For the best mobile booking experience, we'll take you to our dedicated booking platform.
                   </p>
-                  <Button asChild size="lg" className="w-full h-14 text-lg mobile-button">
+                  <Button asChild size="lg" className="w-full h-14 text-lg responsive-button">
                     <a href="https://pilatesinfocus.simplybook.net" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                       <span>Open Booking Platform</span>
                       <ExternalLink className="w-5 h-5" />
                     </a>
                   </Button>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs lg:text-sm text-muted-foreground">
                     Opens in a new tab for optimal mobile experience
                   </p>
                 </div> :
             // Desktop: Embedded Widget
-            <div id="simplybook-widget" className="w-full min-h-[600px] overflow-auto rounded-lg border bg-white">
-                  <div className="flex items-center justify-center h-full text-muted-foreground mobile-card-spacing">
+            <div id="simplybook-widget" className="w-full min-h-[600px] lg:min-h-[700px] xl:min-h-[800px] overflow-auto rounded-lg border bg-white">
+                  <div className="flex items-center justify-center h-full text-muted-foreground responsive-card-spacing">
                     <div className="text-center">
-                      <div className="animate-pulse mb-2 text-base">Loading booking system...</div>
+                      <div className="animate-pulse mb-2 responsive-text-optimize">Loading booking system...</div>
                     </div>
                   </div>
                 </div>}
@@ -166,12 +167,12 @@ const Booking = () => {
       </section>
 
       {/* Contact Info Section */}
-      <section className="mobile-section-spacing bg-white">
-        <div className="max-w-2xl mx-auto mobile-container text-center">
-          <h2 className="font-heading text-xl sm:text-2xl font-bold text-primary mb-3 sm:mb-4 md:mb-6">
+      <section className="responsive-section-spacing bg-white">
+        <div className="max-w-2xl mx-auto responsive-container text-center">
+          <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-primary mb-3 sm:mb-4 md:mb-6">
             Need Help Booking?
           </h2>
-          <p className="mobile-text-optimize text-muted-foreground mb-4 sm:mb-6">
+          <p className="responsive-text-optimize text-muted-foreground mb-4 sm:mb-6">
             If you have any questions or need assistance with booking, feel free to{' '}
             <Link to="/contact" className="text-primary hover:underline font-medium">
               contact us directly

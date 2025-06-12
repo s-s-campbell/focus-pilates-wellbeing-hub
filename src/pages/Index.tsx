@@ -10,7 +10,7 @@ import FloatingBookButton from '@/components/FloatingBookButton';
 
 const Index = () => {
   return (
-    <div className="min-h-screen mobile-scroll">
+    <div className="min-h-screen smooth-scroll">
       <Navigation />
       <HeroSection />
       <IntroSection />
