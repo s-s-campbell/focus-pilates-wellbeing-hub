@@ -13,13 +13,13 @@ const ServicesOverview = () => {
     },
     {
       icon: Settings,
-      title: "Group Reformer Pilates",
+      title: "Group Reformer Classes",
       description: "Utilise state-of-the-art reformer machines for a dynamic, full-body workout that builds strength and tones muscles.",
       image: "/lovable-uploads/859ac7b7-aaf7-4ad9-99a6-794234e0e041.png"
     },
     {
       icon: Heart,
-      title: "Rehab & Private Sessions",
+      title: "Private Sessions",
       description: "Receive one-on-one attention to address specific injuries, manage chronic pain, or accelerate your personal progress.",
       image: "/lovable-uploads/4bdbba0a-00e0-479d-ab62-340eb3037cb7.png"
     }
