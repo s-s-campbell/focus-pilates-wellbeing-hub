@@ -22,7 +22,7 @@ const Contact = () => {
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#c37fa8]">
             We'd Love to <span className="text-primary">Hear From You</span>
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">Get in touch to ask any questions you may have or if you need assistance with booking a class. We are located in a private residential home studio in Midrand, Gauteng. The full address will be provided upon booking confirmation to ensure privacy for our clients and residents.</p>
+          <p className="text-lg text-muted-foreground leading-relaxed">Get in touch to ask any questions you may have, or if you need assistance with booking a class. We are located in a private residential home studio in Midrand, Gauteng. The full address will be provided upon booking confirmation to ensure privacy for our clients and residents.</p>
         </div>
       </section>
 
