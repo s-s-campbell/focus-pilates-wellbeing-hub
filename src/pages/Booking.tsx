@@ -4,7 +4,6 @@ import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-
 const Booking = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -109,8 +108,7 @@ const Booking = () => {
       }
     };
   }, []);
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navigation />
       
       {/* Hero Section */}
@@ -119,9 +117,7 @@ const Booking = () => {
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-primary">
             Book Your <span className="text-[#c37fa8]">Pilates Class</span>
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-            Begin your transformative Pilates journey with just a few simple steps. Our intuitive booking system guides you seamlessly through selecting your ideal class, discovering available session times, and securing your place in our welcoming studio community. Choose your preferred payment method and prepare to experience expert-led movement in our serene Midrand sanctuary.
-          </p>
+          <p className="text-lg text-muted-foreground leading-relaxed mb-8">Begin your transformative pilates journey with just a few simple steps. Our intuitive online booking system guides you through selecting your ideal class, discovering available session times, and securing your place in our welcoming classes. Choose your preferred payment method and prepare to experience expert-led movement in our serene Midrand studio.</p>
         </div>
       </section>
 
@@ -162,8 +158,6 @@ const Booking = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Booking;
