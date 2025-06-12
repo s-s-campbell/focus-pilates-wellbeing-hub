@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -98,8 +97,7 @@ const Booking = () => {
             <CardContent className="p-8">
               <div 
                 id="simplybook-widget" 
-                className="min-h-[600px] max-h-[800px] w-full overflow-hidden rounded-lg border"
-                style={{ height: '600px' }}
+                className="min-h-[600px] w-full overflow-auto rounded-lg border"
               >
                 {/* SimplyBook widget will be rendered here */}
                 <div className="flex items-center justify-center h-full text-muted-foreground">
