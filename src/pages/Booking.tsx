@@ -1,11 +1,9 @@
-
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-
 const Booking = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -15,7 +13,6 @@ const Booking = () => {
     script1.src = '//widget.simplybook.net/v2/widget/widget.js';
     script1.type = 'text/javascript';
     document.head.appendChild(script1);
-
     script1.onload = () => {
       // Wait a bit for the script to be ready, then initialize the widget
       setTimeout(() => {
@@ -111,9 +108,7 @@ const Booking = () => {
       }
     };
   }, []);
-
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navigation />
       
       {/* Hero Section */}
@@ -122,10 +117,7 @@ const Booking = () => {
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-primary">
             Book Your <span className="text-[#c37fa8]">Pilates Class</span>
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-            Ready to start your journey? Schedule your introductory session or join one of our regular classes. 
-            We're here to support you every step of the way.
-          </p>
+          <p className="text-lg text-muted-foreground leading-relaxed mb-8">Schedule your pilates class using our easy online booking system. Follow the prompts below to select the type of class you want, view the calendar of available classes, select your preferred time and choose your preferred payment option.</p>
         </div>
       </section>
 
@@ -139,10 +131,7 @@ const Booking = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="p-8">
-              <div 
-                id="simplybook-widget" 
-                className="min-h-[600px] w-full overflow-auto rounded-lg border"
-              >
+              <div id="simplybook-widget" className="min-h-[600px] w-full overflow-auto rounded-lg border">
                 {/* SimplyBook widget will be rendered here */}
                 <div className="flex items-center justify-center h-full text-muted-foreground">
                   Loading booking system...
@@ -169,8 +158,6 @@ const Booking = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Booking;
