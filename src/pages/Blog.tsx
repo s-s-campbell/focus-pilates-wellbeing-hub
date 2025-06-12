@@ -1,4 +1,4 @@
-
+import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,6 +6,10 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 const Blog = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const blogPosts = [
     {
       title: "5 Simple Pilates Exercises to Alleviate Desk-Related Back Pain",

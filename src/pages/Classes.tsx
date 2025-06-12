@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,6 +7,10 @@ import { Link } from 'react-router-dom';
 import { Users, Settings, Heart, Smile } from 'lucide-react';
 
 const Classes = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const classes = [
     {
       icon: Users,

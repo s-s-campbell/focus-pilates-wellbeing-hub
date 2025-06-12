@@ -1,9 +1,14 @@
+import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Quote } from 'lucide-react';
 
 const Testimonials = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const testimonials = [
     {
       quote: "After my physiotherapist recommended Pilates for my chronic back pain, I was nervous about starting. Finding this studio was a blessing. The instructor's deep knowledge of rehabilitation put me at ease immediately. She tailored every movement for my body, and for the first time in years, I feel strong and in control. It's been life-changing.",

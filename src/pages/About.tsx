@@ -1,9 +1,14 @@
+import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Heart, Users, Target } from 'lucide-react';
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const principles = [{
     icon: Heart,
     title: "Movement as Medicine",
