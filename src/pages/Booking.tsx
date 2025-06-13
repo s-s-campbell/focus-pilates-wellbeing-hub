@@ -1,79 +1,81 @@
-import { useEffect } from 'react';
+
+import { useEffect, useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { ExternalLink } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 const Booking = () => {
   const isMobile = useIsMobile();
+  const [showMobileWidget, setShowMobileWidget] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    // Only load SimplyBook widget script for desktop users
-    if (!isMobile) {
-      // Load SimplyBook widget script
-      const script1 = document.createElement('script');
-      script1.src = '//widget.simplybook.net/v2/widget/widget.js';
-      script1.type = 'text/javascript';
-      document.head.appendChild(script1);
-      script1.onload = () => {
-        // Wait a bit for the script to be ready, then initialize the widget
-        setTimeout(() => {
-          if (window.SimplybookWidget) {
-            const widget = new window.SimplybookWidget({
-              "widget_type": "iframe",
-              "url": "https://pilatesinfocus.simplybook.net",
-              "theme": "dainty",
-              "theme_settings": {
-                "timeline_show_end_time": "1",
-                "timeline_hide_unavailable": "1",
-                "hide_past_days": "0",
-                "sb_base_color": "#861657",
-                "secondary_color": "#f4eaf0",
-                "sb_text_color": "#38182b",
-                "display_item_mode": "block",
-                "body_bg_color": "#ffffff",
-                "sb_background_image": "12",
-                "sb_review_image": "13",
-                "sb_review_image_preview": "/uploads/pilatesinfocus/image_files/preview/fa3d6be4d5673b39b2cc57c2edc7dad1.jpg",
-                "dark_font_color": "#38182b",
-                "light_font_color": "#ffffff",
-                "btn_color_1": "#ecb4bf",
-                "sb_company_label_color": "#38182b",
-                "sb_cancellation_color": "#ff6b8e",
-                "hide_img_mode": "1"
-              },
-              "timeline": "modern",
-              "datepicker": "top_calendar",
-              "is_rtl": false,
-              "app_config": {
-                "clear_session": 0,
-                "allow_switch_to_ada": 0,
-                "predefined": []
-              },
-              "container_id": "simplybook-widget"
-            });
-          }
-        }, 100);
-      };
-
-      // Add custom CSS for desktop optimization only
-      const style = document.createElement('style');
-      style.textContent = `
-        /* Hide timezone/time display in SimplyBook widget */
-        #simplybook-widget .widget-header-time,
-        #simplybook-widget .sb-timezone,
-        #simplybook-widget .sb-time-zone,
-        #simplybook-widget [class*="timezone"],
-        #simplybook-widget [class*="time-zone"],
-        #simplybook-widget .widget-timezone {
-          display: none !important;
+    // Load SimplyBook widget script for both desktop and mobile
+    const script1 = document.createElement('script');
+    script1.src = '//widget.simplybook.net/v2/widget/widget.js';
+    script1.type = 'text/javascript';
+    document.head.appendChild(script1);
+    script1.onload = () => {
+      // Wait a bit for the script to be ready, then initialize the widget
+      setTimeout(() => {
+        if (window.SimplybookWidget) {
+          const widget = new window.SimplybookWidget({
+            "widget_type": "iframe",
+            "url": "https://pilatesinfocus.simplybook.net",
+            "theme": "dainty",
+            "theme_settings": {
+              "timeline_show_end_time": "1",
+              "timeline_hide_unavailable": "1",
+              "hide_past_days": "0",
+              "sb_base_color": "#861657",
+              "secondary_color": "#f4eaf0",
+              "sb_text_color": "#38182b",
+              "display_item_mode": "block",
+              "body_bg_color": "#ffffff",
+              "sb_background_image": "12",
+              "sb_review_image": "13",
+              "sb_review_image_preview": "/uploads/pilatesinfocus/image_files/preview/fa3d6be4d5673b39b2cc57c2edc7dad1.jpg",
+              "dark_font_color": "#38182b",
+              "light_font_color": "#ffffff",
+              "btn_color_1": "#ecb4bf",
+              "sb_company_label_color": "#38182b",
+              "sb_cancellation_color": "#ff6b8e",
+              "hide_img_mode": "1"
+            },
+            "timeline": "modern",
+            "datepicker": "top_calendar",
+            "is_rtl": false,
+            "app_config": {
+              "clear_session": 0,
+              "allow_switch_to_ada": 0,
+              "predefined": []
+            },
+            "container_id": "simplybook-widget"
+          });
         }
-        
-        /* Desktop optimizations */
+      }, 100);
+    };
+
+    // Add custom CSS for both desktop and mobile optimization
+    const style = document.createElement('style');
+    style.textContent = `
+      /* Hide timezone/time display in SimplyBook widget */
+      #simplybook-widget .widget-header-time,
+      #simplybook-widget .sb-timezone,
+      #simplybook-widget .sb-time-zone,
+      #simplybook-widget [class*="timezone"],
+      #simplybook-widget [class*="time-zone"],
+      #simplybook-widget .widget-timezone {
+        display: none !important;
+      }
+      
+      /* Desktop optimizations */
+      @media (min-width: 768px) {
         #simplybook-widget .widget-content,
         #simplybook-widget .sb-main-content,
         #simplybook-widget iframe {
@@ -91,25 +93,81 @@ const Booking = () => {
           padding-top: 0 !important;
           box-sizing: border-box !important;
         }
-      `;
-      document.head.appendChild(style);
+      }
 
-      // Cleanup function to remove scripts and styles when component unmounts
-      return () => {
-        const scripts = document.querySelectorAll('script[src*="simplybook"]');
-        scripts.forEach(script => script.remove());
-        // Remove custom styles
-        if (document.head.contains(style)) {
-          document.head.removeChild(style);
+      /* Mobile full-screen optimizations */
+      @media (max-width: 767px) {
+        .mobile-fullscreen-widget {
+          position: fixed !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          bottom: 0 !important;
+          z-index: 9999 !important;
+          background: white !important;
+          overflow: hidden !important;
         }
-        // Clear the widget container
-        const container = document.getElementById('simplybook-widget');
-        if (container) {
-          container.innerHTML = '';
+        
+        .mobile-fullscreen-widget #simplybook-widget {
+          height: calc(100vh - 60px) !important;
+          margin: 0 !important;
+          border-radius: 0 !important;
+          border: none !important;
+          box-shadow: none !important;
         }
-      };
-    }
-  }, [isMobile]);
+        
+        .mobile-fullscreen-widget #simplybook-widget iframe {
+          height: 100% !important;
+          min-height: 100% !important;
+          border-radius: 0 !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Cleanup function to remove scripts and styles when component unmounts
+    return () => {
+      const scripts = document.querySelectorAll('script[src*="simplybook"]');
+      scripts.forEach(script => script.remove());
+      // Remove custom styles
+      if (document.head.contains(style)) {
+        document.head.removeChild(style);
+      }
+      // Clear the widget container
+      const container = document.getElementById('simplybook-widget');
+      if (container) {
+        container.innerHTML = '';
+      }
+    };
+  }, []);
+
+  // Mobile full-screen widget view
+  if (isMobile && showMobileWidget) {
+    return (
+      <div className="mobile-fullscreen-widget">
+        <div className="flex items-center justify-between p-4 bg-white border-b">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setShowMobileWidget(false)}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back
+          </Button>
+          <h1 className="font-heading text-lg font-semibold text-primary">Book Your Session</h1>
+          <div className="w-16"></div> {/* Spacer for centering */}
+        </div>
+        <div id="simplybook-widget" className="w-full h-full">
+          <div className="flex items-center justify-center h-full text-muted-foreground p-4">
+            <div className="text-center">
+              <div className="animate-pulse mb-2">Loading booking system...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
   
   return <div className="min-h-screen smooth-scroll">
       <Navigation />
@@ -121,12 +179,12 @@ const Booking = () => {
             Book Your <span className="text-[#c37fa8]">Pilates Class</span>
           </h1>
           <p className="responsive-text-optimize text-muted-foreground leading-relaxed mb-4 sm:mb-6 md:mb-8 max-w-3xl mx-auto">
-            Begin your transformative pilates journey with just a few simple steps. Our intuitive online booking system guides you through selecting your ideal class, discovering available session times, and securing your place.
+            Begin your transformative pilates journey with just a few simple steps. Our intuitive booking system guides you through selecting your ideal class, discovering available session times, and securing your place.
           </p>
         </div>
       </section>
 
-      {/* Booking Section - Conditional Rendering */}
+      {/* Booking Section */}
       <section className="responsive-section-spacing bg-stone-50">
         <div className="max-w-4xl mx-auto responsive-container">
           <Card className="border-0 shadow-xl responsive-card">
@@ -137,19 +195,20 @@ const Booking = () => {
             </CardHeader>
             <CardContent className="responsive-card-spacing">
               {isMobile ?
-            // Mobile: External Link Button
+            // Mobile: Button to show full-screen widget
             <div className="text-center space-y-4">
                   <p className="text-muted-foreground mb-6 responsive-text-optimize">
-                    For the best mobile booking experience, we'll take you to our dedicated booking platform.
+                    Start your booking journey with our streamlined mobile experience designed for easy class selection.
                   </p>
-                  <Button asChild size="lg" className="w-full h-14 text-lg responsive-button">
-                    <a href="https://pilatesinfocus.simplybook.net/v2/#book" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                      <span>Open Booking Platform</span>
-                      <ExternalLink className="w-5 h-5" />
-                    </a>
+                  <Button 
+                    size="lg" 
+                    className="w-full h-14 text-lg responsive-button"
+                    onClick={() => setShowMobileWidget(true)}
+                  >
+                    Start Booking Process
                   </Button>
                   <p className="text-xs lg:text-sm text-muted-foreground">
-                    Opens in a new tab for optimal mobile experience
+                    Full-screen booking experience optimized for mobile
                   </p>
                 </div> :
             // Desktop: Embedded Widget
