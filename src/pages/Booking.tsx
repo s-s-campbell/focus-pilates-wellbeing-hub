@@ -39,11 +39,33 @@ const Booking = () => {
           "widget_type": "iframe",
           "url": "https://pilatesinfocus.simplybook.net",
           "theme": "dainty",
-          "theme_settings": { /* Your theme settings can be pasted here */ },
+          "theme_settings": {
+            "timeline_show_end_time": "1",
+            "timeline_hide_unavailable": "1",
+            "hide_past_days": "0",
+            "sb_base_color": "#861657",
+            "secondary_color": "#f4eaf0",
+            "sb_text_color": "#38182b",
+            "display_item_mode": "block",
+            "body_bg_color": "#ffffff",
+            "sb_background_image": "12",
+            "sb_review_image": "13",
+            "sb_review_image_preview": "/uploads/pilatesinfocus/image_files/preview/fa3d6be4d5673b39b2cc57c2edc7dad1.jpg",
+            "dark_font_color": "#38182b",
+            "light_font_color": "#ffffff",
+            "btn_color_1": "#ecb4bf",
+            "sb_company_label_color": "#38182b",
+            "sb_cancellation_color": "#ff6b8e",
+            "hide_img_mode": "1"
+          },
           "timeline": "modern",
           "datepicker": "top_calendar",
           "is_rtl": false,
-          "app_config": { /* Your app config can be pasted here */ },
+          "app_config": {
+            "clear_session": 0,
+            "allow_switch_to_ada": 0,
+            "predefined": []
+          },
           "container_id": "simplybook-widget-desktop"
         });
         setWidgetLoaded(true);
