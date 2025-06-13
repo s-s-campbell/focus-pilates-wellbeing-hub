@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -11,6 +10,7 @@ import { ArrowLeft } from 'lucide-react';
 const Booking = () => {
   const isMobile = useIsMobile();
   const [showMobileWidget, setShowMobileWidget] = useState(false);
+  const [widgetLoaded, setWidgetLoaded] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -57,6 +57,34 @@ const Booking = () => {
             },
             "container_id": "simplybook-widget"
           });
+
+          // Add widget load detection
+          const checkWidgetLoaded = () => {
+            const container = document.getElementById('simplybook-widget');
+            const iframe = container?.querySelector('iframe');
+            
+            if (iframe) {
+              iframe.onload = () => {
+                setWidgetLoaded(true);
+              };
+              // If iframe is already loaded
+              if (iframe.contentDocument?.readyState === 'complete') {
+                setWidgetLoaded(true);
+              }
+            } else {
+              // Check for widget elements
+              const widgetContent = container?.querySelector('[class*="widget"], [class*="sb-"]');
+              if (widgetContent) {
+                setWidgetLoaded(true);
+              } else {
+                // Keep checking every 500ms for up to 10 seconds
+                setTimeout(checkWidgetLoaded, 500);
+              }
+            }
+          };
+
+          // Start checking after a short delay
+          setTimeout(checkWidgetLoaded, 1000);
         }
       }, 100);
     };
@@ -138,6 +166,8 @@ const Booking = () => {
       if (container) {
         container.innerHTML = '';
       }
+      // Reset widget loaded state
+      setWidgetLoaded(false);
     };
   }, []);
 
@@ -159,11 +189,13 @@ const Booking = () => {
           <div className="w-16"></div> {/* Spacer for centering */}
         </div>
         <div id="simplybook-widget" className="w-full h-full">
-          <div className="flex items-center justify-center h-full text-muted-foreground p-4">
-            <div className="text-center">
-              <div className="animate-pulse mb-2">Loading booking system...</div>
+          {!widgetLoaded && (
+            <div className="flex items-center justify-center h-full text-muted-foreground p-4">
+              <div className="text-center">
+                <div className="animate-pulse mb-2">Loading booking system...</div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     );
@@ -213,11 +245,13 @@ const Booking = () => {
                 </div> :
             // Desktop: Embedded Widget
             <div id="simplybook-widget" className="w-full min-h-[600px] lg:min-h-[700px] xl:min-h-[800px] overflow-auto rounded-lg border bg-white">
-                  <div className="flex items-center justify-center h-full text-muted-foreground responsive-card-spacing">
-                    <div className="text-center">
-                      <div className="animate-pulse mb-2 responsive-text-optimize">Loading booking system...</div>
+                  {!widgetLoaded && (
+                    <div className="flex items-center justify-center h-full text-muted-foreground responsive-card-spacing">
+                      <div className="text-center">
+                        <div className="animate-pulse mb-2 responsive-text-optimize">Loading booking system...</div>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>}
             </CardContent>
           </Card>
