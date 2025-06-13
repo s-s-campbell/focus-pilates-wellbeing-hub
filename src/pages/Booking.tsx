@@ -37,22 +37,30 @@ const Booking = () => {
 
     // Function to initialize the widget once script is loaded
     const initializeDesktopWidget = () => {
-      // Prevent multiple initializations
-      if (widgetInitialized.current) return;
+      console.log("Attempting to initialize widget...");
       
-      // Check if the container exists and is empty
+      // Prevent multiple initializations
+      if (widgetInitialized.current) {
+        console.log("Widget already initialized, skipping");
+        return;
+      }
+      
+      // Check if the container exists
       const container = document.getElementById("simplybook-widget-desktop");
       if (!container) {
-        console.log("Widget container not found");
+        console.log("Widget container not found, retrying in 500ms");
+        setTimeout(initializeDesktopWidget, 500);
         return;
       }
 
-      // Clear any existing content
-      container.innerHTML = '';
+      console.log("Container found, checking for SimplybookWidget...");
 
       if (window.SimplybookWidget) {
         try {
-          new window.SimplybookWidget({
+          console.log("Initializing SimplyBook widget...");
+          
+          // Don't clear the container, let the widget handle it
+          const widget = new window.SimplybookWidget({
             "widget_type": "iframe",
             "url": "https://pilatesinfocus.simplybook.net",
             "theme": "dainty",
@@ -85,40 +93,58 @@ const Booking = () => {
             },
             "container_id": "simplybook-widget-desktop"
           });
+          
           widgetInitialized.current = true;
-          setWidgetLoaded(true);
+          console.log("Widget initialized successfully");
+          
+          // Set loaded state after a brief delay to ensure widget is rendered
+          setTimeout(() => {
+            setWidgetLoaded(true);
+            console.log("Widget marked as loaded");
+          }, 1000);
+          
         } catch (error) {
           console.error("Error initializing SimplyBook widget:", error);
+          // Try again after a delay
+          setTimeout(() => {
+            widgetInitialized.current = false;
+            initializeDesktopWidget();
+          }, 2000);
         }
       } else {
-        console.log("SimplybookWidget not available");
+        console.log("SimplybookWidget not available, retrying in 500ms");
+        setTimeout(initializeDesktopWidget, 500);
       }
     };
 
     // Check if script is already loaded
     const existingScript = document.querySelector('script[src*="widget.simplybook.net"]');
     if (existingScript) {
+      console.log("Script already exists, initializing widget");
       setScriptLoaded(true);
-      // Wait a bit for the script to fully initialize
-      setTimeout(initializeDesktopWidget, 100);
+      // Wait a bit longer for the script to fully initialize
+      setTimeout(initializeDesktopWidget, 500);
       return;
     }
 
+    console.log("Loading SimplyBook script...");
+    
     // Load the SimplyBook.me script for the desktop view
     const script = document.createElement('script');
-    script.src = '//widget.simplybook.net/v2/widget/widget.js';
+    script.src = 'https://widget.simplybook.net/v2/widget/widget.js'; // Use https explicitly
     script.type = 'text/javascript';
     script.async = true;
     scriptRef.current = script;
     
     script.onload = () => {
+      console.log("Script loaded successfully");
       setScriptLoaded(true);
-      // Small delay to ensure the script is fully initialized
-      setTimeout(initializeDesktopWidget, 100);
+      // Longer delay to ensure the script is fully initialized
+      setTimeout(initializeDesktopWidget, 1000);
     };
     
-    script.onerror = () => {
-      console.error("Failed to load SimplyBook widget script");
+    script.onerror = (error) => {
+      console.error("Failed to load SimplyBook widget script:", error);
     };
 
     document.head.appendChild(script);
@@ -127,6 +153,10 @@ const Booking = () => {
     const style = document.createElement('style');
     styleRef.current = style;
     style.textContent = `
+      #simplybook-widget-desktop {
+        background: white !important;
+        min-height: 700px !important;
+      }
       .simplybook-container .widget-content,
       .simplybook-container .sb-main-content,
       .simplybook-container iframe {
@@ -142,6 +172,7 @@ const Booking = () => {
 
     // Cleanup function to remove script/styles when the component unmounts
     return () => {
+      widgetInitialized.current = false;
       if (scriptRef.current && scriptRef.current.parentNode) {
         scriptRef.current.parentNode.removeChild(scriptRef.current);
       }
