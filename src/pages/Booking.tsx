@@ -78,11 +78,16 @@ const Booking = () => {
 
     // Cleanup function to remove script/styles when the component unmounts
     return () => {
-      if (scriptRef.current && scriptRef.current.parentNode) {
-        scriptRef.current.parentNode.removeChild(scriptRef.current);
+      if (scriptRef.current && document.head.contains(scriptRef.current)) {
+        document.head.removeChild(scriptRef.current);
       }
-      if (styleRef.current && styleRef.current.parentNode) {
-        styleRef.current.parentNode.removeChild(styleRef.current);
+      if (styleRef.current && document.head.contains(styleRef.current)) {
+        document.head.removeChild(styleRef.current);
+      }
+      // Clear widget container
+      const container = document.getElementById('simplybook-widget-desktop');
+      if (container) {
+        container.innerHTML = '';
       }
     };
   }, [isMobile]); // Dependency on isMobile ensures this logic re-runs if the viewport changes
