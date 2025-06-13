@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -15,30 +14,18 @@ const Booking = () => {
   const [widgetInitialized, setWidgetInitialized] = useState(false);
   const scriptRef = useRef<HTMLScriptElement | null>(null);
   const styleRef = useRef<HTMLStyleElement | null>(null);
-  const desktopContainerRef = useRef<HTMLDivElement>(null);
-  const mobileContainerRef = useRef<HTMLDivElement>(null);
 
+  // This function creates the SimplyBook.me widget instance.
   const initializeWidget = (containerId: string) => {
-    console.log('Initializing widget for container:', containerId);
-    
-    if (widgetInitialized) {
-      console.log('Widget already initialized, skipping...');
+    if (widgetInitialized || !document.getElementById(containerId)) {
       return;
     }
 
-    // Check if container exists before initializing
-    const container = document.getElementById(containerId);
-    if (!container) {
-      console.log('Container not found:', containerId);
-      return;
-    }
-
-    // Wait for script to be ready
+    // This function checks if the SimplyBook script is ready before initializing.
     const checkAndInit = () => {
       if (window.SimplybookWidget) {
-        console.log('SimplybookWidget found, creating widget...');
         try {
-          const widget = new window.SimplybookWidget({
+          new window.SimplybookWidget({
             "widget_type": "iframe",
             "url": "https://pilatesinfocus.simplybook.net",
             "theme": "dainty",
@@ -73,25 +60,16 @@ const Booking = () => {
           });
 
           setWidgetInitialized(true);
-          
-          // Check if widget loaded
+
+          // Check for the iframe to confirm the widget has loaded into the DOM.
+          // This hides the "Loading..." message.
           setTimeout(() => {
             const container = document.getElementById(containerId);
             if (container) {
               const iframe = container.querySelector('iframe');
-              
               if (iframe) {
-                iframe.onload = () => {
-                  console.log('Widget iframe loaded');
-                  setWidgetLoaded(true);
-                };
+                iframe.onload = () => setWidgetLoaded(true);
                 if (iframe.contentDocument?.readyState === 'complete') {
-                  setWidgetLoaded(true);
-                }
-              } else {
-                const widgetContent = container.querySelector('[class*="widget"], [class*="sb-"]');
-                if (widgetContent) {
-                  console.log('Widget content found');
                   setWidgetLoaded(true);
                 }
               }
@@ -99,52 +77,47 @@ const Booking = () => {
           }, 1000);
 
         } catch (error) {
-          console.error('Error initializing widget:', error);
+          console.error('Error initializing SimplyBook widget:', error);
         }
       } else {
-        console.log('SimplybookWidget not ready, retrying...');
+        // If the script isn't ready, wait and try again.
         setTimeout(checkAndInit, 500);
       }
     };
 
-    setTimeout(checkAndInit, 100);
+    checkAndInit();
   };
 
+  // Main effect to load the external script and styles.
+  // This runs when the component mounts and if the view changes between mobile/desktop.
   useEffect(() => {
     window.scrollTo(0, 0);
-    
-    // Reset states
     setWidgetLoaded(false);
     setWidgetInitialized(false);
 
-    console.log('Loading SimplyBook widget script...');
-
-    // Load SimplyBook widget script
     const script = document.createElement('script');
     script.src = '//widget.simplybook.net/v2/widget/widget.js';
     script.type = 'text/javascript';
+    script.async = true;
     scriptRef.current = script;
-    
+
     script.onload = () => {
-      console.log('SimplyBook script loaded successfully');
-      // For desktop, initialize immediately
+      // For desktop, initialize immediately as the container is already in the DOM.
       if (!isMobile) {
         initializeWidget('simplybook-widget-desktop');
       }
     };
     
     script.onerror = () => {
-      console.error('Failed to load SimplyBook script');
+      console.error('Failed to load the SimplyBook.me script.');
     };
     
     document.head.appendChild(script);
 
-    // Add custom CSS
     const style = document.createElement('style');
-    style.setAttribute('data-booking-styles', 'true');
     styleRef.current = style;
     style.textContent = `
-      /* Hide timezone/time display in SimplyBook widget */
+      /* General widget style overrides */
       .simplybook-container .widget-header-time,
       .simplybook-container .sb-timezone,
       .simplybook-container .sb-time-zone,
@@ -162,19 +135,13 @@ const Booking = () => {
           margin-top: -20px !important;
           padding-top: 0 !important;
         }
-        
         .simplybook-container .widget-header {
           padding-top: 10px !important;
           margin-bottom: 0 !important;
         }
-        
-        .simplybook-container {
-          padding-top: 0 !important;
-          box-sizing: border-box !important;
-        }
       }
 
-      /* Mobile full-screen optimizations */
+      /* Mobile full-screen widget styles */
       @media (max-width: 767px) {
         .mobile-fullscreen-widget {
           position: fixed !important;
@@ -186,88 +153,60 @@ const Booking = () => {
           background: white !important;
           overflow: hidden !important;
         }
-        
         .mobile-fullscreen-widget .simplybook-container {
-          height: calc(100vh - 60px) !important;
+          height: calc(100% - 60px) !important; /* Full height minus the header */
           margin: 0 !important;
           border-radius: 0 !important;
           border: none !important;
           box-shadow: none !important;
         }
-        
         .mobile-fullscreen-widget .simplybook-container iframe {
           height: 100% !important;
           min-height: 100% !important;
-          border-radius: 0 !important;
         }
       }
     `;
     document.head.appendChild(style);
 
-    // Cleanup function - defensive DOM manipulation
+    // Cleanup function to remove script and styles when the component unmounts.
     return () => {
-      console.log('Cleaning up booking widget...');
-      setWidgetLoaded(false);
-      setWidgetInitialized(false);
-      
-      // Safely remove script element
-      if (scriptRef.current) {
-        try {
-          // Check if script is still in the DOM and is a child of its parent
-          if (scriptRef.current.parentNode && document.head.contains(scriptRef.current)) {
-            document.head.removeChild(scriptRef.current);
-          }
-        } catch (error) {
-          console.log('Script already removed or not found:', error);
-        }
-        scriptRef.current = null;
+      if (scriptRef.current && scriptRef.current.parentNode) {
+        scriptRef.current.parentNode.removeChild(scriptRef.current);
       }
-      
-      // Safely remove style element
-      if (styleRef.current) {
-        try {
-          // Check if style is still in the DOM and is a child of its parent
-          if (styleRef.current.parentNode && document.head.contains(styleRef.current)) {
-            document.head.removeChild(styleRef.current);
-          }
-        } catch (error) {
-          console.log('Style already removed or not found:', error);
-        }
-        styleRef.current = null;
+      if (styleRef.current && styleRef.current.parentNode) {
+        styleRef.current.parentNode.removeChild(styleRef.current);
       }
-      
-      // Clear widget containers safely
-      ['simplybook-widget-desktop', 'simplybook-widget-mobile'].forEach(id => {
-        try {
-          const container = document.getElementById(id);
-          if (container && container.parentNode) {
-            container.innerHTML = '';
-          }
-        } catch (error) {
-          console.log(`Container ${id} cleanup error:`, error);
-        }
-      });
+      // Clear the global widget object to allow for re-initialization if needed
+      if (window.SimplybookWidget) {
+        delete window.SimplybookWidget;
+      }
     };
   }, [isMobile]);
 
-  const handleStartMobileBooking = () => {
-    console.log('Starting mobile booking...');
-    setShowMobileWidget(true);
-    // Initialize widget for mobile after showing the full-screen view
-    setTimeout(() => {
+  // ADDED: This effect is the core of the fix.
+  // It runs after the component re-renders when `showMobileWidget` becomes true,
+  // guaranteeing the mobile container div exists before we try to initialize the widget.
+  useEffect(() => {
+    if (isMobile && showMobileWidget && !widgetInitialized) {
       initializeWidget('simplybook-widget-mobile');
-    }, 100);
+    }
+  }, [isMobile, showMobileWidget, widgetInitialized]);
+
+  // SIMPLIFIED: This handler now only sets the state to show the widget.
+  const handleStartMobileBooking = () => {
+    setShowMobileWidget(true);
   };
 
-  // Mobile full-screen widget view
+  // Render the mobile full-screen widget when triggered.
   if (isMobile && showMobileWidget) {
     return (
       <div className="mobile-fullscreen-widget">
-        <div className="flex items-center justify-between p-4 bg-white border-b">
+        <div className="flex items-center justify-between p-4 bg-white border-b" style={{ height: '60px' }}>
           <Button
             variant="ghost"
             size="sm"
             onClick={() => {
+              // Reset state to return to the main page view
               setShowMobileWidget(false);
               setWidgetLoaded(false);
               setWidgetInitialized(false);
@@ -278,11 +217,10 @@ const Booking = () => {
             Back
           </Button>
           <h1 className="font-heading text-lg font-semibold text-primary">Book Your Session</h1>
-          <div className="w-16"></div>
+          <div className="w-16"></div> {/* Spacer for centering the title */}
         </div>
-        <div 
-          ref={mobileContainerRef}
-          id="simplybook-widget-mobile" 
+        <div
+          id="simplybook-widget-mobile"
           className="simplybook-container w-full h-full"
           suppressHydrationWarning
         >
@@ -290,7 +228,7 @@ const Booking = () => {
             <div className="flex items-center justify-center h-full text-muted-foreground p-4">
               <div className="text-center">
                 <div className="animate-pulse mb-2">Loading booking system...</div>
-                <div className="text-sm">Please wait while we prepare your booking experience</div>
+                <div className="text-sm">Please wait a moment.</div>
               </div>
             </div>
           )}
@@ -299,11 +237,11 @@ const Booking = () => {
     );
   }
   
+  // Render the main page view.
   return (
     <div className="min-h-screen smooth-scroll">
       <Navigation />
       
-      {/* Hero Section */}
       <section className="responsive-section-spacing bg-white">
         <div className="max-w-4xl mx-auto responsive-container text-center">
           <h1 className="font-heading responsive-heading-optimize font-bold mb-3 sm:mb-4 md:mb-6 text-primary">
@@ -315,7 +253,6 @@ const Booking = () => {
         </div>
       </section>
 
-      {/* Booking Section */}
       <section className="responsive-section-spacing bg-stone-50">
         <div className="max-w-4xl mx-auto responsive-container">
           <Card className="border-0 shadow-xl responsive-card">
@@ -326,32 +263,31 @@ const Booking = () => {
             </CardHeader>
             <CardContent className="responsive-card-spacing">
               {isMobile ? (
-                // Mobile: Button to show full-screen widget
+                // Mobile: Show a button to launch the full-screen widget.
                 <div className="text-center space-y-4">
                   <p className="text-muted-foreground mb-6 responsive-text-optimize">
-                    Start your booking journey with our streamlined mobile experience designed for easy class selection.
+                    Start your booking journey with our streamlined mobile experience.
                   </p>
-                  <Button 
-                    size="lg" 
+                  <Button
+                    size="lg"
                     className="w-full h-14 text-lg responsive-button"
                     onClick={handleStartMobileBooking}
                   >
                     Start Booking Process
                   </Button>
                   <p className="text-xs lg:text-sm text-muted-foreground">
-                    Full-screen booking experience optimized for mobile
+                    You'll be directed to our full-screen booking portal.
                   </p>
                 </div>
               ) : (
-                // Desktop: Embedded Widget
-                <div 
-                  ref={desktopContainerRef}
-                  id="simplybook-widget-desktop" 
-                  className="simplybook-container w-full min-h-[600px] lg:min-h-[700px] xl:min-h-[800px] overflow-auto rounded-lg border bg-white"
+                // Desktop: Embed the widget directly.
+                <div
+                  id="simplybook-widget-desktop"
+                  className="simplybook-container w-full min-h-[700px] overflow-auto rounded-lg border bg-white"
                   suppressHydrationWarning
                 >
                   {!widgetLoaded && (
-                    <div className="flex items-center justify-center h-full text-muted-foreground responsive-card-spacing">
+                    <div className="flex items-center justify-center h-full text-muted-foreground responsive-card-spacing min-h-[700px]">
                       <div className="text-center">
                         <div className="animate-pulse mb-2 responsive-text-optimize">Loading booking system...</div>
                         <div className="text-sm">Connecting to our scheduling platform...</div>
@@ -365,14 +301,13 @@ const Booking = () => {
         </div>
       </section>
 
-      {/* Contact Info Section */}
       <section className="responsive-section-spacing bg-white">
         <div className="max-w-2xl mx-auto responsive-container text-center">
           <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-primary mb-3 sm:mb-4 md:mb-6">
             Need Help Booking?
           </h2>
           <p className="responsive-text-optimize text-muted-foreground mb-4 sm:mb-6">
-            If you have any questions or need assistance with booking, feel free to{' '}
+            If you have any questions or need assistance, feel free to{' '}
             <Link to="/contact" className="text-primary hover:underline font-medium">
               contact us directly
             </Link>
