@@ -1,4 +1,3 @@
-
 // This is the main App component that sets up routing and global providers for our entire website
 // It defines which components to show when users visit different URLs
 
@@ -13,14 +12,17 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Import all the different page components
-import Index from "./pages/Index";                    // Homepage
-import About from "./pages/About";                    // About Us page
-import Classes from "./pages/Classes";                // Our Classes page
+import Index from "./pages/Index";                      // Homepage
+import About from "./pages/About";                      // About Us page
+import Classes from "./pages/Classes";                    // Our Classes page
 import Testimonials from "./pages/Testimonials";      // Customer testimonials
-import Blog from "./pages/Blog";                      // Blog listing page
-import Contact from "./pages/Contact";                // Contact form page
-import Booking from "./pages/Booking";                // Booking page
-import NotFound from "./pages/NotFound";              // 404 error page
+import Blog from "./pages/Blog";                          // Blog listing page
+import Contact from "./pages/Contact";                    // Contact form page
+import Booking from "./pages/Booking";                    // Booking page
+import NotFound from "./pages/NotFound";                  // 404 error page
+
+// ADD THIS LINE: Import the new component for the mobile booking widget
+import BookingWidgetPage from "./components/BookingWidgetPage";
 
 // Import individual blog post components
 import DeskBackPainExercises from "./pages/blog/DeskBackPainExercises";
@@ -44,19 +46,22 @@ const App = () => (
         {/* Routes container defines which component to show for each URL */}
         <Routes>
           {/* Each Route maps a URL path to a specific component */}
-          <Route path="/" element={<Index />} />                    {/* Homepage */}
-          <Route path="/about" element={<About />} />               {/* About Us page */}
-          <Route path="/classes" element={<Classes />} />           {/* Classes page */}
+          <Route path="/" element={<Index />} />                  {/* Homepage */}
+          <Route path="/about" element={<About />} />                {/* About Us page */}
+          <Route path="/classes" element={<Classes />} />            {/* Classes page */}
           <Route path="/testimonials" element={<Testimonials />} /> {/* Testimonials page */}
-          <Route path="/blog" element={<Blog />} />                 {/* Blog listing */}
+          <Route path="/blog" element={<Blog />} />                  {/* Blog listing */}
           
           {/* Individual blog post routes */}
           <Route path="/blog/desk-back-pain-exercises" element={<DeskBackPainExercises />} />
           <Route path="/blog/pilates-balance-seniors" element={<PilatesBalanceSeniors />} />
           <Route path="/blog/first-pilates-class-guide" element={<FirstPilatesClassGuide />} />
           
-          <Route path="/contact" element={<Contact />} />           {/* Contact page */}
-          <Route path="/booking" element={<Booking />} />           {/* Booking page */}
+          <Route path="/contact" element={<Contact />} />            {/* Contact page */}
+          <Route path="/booking" element={<Booking />} />            {/* Booking page */}
+          
+          {/* ADD THIS LINE: Add the route for the new mobile-friendly widget page */}
+          <Route path="/book-now" element={<BookingWidgetPage />} />
           
           {/* Catch-all route for any URL that doesn't match above - shows 404 page */}
           {/* This MUST be last to catch any unmatched routes */}
