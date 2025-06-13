@@ -20,9 +20,7 @@ import Blog from "./pages/Blog";                          // Blog listing page
 import Contact from "./pages/Contact";                    // Contact form page
 import Booking from "./pages/Booking";                    // Booking page
 import NotFound from "./pages/NotFound";                  // 404 error page
-
-// ADD THIS LINE: Import the new component for the mobile booking widget
-import BookingWidgetPage from "./components/BookingWidgetPage";
+import BookingWidgetPage from "./components/BookingWidgetPage"; // The new widget page
 
 // Import individual blog post components
 import DeskBackPainExercises from "./pages/blog/DeskBackPainExercises";
@@ -60,7 +58,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />            {/* Contact page */}
           <Route path="/booking" element={<Booking />} />            {/* Booking page */}
           
-          {/* ADD THIS LINE: Add the route for the new mobile-friendly widget page */}
+          {/* Route for the new mobile-friendly widget page */}
           <Route path="/book-now" element={<BookingWidgetPage />} />
           
           {/* Catch-all route for any URL that doesn't match above - shows 404 page */}
