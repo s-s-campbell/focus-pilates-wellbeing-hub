@@ -143,7 +143,7 @@ const Booking = () => {
                     For the best mobile booking experience, we'll take you to our dedicated booking platform.
                   </p>
                   <Button asChild size="lg" className="w-full h-14 text-lg responsive-button">
-                    <a href="https://pilatesinfocus.simplybook.net" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                    <a href="https://pilatesinfocus.simplybook.net/v2/#book" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                       <span>Open Booking Platform</span>
                       <ExternalLink className="w-5 h-5" />
                     </a>
