@@ -7,11 +7,6 @@ import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
-// Define the shape of the window object to include the widget
-interface CustomWindow extends Window {
-  SimplybookWidget?: any;
-}
-declare const window: CustomWindow;
 
 const Booking = () => {
   const isMobile = useIsMobile();

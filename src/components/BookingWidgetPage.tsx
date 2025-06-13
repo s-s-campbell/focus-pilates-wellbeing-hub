@@ -3,11 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
-// Define the shape of the window object to include the widget
-interface CustomWindow extends Window {
-  SimplybookWidget?: any;
-}
-declare const window: CustomWindow;
 
 
 const BookingWidgetPage = () => {
