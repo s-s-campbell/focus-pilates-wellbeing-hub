@@ -1,127 +1,74 @@
-import { useEffect, useState } from 'react';
+
+import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ExternalLink } from 'lucide-react';
+// Import the SimplyBook widget CSS styles
 import '../styles/simplybook-widget.css';
 
 const Booking = () => {
   const isMobile = useIsMobile();
-  const [widgetLoaded, setWidgetLoaded] = useState(false);
-
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    // Only load SimplyBook widget for desktop users
+    // Only load SimplyBook widget script for desktop users
     if (!isMobile) {
-      // Clean up any existing scripts first
-      const existingScripts = document.querySelectorAll('script[src*="simplybook"]');
-      existingScripts.forEach(script => script.remove());
-
-      // Clear widget container and show loading
-      const container = document.getElementById('simplybook-widget');
-      if (container) {
-        container.innerHTML = `
-          <div class="flex items-center justify-center h-full text-muted-foreground py-12">
-            <div class="text-center">
-              <div class="animate-pulse mb-2 text-lg">Loading booking system...</div>
-            </div>
-          </div>
-        `;
-      }
-
       // Load SimplyBook widget script
-      const script = document.createElement('script');
-      script.src = 'https://widget.simplybook.net/v2/widget/widget.js';
-      script.type = 'text/javascript';
-      script.async = true;
-      
-      script.onload = () => {
-        // Wait for script to be ready, then initialize
+      const script1 = document.createElement('script');
+      script1.src = '//widget.simplybook.net/v2/widget/widget.js';
+      script1.type = 'text/javascript';
+      document.head.appendChild(script1);
+      script1.onload = () => {
+        // Wait a bit for the script to be ready, then initialize the widget
         setTimeout(() => {
           if (window.SimplybookWidget) {
-            try {
-              const widget = new window.SimplybookWidget({
-                "widget_type": "iframe",
-                "url": "https://pilatesinfocus.simplybook.net",
-                "theme": "dainty",
-                "theme_settings": {
-                  "timeline_show_end_time": "1",
-                  "timeline_hide_unavailable": "1",
-                  "hide_past_days": "0",
-                  "sb_base_color": "#c37fa8",
-                  "secondary_color": "#f4eaf0",
-                  "sb_text_color": "#374151",
-                  "display_item_mode": "block",
-                  "body_bg_color": "#ffffff",
-                  "dark_font_color": "#374151",
-                  "light_font_color": "#ffffff",
-                  "btn_color_1": "#c37fa8",
-                  "sb_company_label_color": "#374151",
-                  "sb_cancellation_color": "#ef4444",
-                  "hide_img_mode": "0"
-                },
-                "timeline": "modern",
-                "datepicker": "top_calendar",
-                "is_rtl": false,
-                "app_config": {
-                  "clear_session": 0,
-                  "allow_switch_to_ada": 0,
-                  "predefined": []
-                },
-                "container_id": "simplybook-widget"
-              });
-              setWidgetLoaded(true);
-            } catch (error) {
-              console.error('SimplyBook widget initialization failed:', error);
-              // Show error fallback
-              const container = document.getElementById('simplybook-widget');
-              if (container) {
-                container.innerHTML = `
-                  <div class="text-center py-12 space-y-4">
-                    <p class="text-muted-foreground">Unable to load booking system. Please try refreshing the page.</p>
-                    <a href="https://pilatesinfocus.simplybook.net" target="_blank" rel="noopener noreferrer" 
-                       class="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors">
-                      Open Booking Platform
-                      <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3"/>
-                      </svg>
-                    </a>
-                  </div>
-                `;
-              }
-            }
+            const widget = new window.SimplybookWidget({
+              "widget_type": "iframe",
+              "url": "https://pilatesinfocus.simplybook.net",
+              "theme": "dainty",
+              "theme_settings": {
+                "timeline_show_end_time": "1",
+                "timeline_hide_unavailable": "1",
+                "hide_past_days": "0",
+                "sb_base_color": "#861657",
+                "secondary_color": "#f4eaf0",
+                "sb_text_color": "#38182b",
+                "display_item_mode": "block",
+                "body_bg_color": "#ffffff",
+                "sb_background_image": "12",
+                "sb_review_image": "13",
+                "sb_review_image_preview": "/uploads/pilatesinfocus/image_files/preview/fa3d6be4d5673b39b2cc57c2edc7dad1.jpg",
+                "dark_font_color": "#38182b",
+                "light_font_color": "#ffffff",
+                "btn_color_1": "#ecb4bf",
+                "sb_company_label_color": "#38182b",
+                "sb_cancellation_color": "#ff6b8e",
+                "hide_img_mode": "1"
+              },
+              "timeline": "modern",
+              "datepicker": "top_calendar",
+              "is_rtl": false,
+              "app_config": {
+                "clear_session": 0,
+                "allow_switch_to_ada": 0,
+                "predefined": []
+              },
+              "container_id": "simplybook-widget"
+            });
           }
-        }, 500);
+        }, 100);
       };
 
-      script.onerror = () => {
-        // Show error fallback
-        const container = document.getElementById('simplybook-widget');
-        if (container) {
-          container.innerHTML = `
-            <div class="text-center py-12 space-y-4">
-              <p class="text-muted-foreground">Unable to load booking system.</p>
-              <a href="https://pilatesinfocus.simplybook.net" target="_blank" rel="noopener noreferrer" 
-                 class="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors">
-                Open Booking Platform
-                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3"/>
-                </svg>
-              </a>
-            </div>
-          `;
-        }
-      };
+      // CSS styles are now imported from external file
 
-      document.head.appendChild(script);
-
-      // Cleanup function
+      // Cleanup function to remove scripts when component unmounts
       return () => {
         const scripts = document.querySelectorAll('script[src*="simplybook"]');
         scripts.forEach(script => script.remove());
+        // Clear the widget container
         const container = document.getElementById('simplybook-widget');
         if (container) {
           container.innerHTML = '';
@@ -129,9 +76,8 @@ const Booking = () => {
       };
     }
   }, [isMobile]);
-
-  return (
-    <div className="min-h-screen smooth-scroll">
+  
+  return <div className="min-h-screen smooth-scroll">
       <Navigation />
       
       {/* Hero Section */}
@@ -146,56 +92,38 @@ const Booking = () => {
         </div>
       </section>
 
-      {/* Booking Section */}
-      <section className="py-8 sm:py-12 md:py-16 bg-gradient-to-br from-white to-gray-50">
+      {/* Booking Section - Conditional Rendering */}
+      <section className="py-8 sm:py-12 md:py-16 bg-white">
         <div className="max-w-6xl mx-auto responsive-container">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-primary mb-4">
               Schedule Your Session
             </h2>
-            <p className="text-muted-foreground responsive-text-optimize">
-              Choose from our variety of classes and find the perfect time for you
-            </p>
           </div>
           
           {isMobile ? (
             // Mobile: External Link Button
             <div className="text-center space-y-6 px-4">
-              <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-200">
-                <div className="mb-6">
-                  <div className="w-16 h-16 bg-[#c37fa8] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold text-primary mb-2">Mobile Booking</h3>
-                  <p className="text-muted-foreground responsive-text-optimize">
-                    For the best mobile booking experience, we'll take you to our dedicated booking platform.
-                  </p>
-                </div>
-                <Button asChild size="lg" className="w-full h-14 text-lg responsive-button bg-[#c37fa8] hover:bg-[#9f4f7a] transition-all duration-200">
-                  <a href="https://pilatesinfocus.simplybook.net" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                    <span>Open Booking Platform</span>
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
-                </Button>
-                <p className="text-xs lg:text-sm text-muted-foreground mt-3">
-                  Opens in a new tab for optimal mobile experience
-                </p>
-              </div>
+              <p className="text-muted-foreground responsive-text-optimize">
+                For the best mobile booking experience, we'll take you to our dedicated booking platform.
+              </p>
+              <Button asChild size="lg" className="w-full h-14 text-lg responsive-button">
+                <a href="https://pilatesinfocus.simplybook.net" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                  <span>Open Booking Platform</span>
+                  <ExternalLink className="w-5 h-5" />
+                </a>
+              </Button>
+              <p className="text-xs lg:text-sm text-muted-foreground">
+                Opens in a new tab for optimal mobile experience
+              </p>
             </div>
           ) : (
             // Desktop: Embedded Widget
             <div className="w-full">
-              <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
-                <div 
-                  id="simplybook-widget" 
-                  className="w-full min-h-[600px] lg:min-h-[700px] xl:min-h-[800px]"
-                >
-                  <div className="flex items-center justify-center h-full text-muted-foreground py-12">
-                    <div className="text-center">
-                      <div className="animate-pulse mb-2 responsive-text-optimize">Loading booking system...</div>
-                    </div>
+              <div id="simplybook-widget" className="w-full min-h-[600px] lg:min-h-[700px] xl:min-h-[800px]">
+                <div className="flex items-center justify-center h-full text-muted-foreground py-12">
+                  <div className="text-center">
+                    <div className="animate-pulse mb-2 responsive-text-optimize">Loading booking system...</div>
                   </div>
                 </div>
               </div>
@@ -212,17 +140,15 @@ const Booking = () => {
           </h2>
           <p className="responsive-text-optimize text-muted-foreground mb-4 sm:mb-6">
             If you have any questions or need assistance with booking, feel free to{' '}
-            <a href="/contact" className="text-[#c37fa8] hover:text-[#9f4f7a] hover:underline font-medium transition-colors">
+            <Link to="/contact" className="text-primary hover:underline font-medium">
               contact us directly
-            </a>
+            </Link>
             .
           </p>
         </div>
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Booking;
