@@ -14,9 +14,11 @@ const Booking = () => {
   // State and refs for the desktop widget
   const [widgetLoaded, setWidgetLoaded] = useState(false);
   const [scriptLoaded, setScriptLoaded] = useState(false);
+  const [renderWidget, setRenderWidget] = useState(false);
   const scriptRef = useRef<HTMLScriptElement | null>(null);
   const styleRef = useRef<HTMLStyleElement | null>(null);
   const widgetInitialized = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // This function navigates to the dedicated mobile booking page
   const handleStartMobileBooking = () => {
@@ -25,159 +27,153 @@ const Booking = () => {
 
   // This useEffect handles the desktop widget initialization
   useEffect(() => {
-    // Reset states when switching between mobile/desktop
+    // If we are on mobile, don't load the widget
+    if (isMobile) {
+      setRenderWidget(false);
+      setWidgetLoaded(false);
+      setScriptLoaded(false);
+      widgetInitialized.current = false;
+      return;
+    }
+
+    // Set render flag first
+    setRenderWidget(true);
     setWidgetLoaded(false);
     setScriptLoaded(false);
     widgetInitialized.current = false;
 
-    // If we are on mobile, don't load the widget
-    if (isMobile) {
-      return;
-    }
-
-    // Function to initialize the widget once script is loaded
-    const initializeDesktopWidget = () => {
+    const initializeWidget = () => {
       console.log("Attempting to initialize widget...");
       
-      // Prevent multiple initializations
       if (widgetInitialized.current) {
-        console.log("Widget already initialized, skipping");
-        return;
-      }
-      
-      // Check if the container exists
-      const container = document.getElementById("simplybook-widget-desktop");
-      if (!container) {
-        console.log("Widget container not found, retrying in 500ms");
-        setTimeout(initializeDesktopWidget, 500);
+        console.log("Widget already initialized");
         return;
       }
 
-      console.log("Container found, checking for SimplybookWidget...");
+      if (!containerRef.current) {
+        console.log("Container ref not available, retrying...");
+        setTimeout(initializeWidget, 500);
+        return;
+      }
 
-      if (window.SimplybookWidget) {
-        try {
-          console.log("Initializing SimplyBook widget...");
-          
-          // Don't clear the container, let the widget handle it
-          const widget = new window.SimplybookWidget({
-            "widget_type": "iframe",
-            "url": "https://pilatesinfocus.simplybook.net",
-            "theme": "dainty",
-            "theme_settings": {
-              "timeline_show_end_time": "1",
-              "timeline_hide_unavailable": "1",
-              "hide_past_days": "0",
-              "sb_base_color": "#861657",
-              "secondary_color": "#f4eaf0",
-              "sb_text_color": "#38182b",
-              "display_item_mode": "block",
-              "body_bg_color": "#ffffff",
-              "sb_background_image": "12",
-              "sb_review_image": "13",
-              "sb_review_image_preview": "/uploads/pilatesinfocus/image_files/preview/fa3d6be4d5673b39b2cc57c2edc7dad1.jpg",
-              "dark_font_color": "#38182b",
-              "light_font_color": "#ffffff",
-              "btn_color_1": "#ecb4bf",
-              "sb_company_label_color": "#38182b",
-              "sb_cancellation_color": "#ff6b8e",
-              "hide_img_mode": "1"
-            },
-            "timeline": "modern",
-            "datepicker": "top_calendar",
-            "is_rtl": false,
-            "app_config": {
-              "clear_session": 0,
-              "allow_switch_to_ada": 0,
-              "predefined": []
-            },
-            "container_id": "simplybook-widget-desktop"
-          });
-          
-          widgetInitialized.current = true;
-          console.log("Widget initialized successfully");
-          
-          // Set loaded state after a brief delay to ensure widget is rendered
-          setTimeout(() => {
-            setWidgetLoaded(true);
-            console.log("Widget marked as loaded");
-          }, 1000);
-          
-        } catch (error) {
-          console.error("Error initializing SimplyBook widget:", error);
-          // Try again after a delay
-          setTimeout(() => {
-            widgetInitialized.current = false;
-            initializeDesktopWidget();
-          }, 2000);
-        }
-      } else {
-        console.log("SimplybookWidget not available, retrying in 500ms");
-        setTimeout(initializeDesktopWidget, 500);
+      if (!window.SimplybookWidget) {
+        console.log("SimplybookWidget not available, retrying...");
+        setTimeout(initializeWidget, 500);
+        return;
+      }
+
+      try {
+        console.log("Creating widget...");
+        
+        new window.SimplybookWidget({
+          "widget_type": "iframe",
+          "url": "https://pilatesinfocus.simplybook.net",
+          "theme": "dainty",
+          "theme_settings": {
+            "timeline_show_end_time": "1",
+            "timeline_hide_unavailable": "1",
+            "hide_past_days": "0",
+            "sb_base_color": "#861657",
+            "secondary_color": "#f4eaf0",
+            "sb_text_color": "#38182b",
+            "display_item_mode": "block",
+            "body_bg_color": "#ffffff",
+            "sb_background_image": "12",
+            "sb_review_image": "13",
+            "sb_review_image_preview": "/uploads/pilatesinfocus/image_files/preview/fa3d6be4d5673b39b2cc57c2edc7dad1.jpg",
+            "dark_font_color": "#38182b",
+            "light_font_color": "#ffffff",
+            "btn_color_1": "#ecb4bf",
+            "sb_company_label_color": "#38182b",
+            "sb_cancellation_color": "#ff6b8e",
+            "hide_img_mode": "1"
+          },
+          "timeline": "modern",
+          "datepicker": "top_calendar",
+          "is_rtl": false,
+          "app_config": {
+            "clear_session": 0,
+            "allow_switch_to_ada": 0,
+            "predefined": []
+          },
+          "container_id": "simplybook-widget-desktop"
+        });
+
+        widgetInitialized.current = true;
+        console.log("Widget created successfully");
+        
+        // Delay before marking as loaded to prevent race conditions
+        setTimeout(() => {
+          setWidgetLoaded(true);
+          console.log("Widget marked as loaded");
+        }, 2000);
+
+      } catch (error) {
+        console.error("Error creating widget:", error);
+        setTimeout(() => {
+          widgetInitialized.current = false;
+          initializeWidget();
+        }, 3000);
       }
     };
 
-    // Check if script is already loaded
-    const existingScript = document.querySelector('script[src*="widget.simplybook.net"]');
-    if (existingScript) {
-      console.log("Script already exists, initializing widget");
-      setScriptLoaded(true);
-      // Wait a bit longer for the script to fully initialize
-      setTimeout(initializeDesktopWidget, 500);
-      return;
+    const loadScript = () => {
+      // Check if script already exists
+      const existingScript = document.querySelector('script[src*="widget.simplybook.net"]');
+      if (existingScript) {
+        console.log("Script already loaded");
+        setScriptLoaded(true);
+        setTimeout(initializeWidget, 1000);
+        return;
+      }
+
+      console.log("Loading script...");
+      const script = document.createElement('script');
+      script.src = 'https://widget.simplybook.net/v2/widget/widget.js';
+      script.async = true;
+      scriptRef.current = script;
+
+      script.onload = () => {
+        console.log("Script loaded");
+        setScriptLoaded(true);
+        setTimeout(initializeWidget, 1000);
+      };
+
+      script.onerror = (error) => {
+        console.error("Script load error:", error);
+      };
+
+      document.head.appendChild(script);
+    };
+
+    // Add styles first
+    if (!styleRef.current) {
+      const style = document.createElement('style');
+      styleRef.current = style;
+      style.textContent = `
+        #simplybook-widget-desktop {
+          background: white !important;
+          min-height: 700px !important;
+        }
+        .simplybook-container iframe {
+          min-height: 700px !important;
+        }
+      `;
+      document.head.appendChild(style);
     }
 
-    console.log("Loading SimplyBook script...");
-    
-    // Load the SimplyBook.me script for the desktop view
-    const script = document.createElement('script');
-    script.src = 'https://widget.simplybook.net/v2/widget/widget.js'; // Use https explicitly
-    script.type = 'text/javascript';
-    script.async = true;
-    scriptRef.current = script;
-    
-    script.onload = () => {
-      console.log("Script loaded successfully");
-      setScriptLoaded(true);
-      // Longer delay to ensure the script is fully initialized
-      setTimeout(initializeDesktopWidget, 1000);
-    };
-    
-    script.onerror = (error) => {
-      console.error("Failed to load SimplyBook widget script:", error);
-    };
+    // Load script after a small delay to ensure DOM is ready
+    setTimeout(loadScript, 100);
 
-    document.head.appendChild(script);
-
-    // Add specific styles for the embedded desktop view
-    const style = document.createElement('style');
-    styleRef.current = style;
-    style.textContent = `
-      #simplybook-widget-desktop {
-        background: white !important;
-        min-height: 700px !important;
-      }
-      .simplybook-container .widget-content,
-      .simplybook-container .sb-main-content,
-      .simplybook-container iframe {
-        margin-top: -20px !important;
-        padding-top: 0 !important;
-      }
-      .simplybook-container .widget-header {
-        padding-top: 10px !important;
-        margin-bottom: 0 !important;
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Cleanup function to remove script/styles when the component unmounts
     return () => {
       widgetInitialized.current = false;
-      if (scriptRef.current && scriptRef.current.parentNode) {
+      if (scriptRef.current?.parentNode) {
         scriptRef.current.parentNode.removeChild(scriptRef.current);
+        scriptRef.current = null;
       }
-      if (styleRef.current && styleRef.current.parentNode) {
+      if (styleRef.current?.parentNode) {
         styleRef.current.parentNode.removeChild(styleRef.current);
+        styleRef.current = null;
       }
     };
   }, [isMobile]);
@@ -228,22 +224,25 @@ const Booking = () => {
                 // --- DESKTOP VIEW ---
                 // Embeds the widget directly on the page
                 <div className="w-full">
-                  <div
-                    id="simplybook-widget-desktop"
-                    className="simplybook-container w-full min-h-[700px] overflow-auto rounded-lg border bg-white"
-                  >
-                    {/* Show loading state while script loads or widget initializes */}
-                    {(!scriptLoaded || !widgetLoaded) && (
-                      <div className="flex items-center justify-center h-full text-muted-foreground responsive-card-spacing min-h-[700px]">
-                        <div className="text-center">
-                          <div className="animate-pulse mb-2 responsive-text-optimize">
-                            {!scriptLoaded ? "Loading booking system..." : "Initializing widget..."}
+                  {renderWidget && (
+                    <div
+                      ref={containerRef}
+                      id="simplybook-widget-desktop"
+                      className="simplybook-container w-full min-h-[700px] overflow-auto rounded-lg border bg-white"
+                    >
+                      {/* Show loading state while script loads or widget initializes */}
+                      {(!scriptLoaded || !widgetLoaded) && (
+                        <div className="flex items-center justify-center h-full text-muted-foreground responsive-card-spacing min-h-[700px]">
+                          <div className="text-center">
+                            <div className="animate-pulse mb-2 responsive-text-optimize">
+                              {!scriptLoaded ? "Loading booking system..." : "Initializing widget..."}
+                            </div>
+                            <div className="text-sm">Connecting to our scheduling platform...</div>
                           </div>
-                          <div className="text-sm">Connecting to our scheduling platform...</div>
                         </div>
-                      </div>
-                    )}
-                  </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               )}
             </CardContent>
