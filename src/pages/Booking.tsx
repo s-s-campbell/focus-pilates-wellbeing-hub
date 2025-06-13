@@ -19,6 +19,7 @@ const Booking = () => {
   const styleRef = useRef<HTMLStyleElement | null>(null);
   const widgetInitialized = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isComponentMounted = useRef(true);
 
   // This function navigates to the dedicated mobile booking page
   const handleStartMobileBooking = () => {
@@ -27,6 +28,8 @@ const Booking = () => {
 
   // This useEffect handles the desktop widget initialization
   useEffect(() => {
+    isComponentMounted.current = true;
+
     // If we are on mobile, don't load the widget
     if (isMobile) {
       setRenderWidget(false);
@@ -36,15 +39,24 @@ const Booking = () => {
       return;
     }
 
+    // Prevent multiple initializations
+    if (widgetInitialized.current) {
+      return;
+    }
+
     // Set render flag first
     setRenderWidget(true);
     setWidgetLoaded(false);
     setScriptLoaded(false);
-    widgetInitialized.current = false;
 
     const initializeWidget = () => {
       console.log("Attempting to initialize widget...");
       
+      if (!isComponentMounted.current) {
+        console.log("Component unmounted, stopping initialization");
+        return;
+      }
+
       if (widgetInitialized.current) {
         console.log("Widget already initialized");
         return;
@@ -59,6 +71,15 @@ const Booking = () => {
       if (!window.SimplybookWidget) {
         console.log("SimplybookWidget not available, retrying...");
         setTimeout(initializeWidget, 500);
+        return;
+      }
+
+      // Check if widget container already has content
+      const container = containerRef.current;
+      if (container && container.querySelector('iframe')) {
+        console.log("Widget already exists in container");
+        widgetInitialized.current = true;
+        setWidgetLoaded(true);
         return;
       }
 
@@ -104,16 +125,20 @@ const Booking = () => {
         
         // Delay before marking as loaded to prevent race conditions
         setTimeout(() => {
-          setWidgetLoaded(true);
-          console.log("Widget marked as loaded");
+          if (isComponentMounted.current) {
+            setWidgetLoaded(true);
+            console.log("Widget marked as loaded");
+          }
         }, 2000);
 
       } catch (error) {
         console.error("Error creating widget:", error);
-        setTimeout(() => {
-          widgetInitialized.current = false;
-          initializeWidget();
-        }, 3000);
+        if (isComponentMounted.current) {
+          setTimeout(() => {
+            widgetInitialized.current = false;
+            initializeWidget();
+          }, 3000);
+        }
       }
     };
 
@@ -135,8 +160,10 @@ const Booking = () => {
 
       script.onload = () => {
         console.log("Script loaded");
-        setScriptLoaded(true);
-        setTimeout(initializeWidget, 1000);
+        if (isComponentMounted.current) {
+          setScriptLoaded(true);
+          setTimeout(initializeWidget, 1000);
+        }
       };
 
       script.onerror = (error) => {
@@ -166,14 +193,34 @@ const Booking = () => {
     setTimeout(loadScript, 100);
 
     return () => {
+      console.log("Cleanup function called");
+      isComponentMounted.current = false;
       widgetInitialized.current = false;
-      if (scriptRef.current?.parentNode) {
-        scriptRef.current.parentNode.removeChild(scriptRef.current);
+      
+      // Safer cleanup - check if elements exist before removing
+      if (scriptRef.current && scriptRef.current.parentNode) {
+        try {
+          scriptRef.current.parentNode.removeChild(scriptRef.current);
+          console.log("Script removed successfully");
+        } catch (error) {
+          console.log("Script already removed or not found");
+        }
         scriptRef.current = null;
       }
-      if (styleRef.current?.parentNode) {
-        styleRef.current.parentNode.removeChild(styleRef.current);
+      
+      if (styleRef.current && styleRef.current.parentNode) {
+        try {
+          styleRef.current.parentNode.removeChild(styleRef.current);
+          console.log("Style removed successfully");
+        } catch (error) {
+          console.log("Style already removed or not found");
+        }
         styleRef.current = null;
+      }
+
+      // Clear the widget container
+      if (containerRef.current) {
+        containerRef.current.innerHTML = '';
       }
     };
   }, [isMobile]);
