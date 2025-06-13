@@ -3,24 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
+// Define the shape of the window object to include the widget
+interface CustomWindow extends Window {
+  SimplybookWidget?: any;
+}
+declare const window: CustomWindow;
+
+
 const BookingWidgetPage = () => {
   const navigate = useNavigate();
   const [widgetLoaded, setWidgetLoaded] = useState(false);
-  const scriptRef = useRef(null);
+  const scriptRef = useRef<HTMLScriptElement | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
 
     const initializeWidget = () => {
-      // --- ADDED: Defensive check to prevent duplicate widgets ---
-      // Get the container element.
+      // Defensive check to prevent duplicate widgets
       const container = document.getElementById("simplybook-widget-container");
-      // If the container doesn't exist, or if it ALREADY contains an iframe,
-      // then we should not initialize the widget again.
       if (!container || container.querySelector('iframe')) {
         return;
       }
-      // --- End of check ---
 
       if (window.SimplybookWidget) {
         new window.SimplybookWidget({
