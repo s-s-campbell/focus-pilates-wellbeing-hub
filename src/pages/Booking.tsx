@@ -7,69 +7,102 @@ import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
-
 const Booking = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
 
-  // State and refs are now only needed for the desktop widget
+  // State and refs for the desktop widget
   const [widgetLoaded, setWidgetLoaded] = useState(false);
+  const [scriptLoaded, setScriptLoaded] = useState(false);
   const scriptRef = useRef<HTMLScriptElement | null>(null);
   const styleRef = useRef<HTMLStyleElement | null>(null);
+  const widgetInitialized = useRef(false);
 
   // This function navigates to the dedicated mobile booking page
   const handleStartMobileBooking = () => {
     navigate('/book-now');
   };
 
-  // This useEffect is the "engine" for the desktop widget.
-  // It loads the necessary script and initializes the widget when not on mobile.
+  // This useEffect handles the desktop widget initialization
   useEffect(() => {
-    // If we are on mobile, this component does nothing with the widget.
+    // Reset states when switching between mobile/desktop
+    setWidgetLoaded(false);
+    setScriptLoaded(false);
+    widgetInitialized.current = false;
+
+    // If we are on mobile, don't load the widget
     if (isMobile) {
-      setWidgetLoaded(false); 
       return;
     }
 
-    // This function runs once the script has loaded on desktop.
+    // Function to initialize the widget once script is loaded
     const initializeDesktopWidget = () => {
+      // Prevent multiple initializations
+      if (widgetInitialized.current) return;
+      
+      // Check if the container exists and is empty
+      const container = document.getElementById("simplybook-widget-desktop");
+      if (!container) {
+        console.log("Widget container not found");
+        return;
+      }
+
+      // Clear any existing content
+      container.innerHTML = '';
+
       if (window.SimplybookWidget) {
-        new window.SimplybookWidget({
-          "widget_type": "iframe",
-          "url": "https://pilatesinfocus.simplybook.net",
-          "theme": "dainty",
-          "theme_settings": {
-            "timeline_show_end_time": "1",
-            "timeline_hide_unavailable": "1",
-            "hide_past_days": "0",
-            "sb_base_color": "#861657",
-            "secondary_color": "#f4eaf0",
-            "sb_text_color": "#38182b",
-            "display_item_mode": "block",
-            "body_bg_color": "#ffffff",
-            "sb_background_image": "12",
-            "sb_review_image": "13",
-            "sb_review_image_preview": "/uploads/pilatesinfocus/image_files/preview/fa3d6be4d5673b39b2cc57c2edc7dad1.jpg",
-            "dark_font_color": "#38182b",
-            "light_font_color": "#ffffff",
-            "btn_color_1": "#ecb4bf",
-            "sb_company_label_color": "#38182b",
-            "sb_cancellation_color": "#ff6b8e",
-            "hide_img_mode": "1"
-          },
-          "timeline": "modern",
-          "datepicker": "top_calendar",
-          "is_rtl": false,
-          "app_config": {
-            "clear_session": 0,
-            "allow_switch_to_ada": 0,
-            "predefined": []
-          },
-          "container_id": "simplybook-widget-desktop"
-        });
-        setWidgetLoaded(true);
+        try {
+          new window.SimplybookWidget({
+            "widget_type": "iframe",
+            "url": "https://pilatesinfocus.simplybook.net",
+            "theme": "dainty",
+            "theme_settings": {
+              "timeline_show_end_time": "1",
+              "timeline_hide_unavailable": "1",
+              "hide_past_days": "0",
+              "sb_base_color": "#861657",
+              "secondary_color": "#f4eaf0",
+              "sb_text_color": "#38182b",
+              "display_item_mode": "block",
+              "body_bg_color": "#ffffff",
+              "sb_background_image": "12",
+              "sb_review_image": "13",
+              "sb_review_image_preview": "/uploads/pilatesinfocus/image_files/preview/fa3d6be4d5673b39b2cc57c2edc7dad1.jpg",
+              "dark_font_color": "#38182b",
+              "light_font_color": "#ffffff",
+              "btn_color_1": "#ecb4bf",
+              "sb_company_label_color": "#38182b",
+              "sb_cancellation_color": "#ff6b8e",
+              "hide_img_mode": "1"
+            },
+            "timeline": "modern",
+            "datepicker": "top_calendar",
+            "is_rtl": false,
+            "app_config": {
+              "clear_session": 0,
+              "allow_switch_to_ada": 0,
+              "predefined": []
+            },
+            "container_id": "simplybook-widget-desktop"
+          });
+          widgetInitialized.current = true;
+          setWidgetLoaded(true);
+        } catch (error) {
+          console.error("Error initializing SimplyBook widget:", error);
+        }
+      } else {
+        console.log("SimplybookWidget not available");
       }
     };
+
+    // Check if script is already loaded
+    const existingScript = document.querySelector('script[src*="widget.simplybook.net"]');
+    if (existingScript) {
+      setScriptLoaded(true);
+      // Wait a bit for the script to fully initialize
+      setTimeout(initializeDesktopWidget, 100);
+      return;
+    }
 
     // Load the SimplyBook.me script for the desktop view
     const script = document.createElement('script');
@@ -77,7 +110,17 @@ const Booking = () => {
     script.type = 'text/javascript';
     script.async = true;
     scriptRef.current = script;
-    script.onload = initializeDesktopWidget;
+    
+    script.onload = () => {
+      setScriptLoaded(true);
+      // Small delay to ensure the script is fully initialized
+      setTimeout(initializeDesktopWidget, 100);
+    };
+    
+    script.onerror = () => {
+      console.error("Failed to load SimplyBook widget script");
+    };
+
     document.head.appendChild(script);
 
     // Add specific styles for the embedded desktop view
@@ -106,7 +149,7 @@ const Booking = () => {
         styleRef.current.parentNode.removeChild(styleRef.current);
       }
     };
-  }, [isMobile]); // Dependency on isMobile ensures this logic re-runs if the viewport changes
+  }, [isMobile]);
 
   return (
     <div className="min-h-screen smooth-scroll">
@@ -153,18 +196,23 @@ const Booking = () => {
               ) : (
                 // --- DESKTOP VIEW ---
                 // Embeds the widget directly on the page
-                <div
-                  id="simplybook-widget-desktop"
-                  className="simplybook-container w-full min-h-[700px] overflow-auto rounded-lg border bg-white"
-                >
-                  {!widgetLoaded && (
-                    <div className="flex items-center justify-center h-full text-muted-foreground responsive-card-spacing min-h-[700px]">
-                      <div className="text-center">
-                        <div className="animate-pulse mb-2 responsive-text-optimize">Loading booking system...</div>
-                        <div className="text-sm">Connecting to our scheduling platform...</div>
+                <div className="w-full">
+                  <div
+                    id="simplybook-widget-desktop"
+                    className="simplybook-container w-full min-h-[700px] overflow-auto rounded-lg border bg-white"
+                  >
+                    {/* Show loading state while script loads or widget initializes */}
+                    {(!scriptLoaded || !widgetLoaded) && (
+                      <div className="flex items-center justify-center h-full text-muted-foreground responsive-card-spacing min-h-[700px]">
+                        <div className="text-center">
+                          <div className="animate-pulse mb-2 responsive-text-optimize">
+                            {!scriptLoaded ? "Loading booking system..." : "Initializing widget..."}
+                          </div>
+                          <div className="text-sm">Connecting to our scheduling platform...</div>
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               )}
             </CardContent>
