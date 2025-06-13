@@ -15,6 +15,8 @@ const Booking = () => {
   const [widgetInitialized, setWidgetInitialized] = useState(false);
   const scriptRef = useRef<HTMLScriptElement | null>(null);
   const styleRef = useRef<HTMLStyleElement | null>(null);
+  const desktopContainerRef = useRef<HTMLDivElement>(null);
+  const mobileContainerRef = useRef<HTMLDivElement>(null);
 
   const initializeWidget = (containerId: string) => {
     console.log('Initializing widget for container:', containerId);
@@ -278,7 +280,12 @@ const Booking = () => {
           <h1 className="font-heading text-lg font-semibold text-primary">Book Your Session</h1>
           <div className="w-16"></div>
         </div>
-        <div id="simplybook-widget-mobile" className="simplybook-container w-full h-full">
+        <div 
+          ref={mobileContainerRef}
+          id="simplybook-widget-mobile" 
+          className="simplybook-container w-full h-full"
+          suppressHydrationWarning
+        >
           {!widgetLoaded && (
             <div className="flex items-center justify-center h-full text-muted-foreground p-4">
               <div className="text-center">
@@ -337,7 +344,12 @@ const Booking = () => {
                 </div>
               ) : (
                 // Desktop: Embedded Widget
-                <div id="simplybook-widget-desktop" className="simplybook-container w-full min-h-[600px] lg:min-h-[700px] xl:min-h-[800px] overflow-auto rounded-lg border bg-white">
+                <div 
+                  ref={desktopContainerRef}
+                  id="simplybook-widget-desktop" 
+                  className="simplybook-container w-full min-h-[600px] lg:min-h-[700px] xl:min-h-[800px] overflow-auto rounded-lg border bg-white"
+                  suppressHydrationWarning
+                >
                   {!widgetLoaded && (
                     <div className="flex items-center justify-center h-full text-muted-foreground responsive-card-spacing">
                       <div className="text-center">
