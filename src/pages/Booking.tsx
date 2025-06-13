@@ -24,6 +24,13 @@ const Booking = () => {
       return;
     }
 
+    // Check if container exists before initializing
+    const container = document.getElementById(containerId);
+    if (!container) {
+      console.log('Container not found:', containerId);
+      return;
+    }
+
     // Wait for script to be ready
     const checkAndInit = () => {
       if (window.SimplybookWidget) {
@@ -68,21 +75,23 @@ const Booking = () => {
           // Check if widget loaded
           setTimeout(() => {
             const container = document.getElementById(containerId);
-            const iframe = container?.querySelector('iframe');
-            
-            if (iframe) {
-              iframe.onload = () => {
-                console.log('Widget iframe loaded');
-                setWidgetLoaded(true);
-              };
-              if (iframe.contentDocument?.readyState === 'complete') {
-                setWidgetLoaded(true);
-              }
-            } else {
-              const widgetContent = container?.querySelector('[class*="widget"], [class*="sb-"]');
-              if (widgetContent) {
-                console.log('Widget content found');
-                setWidgetLoaded(true);
+            if (container) {
+              const iframe = container.querySelector('iframe');
+              
+              if (iframe) {
+                iframe.onload = () => {
+                  console.log('Widget iframe loaded');
+                  setWidgetLoaded(true);
+                };
+                if (iframe.contentDocument?.readyState === 'complete') {
+                  setWidgetLoaded(true);
+                }
+              } else {
+                const widgetContent = container.querySelector('[class*="widget"], [class*="sb-"]');
+                if (widgetContent) {
+                  console.log('Widget content found');
+                  setWidgetLoaded(true);
+                }
               }
             }
           }, 1000);
@@ -193,33 +202,47 @@ const Booking = () => {
     `;
     document.head.appendChild(style);
 
-    // Cleanup function
+    // Cleanup function - defensive DOM manipulation
     return () => {
       console.log('Cleaning up booking widget...');
       setWidgetLoaded(false);
       setWidgetInitialized(false);
       
-      if (scriptRef.current?.parentNode) {
+      // Safely remove script element
+      if (scriptRef.current) {
         try {
-          scriptRef.current.parentNode.removeChild(scriptRef.current);
+          // Check if script is still in the DOM and is a child of its parent
+          if (scriptRef.current.parentNode && document.head.contains(scriptRef.current)) {
+            document.head.removeChild(scriptRef.current);
+          }
         } catch (error) {
-          console.log('Script cleanup error:', error);
+          console.log('Script already removed or not found:', error);
         }
+        scriptRef.current = null;
       }
       
-      if (styleRef.current?.parentNode) {
+      // Safely remove style element
+      if (styleRef.current) {
         try {
-          styleRef.current.parentNode.removeChild(styleRef.current);
+          // Check if style is still in the DOM and is a child of its parent
+          if (styleRef.current.parentNode && document.head.contains(styleRef.current)) {
+            document.head.removeChild(styleRef.current);
+          }
         } catch (error) {
-          console.log('Style cleanup error:', error);
+          console.log('Style already removed or not found:', error);
         }
+        styleRef.current = null;
       }
       
-      // Clear widget containers
+      // Clear widget containers safely
       ['simplybook-widget-desktop', 'simplybook-widget-mobile'].forEach(id => {
-        const container = document.getElementById(id);
-        if (container) {
-          container.innerHTML = '';
+        try {
+          const container = document.getElementById(id);
+          if (container && container.parentNode) {
+            container.innerHTML = '';
+          }
+        } catch (error) {
+          console.log(`Container ${id} cleanup error:`, error);
         }
       });
     };
