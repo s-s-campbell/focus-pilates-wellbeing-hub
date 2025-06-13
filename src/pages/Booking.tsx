@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -91,6 +92,7 @@ const Booking = () => {
 
     // Add custom CSS for both desktop and mobile optimization
     const style = document.createElement('style');
+    style.setAttribute('data-booking-styles', 'true');
     style.textContent = `
       /* Hide timezone/time display in SimplyBook widget */
       #simplybook-widget .widget-header-time,
@@ -153,21 +155,42 @@ const Booking = () => {
     `;
     document.head.appendChild(style);
 
-    // Cleanup function to remove scripts and styles when component unmounts
+    // Store references for cleanup
+    const scriptRef = script1;
+    const styleRef = style;
+
+    // Cleanup function with defensive checks
     return () => {
-      const scripts = document.querySelectorAll('script[src*="simplybook"]');
-      scripts.forEach(script => script.remove());
-      // Remove custom styles
-      if (document.head.contains(style)) {
-        document.head.removeChild(style);
-      }
-      // Clear the widget container
-      const container = document.getElementById('simplybook-widget');
-      if (container) {
-        container.innerHTML = '';
-      }
-      // Reset widget loaded state
+      // Reset widget loaded state first
       setWidgetLoaded(false);
+      
+      // Safely remove script if it exists and is still in the DOM
+      try {
+        if (scriptRef && scriptRef.parentNode) {
+          scriptRef.parentNode.removeChild(scriptRef);
+        }
+      } catch (error) {
+        console.log('Script already removed or not found:', error);
+      }
+      
+      // Safely remove custom styles if they exist and are still in the DOM
+      try {
+        if (styleRef && styleRef.parentNode) {
+          styleRef.parentNode.removeChild(styleRef);
+        }
+      } catch (error) {
+        console.log('Style already removed or not found:', error);
+      }
+      
+      // Clear the widget container content only if it exists
+      try {
+        const container = document.getElementById('simplybook-widget');
+        if (container) {
+          container.innerHTML = '';
+        }
+      } catch (error) {
+        console.log('Container already cleared or not found:', error);
+      }
     };
   }, []);
 
