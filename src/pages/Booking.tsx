@@ -21,32 +21,36 @@ const Booking = () => {
     navigate('/book-now');
   };
 
-  // This effect now only handles the DESKTOP widget.
-  // It will load the script and initialize the widget if the user is on a desktop.
+  // This useEffect is the "engine" for the desktop widget.
+  // It loads the necessary script and initializes the widget when not on mobile.
   useEffect(() => {
-    // If we are on mobile, do nothing. The script will be handled by the BookingWidgetPage.
+    // If we are on mobile, this component does nothing with the widget.
+    // The new BookingWidgetPage handles it instead.
     if (isMobile) {
+      // Ensure we don't show a loader from a previous desktop view.
+      setWidgetLoaded(false); 
       return;
     }
 
+    // This function runs once the script has loaded on desktop.
     const initializeDesktopWidget = () => {
       if (window.SimplybookWidget) {
         new window.SimplybookWidget({
-            "widget_type": "iframe",
-            "url": "https://pilatesinfocus.simplybook.net",
-            "theme": "dainty",
-            "theme_settings": { /* ... your theme settings ... */ },
-            "timeline": "modern",
-            "datepicker": "top_calendar",
-            "is_rtl": false,
-            "app_config": { /* ... your app config ... */ },
-            "container_id": "simplybook-widget-desktop"
+          "widget_type": "iframe",
+          "url": "https://pilatesinfocus.simplybook.net",
+          "theme": "dainty",
+          "theme_settings": { /* Your theme settings can be pasted here */ },
+          "timeline": "modern",
+          "datepicker": "top_calendar",
+          "is_rtl": false,
+          "app_config": { /* Your app config can be pasted here */ },
+          "container_id": "simplybook-widget-desktop"
         });
         setWidgetLoaded(true);
       }
     };
 
-    // Load the SimplyBook.me script
+    // Load the SimplyBook.me script for the desktop view
     const script = document.createElement('script');
     script.src = '//widget.simplybook.net/v2/widget/widget.js';
     script.type = 'text/javascript';
@@ -55,7 +59,7 @@ const Booking = () => {
     script.onload = initializeDesktopWidget;
     document.head.appendChild(script);
 
-    // Add specific desktop styles
+    // Add specific styles for the embedded desktop view
     const style = document.createElement('style');
     styleRef.current = style;
     style.textContent = `
@@ -72,7 +76,7 @@ const Booking = () => {
     `;
     document.head.appendChild(style);
 
-    // Cleanup function to remove the script and styles
+    // Cleanup function to remove script/styles when the component unmounts
     return () => {
       if (scriptRef.current && scriptRef.current.parentNode) {
         scriptRef.current.parentNode.removeChild(scriptRef.current);
@@ -81,7 +85,7 @@ const Booking = () => {
         styleRef.current.parentNode.removeChild(styleRef.current);
       }
     };
-  }, [isMobile]); // This dependency ensures the effect re-evaluates if the view changes
+  }, [isMobile]); // Dependency on isMobile ensures this logic re-runs if the viewport changes
 
   return (
     <div className="min-h-screen smooth-scroll">
@@ -108,8 +112,6 @@ const Booking = () => {
             </CardHeader>
             <CardContent className="responsive-card-spacing">
               {isMobile ? (
-                // --- MOBILE VIEW ---
-                // Shows a simple button that navigates to the dedicated widget page
                 <div className="text-center space-y-4">
                   <p className="text-muted-foreground mb-6 responsive-text-optimize">
                     Start your booking journey with our streamlined mobile experience.
@@ -126,8 +128,6 @@ const Booking = () => {
                   </p>
                 </div>
               ) : (
-                // --- DESKTOP VIEW ---
-                // Embeds the widget directly on the page
                 <div
                   id="simplybook-widget-desktop"
                   className="simplybook-container w-full min-h-[700px] overflow-auto rounded-lg border bg-white"
