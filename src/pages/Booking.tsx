@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -7,84 +7,27 @@ import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
-const Booking = () => {
-  const isMobile = useIsMobile();
-  const navigate = useNavigate();
-
-  // State and refs for the desktop widget
-  const [widgetLoaded, setWidgetLoaded] = useState(false);
-  const [scriptLoaded, setScriptLoaded] = useState(false);
-  const [renderWidget, setRenderWidget] = useState(false);
-  const scriptRef = useRef<HTMLScriptElement | null>(null);
-  const styleRef = useRef<HTMLStyleElement | null>(null);
-  const widgetInitialized = useRef(false);
+// Separate widget component to isolate the external script
+const WidgetContainer = ({ onWidgetLoaded }: { onWidgetLoaded: (loaded: boolean) => void }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isComponentMounted = useRef(true);
+  const initializationRef = useRef(false);
 
-  // This function navigates to the dedicated mobile booking page
-  const handleStartMobileBooking = () => {
-    navigate('/book-now');
-  };
-
-  // This useEffect handles the desktop widget initialization
   useEffect(() => {
-    isComponentMounted.current = true;
-
-    // If we are on mobile, don't load the widget
-    if (isMobile) {
-      setRenderWidget(false);
-      setWidgetLoaded(false);
-      setScriptLoaded(false);
-      widgetInitialized.current = false;
-      return;
-    }
-
-    // Prevent multiple initializations
-    if (widgetInitialized.current) {
-      return;
-    }
-
-    // Set render flag first
-    setRenderWidget(true);
-    setWidgetLoaded(false);
-    setScriptLoaded(false);
-
+    let timeoutId: NodeJS.Timeout;
+    
     const initializeWidget = () => {
-      console.log("Attempting to initialize widget...");
+      if (initializationRef.current) return;
       
-      if (!isComponentMounted.current) {
-        console.log("Component unmounted, stopping initialization");
-        return;
-      }
-
-      if (widgetInitialized.current) {
-        console.log("Widget already initialized");
-        return;
-      }
-
-      if (!containerRef.current) {
-        console.log("Container ref not available, retrying...");
-        setTimeout(initializeWidget, 500);
-        return;
-      }
-
-      if (!window.SimplybookWidget) {
-        console.log("SimplybookWidget not available, retrying...");
-        setTimeout(initializeWidget, 500);
-        return;
-      }
-
-      // Check if widget container already has content
       const container = containerRef.current;
-      if (container && container.querySelector('iframe')) {
-        console.log("Widget already exists in container");
-        widgetInitialized.current = true;
-        setWidgetLoaded(true);
+      if (!container) return;
+      
+      if (!window.SimplybookWidget) {
+        timeoutId = setTimeout(initializeWidget, 500);
         return;
       }
 
       try {
-        console.log("Creating widget...");
+        initializationRef.current = true;
         
         new window.SimplybookWidget({
           "widget_type": "iframe",
@@ -120,107 +63,100 @@ const Booking = () => {
           "container_id": "simplybook-widget-desktop"
         });
 
-        widgetInitialized.current = true;
-        console.log("Widget created successfully");
-        
-        // Delay before marking as loaded to prevent race conditions
-        setTimeout(() => {
-          if (isComponentMounted.current) {
-            setWidgetLoaded(true);
-            console.log("Widget marked as loaded");
-          }
+        timeoutId = setTimeout(() => {
+          onWidgetLoaded(true);
         }, 2000);
 
       } catch (error) {
-        console.error("Error creating widget:", error);
-        if (isComponentMounted.current) {
-          setTimeout(() => {
-            widgetInitialized.current = false;
-            initializeWidget();
-          }, 3000);
-        }
+        console.error("Widget initialization error:", error);
+        initializationRef.current = false;
       }
     };
 
+    // Start initialization after a small delay
+    timeoutId = setTimeout(initializeWidget, 1000);
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [onWidgetLoaded]);
+
+  return (
+    <div
+      ref={containerRef}
+      id="simplybook-widget-desktop"
+      className="w-full min-h-[700px] overflow-auto rounded-lg border bg-white"
+    />
+  );
+};
+
+const Booking = () => {
+  const isMobile = useIsMobile();
+  const navigate = useNavigate();
+  const [scriptLoaded, setScriptLoaded] = useState(false);
+  const [widgetLoaded, setWidgetLoaded] = useState(false);
+  const [widgetKey, setWidgetKey] = useState(0);
+  const scriptLoadedRef = useRef(false);
+
+  const handleStartMobileBooking = () => {
+    navigate('/book-now');
+  };
+
+  const handleWidgetLoaded = useCallback((loaded: boolean) => {
+    setWidgetLoaded(loaded);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile || scriptLoadedRef.current) return;
+
     const loadScript = () => {
-      // Check if script already exists
       const existingScript = document.querySelector('script[src*="widget.simplybook.net"]');
       if (existingScript) {
-        console.log("Script already loaded");
         setScriptLoaded(true);
-        setTimeout(initializeWidget, 1000);
+        scriptLoadedRef.current = true;
         return;
       }
 
-      console.log("Loading script...");
       const script = document.createElement('script');
       script.src = 'https://widget.simplybook.net/v2/widget/widget.js';
       script.async = true;
-      scriptRef.current = script;
-
+      
       script.onload = () => {
-        console.log("Script loaded");
-        if (isComponentMounted.current) {
-          setScriptLoaded(true);
-          setTimeout(initializeWidget, 1000);
-        }
+        setScriptLoaded(true);
+        scriptLoadedRef.current = true;
       };
 
-      script.onerror = (error) => {
-        console.error("Script load error:", error);
+      script.onerror = () => {
+        console.error("Failed to load SimplyBook widget script");
       };
 
       document.head.appendChild(script);
     };
 
-    // Add styles first
-    if (!styleRef.current) {
-      const style = document.createElement('style');
-      styleRef.current = style;
-      style.textContent = `
-        #simplybook-widget-desktop {
-          background: white !important;
-          min-height: 700px !important;
-        }
-        .simplybook-container iframe {
-          min-height: 700px !important;
-        }
-      `;
-      document.head.appendChild(style);
-    }
+    loadScript();
+  }, [isMobile]);
 
-    // Load script after a small delay to ensure DOM is ready
-    setTimeout(loadScript, 100);
+  // Add CSS styles
+  useEffect(() => {
+    if (isMobile) return;
+
+    const style = document.createElement('style');
+    style.textContent = `
+      #simplybook-widget-desktop {
+        background: white !important;
+        min-height: 700px !important;
+      }
+      .simplybook-container iframe {
+        min-height: 700px !important;
+      }
+    `;
+    document.head.appendChild(style);
 
     return () => {
-      console.log("Cleanup function called");
-      isComponentMounted.current = false;
-      widgetInitialized.current = false;
-      
-      // Safer cleanup - check if elements exist before removing
-      if (scriptRef.current && scriptRef.current.parentNode) {
-        try {
-          scriptRef.current.parentNode.removeChild(scriptRef.current);
-          console.log("Script removed successfully");
-        } catch (error) {
-          console.log("Script already removed or not found");
-        }
-        scriptRef.current = null;
-      }
-      
-      if (styleRef.current && styleRef.current.parentNode) {
-        try {
-          styleRef.current.parentNode.removeChild(styleRef.current);
-          console.log("Style removed successfully");
-        } catch (error) {
-          console.log("Style already removed or not found");
-        }
-        styleRef.current = null;
-      }
-
-      // Clear the widget container
-      if (containerRef.current) {
-        containerRef.current.innerHTML = '';
+      if (style.parentNode) {
+        style.parentNode.removeChild(style);
       }
     };
   }, [isMobile]);
@@ -250,8 +186,6 @@ const Booking = () => {
             </CardHeader>
             <CardContent className="responsive-card-spacing">
               {isMobile ? (
-                // --- MOBILE VIEW ---
-                // Shows a simple button that navigates to the dedicated widget page
                 <div className="text-center space-y-4">
                   <p className="text-muted-foreground mb-6 responsive-text-optimize">
                     Start your booking journey with our streamlined mobile experience.
@@ -268,26 +202,32 @@ const Booking = () => {
                   </p>
                 </div>
               ) : (
-                // --- DESKTOP VIEW ---
-                // Embeds the widget directly on the page
                 <div className="w-full">
-                  {renderWidget && (
-                    <div
-                      ref={containerRef}
-                      id="simplybook-widget-desktop"
-                      className="simplybook-container w-full min-h-[700px] overflow-auto rounded-lg border bg-white"
-                    >
-                      {/* Show loading state while script loads or widget initializes */}
-                      {(!scriptLoaded || !widgetLoaded) && (
-                        <div className="flex items-center justify-center h-full text-muted-foreground responsive-card-spacing min-h-[700px]">
-                          <div className="text-center">
+                  {scriptLoaded ? (
+                    <div className="simplybook-container">
+                      <WidgetContainer 
+                        key={widgetKey} 
+                        onWidgetLoaded={handleWidgetLoaded} 
+                      />
+                      {!widgetLoaded && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-white/80 rounded-lg">
+                          <div className="text-center text-muted-foreground">
                             <div className="animate-pulse mb-2 responsive-text-optimize">
-                              {!scriptLoaded ? "Loading booking system..." : "Initializing widget..."}
+                              Initializing booking system...
                             </div>
                             <div className="text-sm">Connecting to our scheduling platform...</div>
                           </div>
                         </div>
                       )}
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center min-h-[700px] text-muted-foreground">
+                      <div className="text-center">
+                        <div className="animate-pulse mb-2 responsive-text-optimize">
+                          Loading booking system...
+                        </div>
+                        <div className="text-sm">Please wait while we prepare your booking experience...</div>
+                      </div>
                     </div>
                   )}
                 </div>
