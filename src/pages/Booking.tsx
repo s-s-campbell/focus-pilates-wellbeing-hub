@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,19 +12,23 @@ const Booking = () => {
   const isMobile = useIsMobile();
   const [showMobileWidget, setShowMobileWidget] = useState(false);
   const [widgetLoaded, setWidgetLoaded] = useState(false);
+  const [widgetInitialized, setWidgetInitialized] = useState(false);
+  const scriptRef = useRef<HTMLScriptElement | null>(null);
+  const styleRef = useRef<HTMLStyleElement | null>(null);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  const initializeWidget = (containerId: string) => {
+    console.log('Initializing widget for container:', containerId);
+    
+    if (widgetInitialized) {
+      console.log('Widget already initialized, skipping...');
+      return;
+    }
 
-    // Load SimplyBook widget script for both desktop and mobile
-    const script1 = document.createElement('script');
-    script1.src = '//widget.simplybook.net/v2/widget/widget.js';
-    script1.type = 'text/javascript';
-    document.head.appendChild(script1);
-    script1.onload = () => {
-      // Wait a bit for the script to be ready, then initialize the widget
-      setTimeout(() => {
-        if (window.SimplybookWidget) {
+    // Wait for script to be ready
+    const checkAndInit = () => {
+      if (window.SimplybookWidget) {
+        console.log('SimplybookWidget found, creating widget...');
+        try {
           const widget = new window.SimplybookWidget({
             "widget_type": "iframe",
             "url": "https://pilatesinfocus.simplybook.net",
@@ -56,70 +60,104 @@ const Booking = () => {
               "allow_switch_to_ada": 0,
               "predefined": []
             },
-            "container_id": "simplybook-widget"
+            "container_id": containerId
           });
 
-          // Add widget load detection
-          const checkWidgetLoaded = () => {
-            const container = document.getElementById('simplybook-widget');
+          setWidgetInitialized(true);
+          
+          // Check if widget loaded
+          setTimeout(() => {
+            const container = document.getElementById(containerId);
             const iframe = container?.querySelector('iframe');
             
             if (iframe) {
               iframe.onload = () => {
+                console.log('Widget iframe loaded');
                 setWidgetLoaded(true);
               };
-              // If iframe is already loaded
               if (iframe.contentDocument?.readyState === 'complete') {
                 setWidgetLoaded(true);
               }
             } else {
-              // Check for widget elements
               const widgetContent = container?.querySelector('[class*="widget"], [class*="sb-"]');
               if (widgetContent) {
+                console.log('Widget content found');
                 setWidgetLoaded(true);
-              } else {
-                // Keep checking every 500ms for up to 10 seconds
-                setTimeout(checkWidgetLoaded, 500);
               }
             }
-          };
+          }, 1000);
 
-          // Start checking after a short delay
-          setTimeout(checkWidgetLoaded, 1000);
+        } catch (error) {
+          console.error('Error initializing widget:', error);
         }
-      }, 100);
+      } else {
+        console.log('SimplybookWidget not ready, retrying...');
+        setTimeout(checkAndInit, 500);
+      }
     };
 
-    // Add custom CSS for both desktop and mobile optimization
+    setTimeout(checkAndInit, 100);
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    
+    // Reset states
+    setWidgetLoaded(false);
+    setWidgetInitialized(false);
+
+    console.log('Loading SimplyBook widget script...');
+
+    // Load SimplyBook widget script
+    const script = document.createElement('script');
+    script.src = '//widget.simplybook.net/v2/widget/widget.js';
+    script.type = 'text/javascript';
+    scriptRef.current = script;
+    
+    script.onload = () => {
+      console.log('SimplyBook script loaded successfully');
+      // For desktop, initialize immediately
+      if (!isMobile) {
+        initializeWidget('simplybook-widget-desktop');
+      }
+    };
+    
+    script.onerror = () => {
+      console.error('Failed to load SimplyBook script');
+    };
+    
+    document.head.appendChild(script);
+
+    // Add custom CSS
     const style = document.createElement('style');
     style.setAttribute('data-booking-styles', 'true');
+    styleRef.current = style;
     style.textContent = `
       /* Hide timezone/time display in SimplyBook widget */
-      #simplybook-widget .widget-header-time,
-      #simplybook-widget .sb-timezone,
-      #simplybook-widget .sb-time-zone,
-      #simplybook-widget [class*="timezone"],
-      #simplybook-widget [class*="time-zone"],
-      #simplybook-widget .widget-timezone {
+      .simplybook-container .widget-header-time,
+      .simplybook-container .sb-timezone,
+      .simplybook-container .sb-time-zone,
+      .simplybook-container [class*="timezone"],
+      .simplybook-container [class*="time-zone"],
+      .simplybook-container .widget-timezone {
         display: none !important;
       }
       
       /* Desktop optimizations */
       @media (min-width: 768px) {
-        #simplybook-widget .widget-content,
-        #simplybook-widget .sb-main-content,
-        #simplybook-widget iframe {
+        .simplybook-container .widget-content,
+        .simplybook-container .sb-main-content,
+        .simplybook-container iframe {
           margin-top: -20px !important;
           padding-top: 0 !important;
         }
         
-        #simplybook-widget .widget-header {
+        .simplybook-container .widget-header {
           padding-top: 10px !important;
           margin-bottom: 0 !important;
         }
         
-        /* Ensure the widget fills available space efficiently */
-        #simplybook-widget {
+        .simplybook-container {
           padding-top: 0 !important;
           box-sizing: border-box !important;
         }
@@ -138,7 +176,7 @@ const Booking = () => {
           overflow: hidden !important;
         }
         
-        .mobile-fullscreen-widget #simplybook-widget {
+        .mobile-fullscreen-widget .simplybook-container {
           height: calc(100vh - 60px) !important;
           margin: 0 !important;
           border-radius: 0 !important;
@@ -146,7 +184,7 @@ const Booking = () => {
           box-shadow: none !important;
         }
         
-        .mobile-fullscreen-widget #simplybook-widget iframe {
+        .mobile-fullscreen-widget .simplybook-container iframe {
           height: 100% !important;
           min-height: 100% !important;
           border-radius: 0 !important;
@@ -155,44 +193,46 @@ const Booking = () => {
     `;
     document.head.appendChild(style);
 
-    // Store references for cleanup
-    const scriptRef = script1;
-    const styleRef = style;
-
-    // Cleanup function with defensive checks
+    // Cleanup function
     return () => {
-      // Reset widget loaded state first
+      console.log('Cleaning up booking widget...');
       setWidgetLoaded(false);
+      setWidgetInitialized(false);
       
-      // Safely remove script if it exists and is still in the DOM
-      try {
-        if (scriptRef && scriptRef.parentNode) {
-          scriptRef.parentNode.removeChild(scriptRef);
+      if (scriptRef.current?.parentNode) {
+        try {
+          scriptRef.current.parentNode.removeChild(scriptRef.current);
+        } catch (error) {
+          console.log('Script cleanup error:', error);
         }
-      } catch (error) {
-        console.log('Script already removed or not found:', error);
       }
       
-      // Safely remove custom styles if they exist and are still in the DOM
-      try {
-        if (styleRef && styleRef.parentNode) {
-          styleRef.parentNode.removeChild(styleRef);
+      if (styleRef.current?.parentNode) {
+        try {
+          styleRef.current.parentNode.removeChild(styleRef.current);
+        } catch (error) {
+          console.log('Style cleanup error:', error);
         }
-      } catch (error) {
-        console.log('Style already removed or not found:', error);
       }
       
-      // Clear the widget container content only if it exists
-      try {
-        const container = document.getElementById('simplybook-widget');
+      // Clear widget containers
+      ['simplybook-widget-desktop', 'simplybook-widget-mobile'].forEach(id => {
+        const container = document.getElementById(id);
         if (container) {
           container.innerHTML = '';
         }
-      } catch (error) {
-        console.log('Container already cleared or not found:', error);
-      }
+      });
     };
-  }, []);
+  }, [isMobile]);
+
+  const handleStartMobileBooking = () => {
+    console.log('Starting mobile booking...');
+    setShowMobileWidget(true);
+    // Initialize widget for mobile after showing the full-screen view
+    setTimeout(() => {
+      initializeWidget('simplybook-widget-mobile');
+    }, 100);
+  };
 
   // Mobile full-screen widget view
   if (isMobile && showMobileWidget) {
@@ -202,20 +242,25 @@ const Booking = () => {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => setShowMobileWidget(false)}
+            onClick={() => {
+              setShowMobileWidget(false);
+              setWidgetLoaded(false);
+              setWidgetInitialized(false);
+            }}
             className="flex items-center gap-2"
           >
             <ArrowLeft className="w-4 h-4" />
             Back
           </Button>
           <h1 className="font-heading text-lg font-semibold text-primary">Book Your Session</h1>
-          <div className="w-16"></div> {/* Spacer for centering */}
+          <div className="w-16"></div>
         </div>
-        <div id="simplybook-widget" className="w-full h-full">
+        <div id="simplybook-widget-mobile" className="simplybook-container w-full h-full">
           {!widgetLoaded && (
             <div className="flex items-center justify-center h-full text-muted-foreground p-4">
               <div className="text-center">
                 <div className="animate-pulse mb-2">Loading booking system...</div>
+                <div className="text-sm">Please wait while we prepare your booking experience</div>
               </div>
             </div>
           )}
@@ -224,7 +269,8 @@ const Booking = () => {
     );
   }
   
-  return <div className="min-h-screen smooth-scroll">
+  return (
+    <div className="min-h-screen smooth-scroll">
       <Navigation />
       
       {/* Hero Section */}
@@ -249,33 +295,36 @@ const Booking = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="responsive-card-spacing">
-              {isMobile ?
-            // Mobile: Button to show full-screen widget
-            <div className="text-center space-y-4">
+              {isMobile ? (
+                // Mobile: Button to show full-screen widget
+                <div className="text-center space-y-4">
                   <p className="text-muted-foreground mb-6 responsive-text-optimize">
                     Start your booking journey with our streamlined mobile experience designed for easy class selection.
                   </p>
                   <Button 
                     size="lg" 
                     className="w-full h-14 text-lg responsive-button"
-                    onClick={() => setShowMobileWidget(true)}
+                    onClick={handleStartMobileBooking}
                   >
                     Start Booking Process
                   </Button>
                   <p className="text-xs lg:text-sm text-muted-foreground">
                     Full-screen booking experience optimized for mobile
                   </p>
-                </div> :
-            // Desktop: Embedded Widget
-            <div id="simplybook-widget" className="w-full min-h-[600px] lg:min-h-[700px] xl:min-h-[800px] overflow-auto rounded-lg border bg-white">
+                </div>
+              ) : (
+                // Desktop: Embedded Widget
+                <div id="simplybook-widget-desktop" className="simplybook-container w-full min-h-[600px] lg:min-h-[700px] xl:min-h-[800px] overflow-auto rounded-lg border bg-white">
                   {!widgetLoaded && (
                     <div className="flex items-center justify-center h-full text-muted-foreground responsive-card-spacing">
                       <div className="text-center">
                         <div className="animate-pulse mb-2 responsive-text-optimize">Loading booking system...</div>
+                        <div className="text-sm">Connecting to our scheduling platform...</div>
                       </div>
                     </div>
                   )}
-                </div>}
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
@@ -298,6 +347,8 @@ const Booking = () => {
       </section>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Booking;
