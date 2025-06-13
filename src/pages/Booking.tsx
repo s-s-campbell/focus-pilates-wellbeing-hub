@@ -7,14 +7,20 @@ import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
+// Define the shape of the window object to include the widget
+interface CustomWindow extends Window {
+  SimplybookWidget?: any;
+}
+declare const window: CustomWindow;
+
 const Booking = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
 
   // State and refs are now only needed for the desktop widget
   const [widgetLoaded, setWidgetLoaded] = useState(false);
-  const scriptRef = useRef(null);
-  const styleRef = useRef(null);
+  const scriptRef = useRef<HTMLScriptElement | null>(null);
+  const styleRef = useRef<HTMLStyleElement | null>(null);
 
   // This function navigates to the dedicated mobile booking page
   const handleStartMobileBooking = () => {
@@ -25,9 +31,7 @@ const Booking = () => {
   // It loads the necessary script and initializes the widget when not on mobile.
   useEffect(() => {
     // If we are on mobile, this component does nothing with the widget.
-    // The new BookingWidgetPage handles it instead.
     if (isMobile) {
-      // Ensure we don't show a loader from a previous desktop view.
       setWidgetLoaded(false); 
       return;
     }
@@ -100,16 +104,11 @@ const Booking = () => {
 
     // Cleanup function to remove script/styles when the component unmounts
     return () => {
-      if (scriptRef.current && document.head.contains(scriptRef.current)) {
-        document.head.removeChild(scriptRef.current);
+      if (scriptRef.current && scriptRef.current.parentNode) {
+        scriptRef.current.parentNode.removeChild(scriptRef.current);
       }
-      if (styleRef.current && document.head.contains(styleRef.current)) {
-        document.head.removeChild(styleRef.current);
-      }
-      // Clear widget container
-      const container = document.getElementById('simplybook-widget-desktop');
-      if (container) {
-        container.innerHTML = '';
+      if (styleRef.current && styleRef.current.parentNode) {
+        styleRef.current.parentNode.removeChild(styleRef.current);
       }
     };
   }, [isMobile]); // Dependency on isMobile ensures this logic re-runs if the viewport changes
@@ -139,6 +138,8 @@ const Booking = () => {
             </CardHeader>
             <CardContent className="responsive-card-spacing">
               {isMobile ? (
+                // --- MOBILE VIEW ---
+                // Shows a simple button that navigates to the dedicated widget page
                 <div className="text-center space-y-4">
                   <p className="text-muted-foreground mb-6 responsive-text-optimize">
                     Start your booking journey with our streamlined mobile experience.
@@ -155,6 +156,8 @@ const Booking = () => {
                   </p>
                 </div>
               ) : (
+                // --- DESKTOP VIEW ---
+                // Embeds the widget directly on the page
                 <div
                   id="simplybook-widget-desktop"
                   className="simplybook-container w-full min-h-[700px] overflow-auto rounded-lg border bg-white"
